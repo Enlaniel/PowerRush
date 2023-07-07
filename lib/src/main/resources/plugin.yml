@@ -10,5 +10,15 @@ commands :
   config :
     description : Ouvre le menu de configuration
     permission : powerrush.config
-    permission-message: Vous n'êtes pas administrateur ! :(
+    permission-message : Vous n'êtes pas administrateur ! :(
     aliases: [config, cfg, configs]
+  start :
+    description : Lance la partie
+    permission : powerrush.start
+    permission-message : Vous n'êtes pas administrateur ! :(
+    
+permissions :
+  powerrush.config:
+    default: op
+  powerrush.start:
+    default: op

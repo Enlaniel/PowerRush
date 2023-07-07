@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 
 public class CommandConfig implements CommandExecutor {
@@ -40,6 +41,26 @@ public class CommandConfig implements CommandExecutor {
 			ItemStack commandBlock = new ItemStack(Material.COMMAND);
 			ItemStack armor_stand = new ItemStack(Material.ARMOR_STAND);
 			ItemStack bookAndQuill = new ItemStack(Material.WRITTEN_BOOK);
+			
+			ItemMeta name = barrierBlock.getItemMeta();
+			name.setDisplayName("Bordure");
+			barrierBlock.setItemMeta(name);
+			
+			name = grassBlock.getItemMeta();
+			name.setDisplayName("Map");
+			grassBlock.setItemMeta(name);
+			
+			name = commandBlock.getItemMeta();
+			name.setDisplayName("Mode de jeu");
+			commandBlock.setItemMeta(name);
+			
+			name = armor_stand.getItemMeta();
+			name.setDisplayName("Max Joueur");
+			armor_stand.setItemMeta(name);
+			
+			name = bookAndQuill.getItemMeta();
+			name.setDisplayName("On/Off Kits");
+			bookAndQuill.setItemMeta(name);
 			
 			//set in the correct order items
 			configList[(9*1)+2] = barrierBlock;
