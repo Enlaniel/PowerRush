@@ -1,6 +1,8 @@
 package fr.teamkiwi.powerrush.events;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.WorldBorder;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -24,6 +26,7 @@ public class OnClickInventory implements Listener {
 
                 //Config de bordure
                 case BARRIER :
+                    WorldBorder wb = Bukkit.getWorld("world").getWorldBorder();
                     break;
 
                 //Config de map
