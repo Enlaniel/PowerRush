@@ -22,7 +22,7 @@ public class CommandConfig implements CommandExecutor {
 			Inventory config = Bukkit.createInventory(null, 9*5);
 			List<ItemStack> configList = new ArrayList<ItemStack>();
 
-			ItemStack glassPane = new ItemStack(Material.STAINED_GLASS_PANE, 1);
+			ItemStack glassPane = new ItemStack(Material.STAINED_GLASS_PANE);
 
 			for (int i = 0; i <= 9; i++){
 				configList.add(glassPane);
