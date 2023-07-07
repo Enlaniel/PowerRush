@@ -125,7 +125,7 @@ public class OnClickInventory implements Listener {
 
                 case ARROW :
 
-                    player.openInventory(new CommandConfig().config);
+                    player.openInventory(CommandConfig.config);
 
                 default:
                     break;
