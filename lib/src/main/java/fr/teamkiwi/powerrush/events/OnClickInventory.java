@@ -93,23 +93,23 @@ public class OnClickInventory implements Listener {
                 case ACACIA_FENCE :
 
                     wb.setSize(wb.getSize() - 100);
-                    player.sendMessage(consoleSender + "La taille de la bordure a ete reduite de " + ChatColor.RED + "50 blocs");
-                    player.sendMessage(consoleSender + "La taille de la bordure est maintenant de " + ChatColor.AQUA + wb.getSize() / 2);
+                    player.sendMessage(consoleSender + " La taille de la bordure a ete reduite de " + ChatColor.RED + "50 blocs");
+                    player.sendMessage(consoleSender + " La taille de la bordure est maintenant de " + ChatColor.AQUA + wb.getSize() / 2);
 
                     break;
 
                 case COBBLE_WALL :
 
                     wb.setSize(1000);
-                    player.sendMessage(consoleSender + "La taille de la bordure a ete reinitialisee a " + ChatColor.AQUA + "500 blocs");
+                    player.sendMessage(consoleSender + " La taille de la bordure a ete reinitialisee a " + ChatColor.AQUA + "500 blocs");
 
                     break;
 
                 case ACACIA_FENCE_GATE :
 
                     wb.setSize(wb.getSize() + 100);
-                    player.sendMessage(consoleSender + "La taille de la bordure a ete augmentée de " + ChatColor.GREEN + "50 blocs");
-                    player.sendMessage(consoleSender + "La taille de la bordure est maintenant de " + ChatColor.AQUA + wb.getSize() / 2);
+                    player.sendMessage(consoleSender + " La taille de la bordure a ete augmentee de " + ChatColor.GREEN + "50 blocs");
+                    player.sendMessage(consoleSender + " La taille de la bordure est maintenant de " + ChatColor.AQUA + wb.getSize() / 2);
 
                     break;
 
