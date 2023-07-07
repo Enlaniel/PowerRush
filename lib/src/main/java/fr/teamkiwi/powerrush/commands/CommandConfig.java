@@ -68,10 +68,12 @@ public class CommandConfig implements CommandExecutor {
 			name.setDisplayName("On/Off Kits");
 			bookAndQuill.setItemMeta(name);
 			
+			
 			//set in the correct order items
 			configList[(9*1)+2] = barrierBlock;
 			configList[(9*1)+6] = grassBlock;
 			configList[(9*2)+3] = commandBlock;
+			configList[(9*2)+5] = chest;
 			configList[(9*3)+6] = armor_stand;
 			configList[(9*3)+2] = bookAndQuill;
 			configList[9*1] = glassPane;
