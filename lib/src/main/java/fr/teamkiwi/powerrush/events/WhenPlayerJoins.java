@@ -10,7 +10,7 @@ public class WhenPlayerJoins implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
 
-        if (OnClickInventory.maxPlayerConnected < Bukkit.getOnlinePlayers().size()) {
+        if (Bukkit.getOnlinePlayers().size() > OnClickInventory.maxPlayerConnected && OnClickInventory.maxPlayerConnected > 0) {
 
             event.getPlayer().kickPlayer("La partie est complete !");
 

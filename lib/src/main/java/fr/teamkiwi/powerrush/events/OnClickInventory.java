@@ -172,7 +172,7 @@ public class OnClickInventory implements Listener {
                 case COBBLE_WALL :
 
                     maxPlayerConnected = 30;
-                    player.sendMessage(consoleSender + " Le nombre maximum de joueurs a ete reinitialise a " + ChatColor.GREEN + "30 joueurs");
+                    player.sendMessage(consoleSender + " Le nombre maximum de joueurs a ete reinitialise a " + ChatColor.AQUA + "30 joueurs");
 
                     break;
 
