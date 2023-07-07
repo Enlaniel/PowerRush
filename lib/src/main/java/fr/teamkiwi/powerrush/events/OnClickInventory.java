@@ -39,9 +39,9 @@ public class OnClickInventory implements Listener {
                     Inventory border = Bukkit.createInventory(null, 9*1, ChatColor.AQUA + "Border Menu");
                     ItemStack[] borderList = new ItemStack[9*1];
 
-                    borderList[3] = acaciaFence;
-                    borderList[5] = cobblestoneWall;
-                    borderList[7] = acaciaFenceGate;
+                    borderList[2] = acaciaFence;
+                    borderList[4] = cobblestoneWall;
+                    borderList[6] = acaciaFenceGate;
 
                     border.setContents(borderList);
 
@@ -102,6 +102,8 @@ public class OnClickInventory implements Listener {
                     break;
 
             }
+
+            event.setCancelled(true);
 
         }
 
