@@ -2,6 +2,7 @@ package fr.teamkiwi.powerrush;
 
 import java.util.logging.Logger;
 
+import fr.teamkiwi.powerrush.events.WhenPlayerJoins;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -26,6 +27,7 @@ public class Main extends JavaPlugin {
     	
     	//register event
     	getServer().getPluginManager().registerEvents(new OnClickInventory(), this);
+        getServer().getPluginManager().registerEvents(new WhenPlayerJoins(), this);
     	
     }
 	

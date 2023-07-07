@@ -1,0 +1,21 @@
+package fr.teamkiwi.powerrush.events;
+
+import org.bukkit.Bukkit;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+
+public class WhenPlayerJoins implements Listener {
+
+    @EventHandler
+    public void onJoin(PlayerJoinEvent event) {
+
+        if (OnClickInventory.maxPlayerConnected < Bukkit.getOnlinePlayers().size()) {
+
+            event.getPlayer().kickPlayer("La partie est complete !");
+
+        }
+
+    }
+
+}

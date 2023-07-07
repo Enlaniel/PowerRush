@@ -16,6 +16,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class OnClickInventory implements Listener {
 
     String consoleSender = "" + ChatColor.LIGHT_PURPLE + ChatColor.ITALIC + "[" + ChatColor.DARK_GREEN + ChatColor.ITALIC + "POWER RUSH" + ChatColor.  LIGHT_PURPLE + ChatColor.ITALIC + "]";
+    static int maxPlayerConnected = 30;
 
     @EventHandler
     public void onClickInConfig(InventoryClickEvent event){
