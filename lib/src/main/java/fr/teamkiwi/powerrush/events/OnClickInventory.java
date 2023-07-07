@@ -148,6 +148,7 @@ public class OnClickInventory implements Listener {
 
                     player.openInventory(CommandConfig.config);
 
+                    break;
                 default:
                     break;
 
@@ -182,6 +183,14 @@ public class OnClickInventory implements Listener {
                     player.sendMessage(consoleSender + " Le nombre maximum de joueurs a ete augmente de " + ChatColor.GREEN + "1 joueur");
                     player.sendMessage(consoleSender + " Le nombre maximum de joueur est maintenant de " + ChatColor.AQUA + maxPlayerConnected);
 
+                    break;
+
+                case ARROW :
+
+                    player.openInventory(CommandConfig.config);
+
+                    break;
+                default:
                     break;
 
             }
