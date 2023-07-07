@@ -20,16 +20,16 @@ public class CommandConfig implements CommandExecutor {
 	 * @author Enlaniel
 	 * 
 	 */
-	
+
+	//create inventory
+	public Inventory config = Bukkit.createInventory(null, 9*5, ChatColor.DARK_PURPLE + "Config Menu");
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
 		//check if it is a player who send command
 		if(sender instanceof Player player) {
-			
-			//create inventory
-			Inventory config = Bukkit.createInventory(null, 9*5, ChatColor.DARK_PURPLE + "Config Menu");
+
 			//create itemStack list
 			ItemStack[] configList = new ItemStack[9*5];
 			

@@ -1,5 +1,6 @@
 package fr.teamkiwi.powerrush.events;
 
+import fr.teamkiwi.powerrush.commands.CommandConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -18,6 +19,7 @@ public class OnClickInventory implements Listener {
 
     @EventHandler
     public void onClickInConfig(InventoryClickEvent event){
+
 
         Inventory clickedInventory = event.getClickedInventory();
         ItemStack clickedItem = event.getCurrentItem();
@@ -38,6 +40,11 @@ public class OnClickInventory implements Listener {
         name.setDisplayName("Augmenter de 50 blocs");
         acaciaFenceGate.setItemMeta(name);
 
+        ItemStack arrow = new ItemStack(Material.ARROW);
+        name = arrow.getItemMeta();
+        name.setDisplayName("Back");
+        arrow.setItemMeta(name);
+
 
         WorldBorder wb = Bukkit.getWorld("world").getWorldBorder();
         wb.setCenter(0, 0);
@@ -52,9 +59,11 @@ public class OnClickInventory implements Listener {
                     Inventory border = Bukkit.createInventory(null, 9*1, ChatColor.AQUA + "Border Menu");
                     ItemStack[] borderList = new ItemStack[9*1];
 
+                    borderList[0] = arrow;
                     borderList[2] = acaciaFence;
                     borderList[4] = cobblestoneWall;
                     borderList[6] = acaciaFenceGate;
+                    borderList[9] = arrow;
 
                     border.setContents(borderList);
 
@@ -112,6 +121,10 @@ public class OnClickInventory implements Listener {
                     player.sendMessage(consoleSender + " La taille de la bordure est maintenant de " + ChatColor.AQUA + wb.getSize() / 2);
 
                     break;
+
+                case ARROW :
+
+                    player.openInventory(new CommandConfig().config);
 
                 default:
                     break;
