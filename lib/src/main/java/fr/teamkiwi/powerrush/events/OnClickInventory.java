@@ -184,6 +184,9 @@ public class OnClickInventory implements Listener {
                     player.sendMessage(consoleSender + " Le nombre maximum de joueur est maintenant de " + ChatColor.AQUA + maxPlayerConnected);
 
                     break;
+                    
+                default:
+                	break;
 
                 case ARROW :
 
