@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.teamkiwi.powerrush.commands.CommandConfig;
+import fr.teamkiwi.powerrush.commands.CommandStart;
 
 
 public class Main extends JavaPlugin {
@@ -18,7 +19,9 @@ public class Main extends JavaPlugin {
     	
     	LOGGER.info("Plugin lancé avec succès");
     	
+    	//set up commandes
     	getCommand("config").setExecutor(new CommandConfig());
+    	getCommand("start").setExecutor(new CommandStart());
     	
     }
 	
