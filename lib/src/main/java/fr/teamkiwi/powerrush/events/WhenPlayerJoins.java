@@ -12,8 +12,7 @@ public class WhenPlayerJoins implements Listener {
 
         if (Bukkit.getOnlinePlayers().size() > OnClickInventory.maxPlayerConnected && OnClickInventory.maxPlayerConnected > 0) {
 
-            event.getPlayer().kickPlayer("La partie est complete !");
-
+            event.getPlayer().kickPlayer("La partie est complete, il y a déja " + Bukkit.getOnlinePlayers().size() + " / " + OnClickInventory.maxPlayerConnected + " joueurs connectés !");
         }
 
     }
