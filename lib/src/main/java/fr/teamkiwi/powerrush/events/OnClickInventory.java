@@ -81,6 +81,27 @@ public class OnClickInventory implements Listener {
 
                 //Config du nombre de joueurs
                 case ARMOR_STAND :
+
+                    Inventory maxPlayers = Bukkit.createInventory(null, 9*1, ChatColor. DARK_GREEN + "Max Players Count Menu");
+                    ItemStack[] maxPlayersList = new ItemStack[9*1];
+
+                    maxPlayersList[0] = arrow;
+                    maxPlayersList[2] = acaciaFence;
+                    maxPlayersList[4] = cobblestoneWall;
+                    maxPlayersList[6] = acaciaFenceGate;
+                    maxPlayersList[8] = arrow;
+
+                    name.setDisplayName("Augmenter de 1 joueur");
+                    acaciaFenceGate.setItemMeta(name);
+                    name.setDisplayName("Diminuer de 1 joueur");
+                    acaciaFence.setItemMeta(name);
+                    name.setDisplayName("Reinitialiser à 30 joueurs");
+                    cobblestoneWall.setItemMeta(name);
+
+                    maxPlayers.setContents(maxPlayersList);
+
+                    player.openInventory(maxPlayers);
+
                     break;
 
                 //Config des rôles et de la partie en elle-même
@@ -128,6 +149,39 @@ public class OnClickInventory implements Listener {
                     player.openInventory(CommandConfig.config);
 
                 default:
+                    break;
+
+            }
+
+            event.setCancelled(true);
+
+        }
+
+        if (clickedInventory.getTitle().equals(ChatColor. DARK_GREEN + "Max Players Count Menu")) {
+
+            switch (clickedItem.getType()) {
+
+                case ACACIA_FENCE :
+
+                    maxPlayerConnected --;
+                    player.sendMessage(consoleSender + " Le nombre maximum de joueurs a ete diminue de " + ChatColor.RED + "1 joueur");
+                    player.sendMessage(consoleSender + " Le nombre maximum de joueur est maintenant de " + ChatColor.AQUA + maxPlayerConnected);
+
+                    break;
+
+                case COBBLE_WALL :
+
+                    maxPlayerConnected = 30;
+                    player.sendMessage(consoleSender + " Le nombre maximum de joueurs a ete reinitialise a " + ChatColor.GREEN + "30 joueurs");
+
+                    break;
+
+                case ACACIA_FENCE_GATE :
+
+                    maxPlayerConnected ++;
+                    player.sendMessage(consoleSender + " Le nombre maximum de joueurs a ete augmente de " + ChatColor.GREEN + "1 joueur");
+                    player.sendMessage(consoleSender + " Le nombre maximum de joueur est maintenant de " + ChatColor.AQUA + maxPlayerConnected);
+
                     break;
 
             }
