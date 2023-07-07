@@ -41,16 +41,11 @@ public class CommandConfig implements CommandExecutor {
 			ItemStack commandBlock = new ItemStack(Material.COMMAND);
 			ItemStack armor_stand = new ItemStack(Material.ARMOR_STAND);
 			ItemStack bookAndQuill = new ItemStack(Material.WRITTEN_BOOK);
-			ItemStack chest = new ItemStack(Material.CHEST);
 			
 			//set all meta data
 			ItemMeta name = barrierBlock.getItemMeta();
 			name.setDisplayName("Bordure");
 			barrierBlock.setItemMeta(name);
-			
-			name = chest.getItemMeta();
-			name.setDisplayName("Inventaire");
-			chest.setItemMeta(name);
 			
 			name = grassBlock.getItemMeta();
 			name.setDisplayName("Map");
@@ -72,8 +67,7 @@ public class CommandConfig implements CommandExecutor {
 			//set in the correct order items
 			configList[(9*1)+2] = barrierBlock;
 			configList[(9*1)+6] = grassBlock;
-			configList[(9*2)+3] = commandBlock;
-			configList[(9*2)+5] = chest;
+			configList[(9*2)+4] = commandBlock;
 			configList[(9*3)+6] = armor_stand;
 			configList[(9*3)+2] = bookAndQuill;
 			configList[9*1] = glassPane;
