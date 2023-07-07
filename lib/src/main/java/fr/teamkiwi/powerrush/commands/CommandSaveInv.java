@@ -1,10 +1,13 @@
 package fr.teamkiwi.powerrush.commands;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import fr.teamkiwi.powerrush.events.OnClickInventory;
 
 public class CommandSaveInv implements CommandExecutor {
 
@@ -19,6 +22,10 @@ public class CommandSaveInv implements CommandExecutor {
 			
 			inventoryOnStartContent = player.getInventory().getContents();
 			inventoryOnStartArmor = player.getInventory().getArmorContents();
+			
+			player.sendMessage(OnClickInventory.consoleSender + ChatColor.AQUA + "Votre inventaire a bien ete sauvegarde !");
+			
+			player.getInventory().clear();
 			
 		}
 		
