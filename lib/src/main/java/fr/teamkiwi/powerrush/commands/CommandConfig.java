@@ -1,6 +1,7 @@
 package fr.teamkiwi.powerrush.commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -18,15 +19,18 @@ public class CommandConfig implements CommandExecutor {
 
 		if(sender instanceof Player player) {
 
-			Inventory config = Bukkit.createInventory(null, 9*5);
-			ItemStack[] configList = {};
-
+			Inventory config = Bukkit.createInventory(null, 9*5, ChatColor.DARK_PURPLE + "Config Menu");
+			
+			ItemStack[] configList = new ItemStack[9*5];
+			
+			
 			ItemStack glassPane = new ItemStack(Material.MAGMA_CREAM);
-
-			for (int i = 1; i <= 9; i++){
+			
+			for (int i = 0; i <= 9; i++){
 				configList[i] = glassPane;
 			}
-
+			
+			
 			config.setContents(configList);
 
 			player.openInventory(config);
