@@ -63,7 +63,7 @@ public class OnClickInventory implements Listener {
                     borderList[2] = acaciaFence;
                     borderList[4] = cobblestoneWall;
                     borderList[6] = acaciaFenceGate;
-                    borderList[9] = arrow;
+                    borderList[8] = arrow;
 
                     border.setContents(borderList);
 
