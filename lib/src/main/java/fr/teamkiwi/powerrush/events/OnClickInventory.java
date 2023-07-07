@@ -15,7 +15,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class OnClickInventory implements Listener {
 
-    String consoleSender = "" + ChatColor.LIGHT_PURPLE + ChatColor.ITALIC + "[" + ChatColor.DARK_GREEN + ChatColor.ITALIC + "POWER RUSH" + ChatColor.  LIGHT_PURPLE + ChatColor.ITALIC + "]";
+    public static final String consoleSender = "" + ChatColor.LIGHT_PURPLE + ChatColor.ITALIC + "[" + ChatColor.DARK_GREEN + ChatColor.ITALIC + "POWER RUSH" + ChatColor.  LIGHT_PURPLE + ChatColor.ITALIC + "]§r ";
     static int maxPlayerConnected = 30;
 
     @EventHandler
@@ -124,23 +124,23 @@ public class OnClickInventory implements Listener {
                 case ACACIA_FENCE :
 
                     wb.setSize(wb.getSize() - 100);
-                    player.sendMessage(consoleSender + " La taille de la bordure a ete reduite de " + ChatColor.RED + "50 blocs");
-                    player.sendMessage(consoleSender + " La taille de la bordure est maintenant de " + ChatColor.AQUA + wb.getSize() / 2);
+                    player.sendMessage(consoleSender + "La taille de la bordure a ete reduite de " + ChatColor.RED + "50 blocs");
+                    player.sendMessage(consoleSender + "La taille de la bordure est maintenant de " + ChatColor.AQUA + wb.getSize() / 2);
 
                     break;
 
                 case COBBLE_WALL :
 
                     wb.setSize(1000);
-                    player.sendMessage(consoleSender + " La taille de la bordure a ete reinitialisee a " + ChatColor.AQUA + "500 blocs");
+                    player.sendMessage(consoleSender + "La taille de la bordure a ete reinitialisee a " + ChatColor.AQUA + "500 blocs");
 
                     break;
 
                 case ACACIA_FENCE_GATE :
 
                     wb.setSize(wb.getSize() + 100);
-                    player.sendMessage(consoleSender + " La taille de la bordure a ete augmentee de " + ChatColor.GREEN + "50 blocs");
-                    player.sendMessage(consoleSender + " La taille de la bordure est maintenant de " + ChatColor.AQUA + wb.getSize() / 2);
+                    player.sendMessage(consoleSender + "La taille de la bordure a ete augmentee de " + ChatColor.GREEN + "50 blocs");
+                    player.sendMessage(consoleSender + "La taille de la bordure est maintenant de " + ChatColor.AQUA + wb.getSize() / 2);
 
                     break;
 

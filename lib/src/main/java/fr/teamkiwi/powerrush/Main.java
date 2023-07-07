@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.teamkiwi.powerrush.commands.CommandConfig;
+import fr.teamkiwi.powerrush.commands.CommandSaveInv;
 import fr.teamkiwi.powerrush.commands.CommandStart;
 import fr.teamkiwi.powerrush.events.OnClickInventory;
 
@@ -24,6 +25,7 @@ public class Main extends JavaPlugin {
     	//set up commandes
     	getCommand("config").setExecutor(new CommandConfig());
     	getCommand("start").setExecutor(new CommandStart());
+    	getCommand("saveinventory").setExecutor(new CommandSaveInv());
     	
     	//register event
     	getServer().getPluginManager().registerEvents(new OnClickInventory(), this);

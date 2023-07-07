@@ -1,15 +1,29 @@
 package fr.teamkiwi.powerrush.commands;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class CommandStart implements CommandExecutor {
 
+	static boolean isStarted = false;
+	
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		
-		//TODO: dipatch player and give inv
+		//TODO: dipatch player and give inv, deop, open kis choice ...
+		
+		
+		for(Player aPlayer : Bukkit.getOnlinePlayers()) {
+			
+			aPlayer.getInventory().setArmorContents(CommandSaveInv.inventoryOnStartArmor);
+			aPlayer.getInventory().setContents(CommandSaveInv.inventoryOnStartContent);
+			
+			
+		}
 		
 		
 		return false;
