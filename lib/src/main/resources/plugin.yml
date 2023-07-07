@@ -5,3 +5,10 @@ version: 1.0
 authors: [Enlaniel,Falkunai]
 main: fr.teamkiwi.powerrush.Main
 description: Plugin super cool
+
+commands :
+  config :
+    description : Ouvre le menu de configuration
+    permission : powerrush.config
+    permission-message: Vous n'êtes pas administrateur ! :(
+    aliases: [config, cfg, configs]

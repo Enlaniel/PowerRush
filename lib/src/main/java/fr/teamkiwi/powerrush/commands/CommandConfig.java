@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 public class CommandConfig implements CommandExecutor {
 
 	@Override
-	public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		
 		
 		
@@ -16,3 +16,5 @@ public class CommandConfig implements CommandExecutor {
 	}
 
 }
+
+//
