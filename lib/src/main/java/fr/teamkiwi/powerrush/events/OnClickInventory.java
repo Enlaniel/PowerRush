@@ -10,10 +10,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class OnClickInventory implements Listener {
 
-    String consoleSender = "" + ChatColor.GRAY + ChatColor.ITALIC + "[" + ChatColor.DARK_GREEN + "POWER RUSH" + ChatColor.GRAY + "]";
+    String consoleSender = "" + ChatColor.LIGHT_PURPLE + ChatColor.ITALIC + "[" + ChatColor.DARK_GREEN + ChatColor.ITALIC + "POWER RUSH" + ChatColor.  LIGHT_PURPLE + ChatColor.ITALIC + "]";
 
     @EventHandler
     public void onClickInConfig(InventoryClickEvent event){
@@ -23,8 +24,20 @@ public class OnClickInventory implements Listener {
         HumanEntity player = event.getWhoClicked();
 
         ItemStack acaciaFence = new ItemStack(Material.ACACIA_FENCE);
+        ItemMeta name = acaciaFence.getItemMeta();
+        name.setDisplayName("Réduire de 50 blocs");
+        acaciaFence.setItemMeta(name);
+
         ItemStack cobblestoneWall = new ItemStack(Material.COBBLE_WALL);
+        name = cobblestoneWall.getItemMeta();
+        name.setDisplayName("Réinitaliser à 500 blocs");
+        cobblestoneWall.setItemMeta(name);
+
         ItemStack acaciaFenceGate = new ItemStack(Material.ACACIA_FENCE_GATE);
+        name = acaciaFenceGate.getItemMeta();
+        name.setDisplayName("Augmenter de 50 blocs");
+        acaciaFenceGate.setItemMeta(name);
+
 
         WorldBorder wb = Bukkit.getWorld("world").getWorldBorder();
         wb.setCenter(0, 0);
@@ -81,6 +94,7 @@ public class OnClickInventory implements Listener {
 
                     wb.setSize(wb.getSize() - 100);
                     player.sendMessage(consoleSender + "La taille de la bordure a été réduite de " + ChatColor.RED + "50 blocs");
+                    player.sendMessage(consoleSender + "La taille de la bordure est maintenant de" + ChatColor.AQUA + wb.getSize() / 2);
 
                     break;
 
@@ -95,6 +109,7 @@ public class OnClickInventory implements Listener {
 
                     wb.setSize(wb.getSize() + 100);
                     player.sendMessage(consoleSender + "La taille de la bordure a été augmentée de " + ChatColor.GREEN + "50 blocs");
+                    player.sendMessage(consoleSender + "La taille de la bordure est maintenant de" + ChatColor.AQUA + wb.getSize() / 2);
 
                     break;
 
