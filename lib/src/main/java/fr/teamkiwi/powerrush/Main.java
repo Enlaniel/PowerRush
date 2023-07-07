@@ -5,6 +5,9 @@ import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import fr.teamkiwi.powerrush.commands.CommandConfig;
+
+
 public class Main extends JavaPlugin {
 	
 	//Pour les logs
@@ -14,6 +17,8 @@ public class Main extends JavaPlugin {
     public void onEnable() {
     	
     	LOGGER.info("Plugin lancé avec succès");
+    	
+    	getCommand("config").setExecutor(new CommandConfig());
     	
     }
 	
