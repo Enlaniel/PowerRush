@@ -26,7 +26,7 @@ repositories {
 
 jar {
     //directory Paper
-    destinationDirectory.set(file("C:/Users/augus/OneDrive/Bureau/youpi/Plugins")) //dir de Enlaniel
+    destinationDirectory.set(file("C:/Users/augus/OneDrive/Bureau/Serveur 1.8.8/plugins")) //dir de Enlaniel
 }
 
 dependencies {

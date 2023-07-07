@@ -9,26 +9,25 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class CommandConfig implements CommandExecutor {
 
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
 		if(sender instanceof Player player) {
 
 			Inventory config = Bukkit.createInventory(null, 9*5);
-			List<ItemStack> configList = new ArrayList<ItemStack>();
+			ItemStack[] configList = {};
 
-			ItemStack glassPane = new ItemStack(Material.STAINED_GLASS_PANE);
+			ItemStack glassPane = new ItemStack(Material.MAGMA_CREAM);
 
-			for (int i = 0; i <= 9; i++){
-				configList.add(glassPane);
+			for (int i = 1; i <= 9; i++){
+				configList[i] = glassPane;
 			}
 
-			config.setContents((ItemStack[]) configList.toArray());
+			config.setContents(configList);
 
 			player.openInventory(config);
 
