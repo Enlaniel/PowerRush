@@ -1,0 +1,7 @@
+api-version: 1.8
+
+name: PowerRush
+version: 1.0
+authors: [Enlaniel,Falkunai]
+main: fr.teamkiwi.powerrush.Main
+description: Plugin super cool
