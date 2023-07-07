@@ -16,9 +16,16 @@ commands :
     description : Lance la partie
     permission : powerrush.start
     permission-message : Vous n'êtes pas administrateur ! :(
+  saveinventory :
+    description : Configure l'inventaire de départ
+    permission : powerrush.saveinv
+    permission-message : Vous n'êtes pas administrateur ! :(
+    aliases: [saveinv, saveinventory]
     
 permissions :
   powerrush.config:
     default: op
   powerrush.start:
+    default: op
+  powerrush.saveinv:
     default: op
