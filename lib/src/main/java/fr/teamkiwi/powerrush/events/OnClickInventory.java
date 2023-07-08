@@ -199,6 +199,14 @@ public class OnClickInventory implements Listener {
             event.setCancelled(true);
 
         }
+        
+        //cancel event if in show event
+        if (clickedInventory.getTitle().equals(ChatColor.DARK_GRAY + "Inventaire de Depart")) {
+        	
+        	event.setCancelled(true);
+        	
+        	
+        }
 
     }
 

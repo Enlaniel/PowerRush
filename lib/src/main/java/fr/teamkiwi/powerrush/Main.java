@@ -10,6 +10,7 @@ import fr.teamkiwi.powerrush.commands.CommandConfig;
 import fr.teamkiwi.powerrush.commands.CommandForceStop;
 import fr.teamkiwi.powerrush.commands.CommandHelp;
 import fr.teamkiwi.powerrush.commands.CommandSaveInv;
+import fr.teamkiwi.powerrush.commands.CommandShowInv;
 import fr.teamkiwi.powerrush.commands.CommandStart;
 import fr.teamkiwi.powerrush.events.OnClickInventory;
 
@@ -34,6 +35,7 @@ public class Main extends JavaPlugin {
     	getCommand("start").setExecutor(new CommandStart());
     	getCommand("forcestop").setExecutor(new CommandForceStop());
     	getCommand("saveinventory").setExecutor(new CommandSaveInv());
+    	getCommand("showinventory").setExecutor(new CommandShowInv());
     	getCommand("powerrushhelp").setExecutor(new CommandHelp());
     	
     	//register event
