@@ -24,19 +24,23 @@ public class CommandSaveInv implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		
+		//check if the sender is a Player
 		if(sender instanceof Player player) {
 			
-			inventoryOnStartContent = player.getInventory().getContents();
-			inventoryOnStartArmor = player.getInventory().getArmorContents();
-			
-			player.sendMessage(OnClickInventory.consoleSender + ChatColor.AQUA + "Votre inventaire a bien ete sauvegarde !");
-			
-			player.getInventory().clear();
-			player.getInventory().setArmorContents(null);
+			//check if game is started
+			if(! CommandStart.isStarted) {
+				
+				inventoryOnStartContent = player.getInventory().getContents();
+				inventoryOnStartArmor = player.getInventory().getArmorContents();
+				
+				player.sendMessage(OnClickInventory.consoleSender + ChatColor.AQUA + "Votre inventaire a bien ete sauvegarde !");
+				
+				player.getInventory().clear();
+				player.getInventory().setArmorContents(null);
+				
+			}
 			
 		}
-		
-		
 		
 		return false;
 	}

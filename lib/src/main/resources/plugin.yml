@@ -16,16 +16,36 @@ commands :
     description : Lance la partie
     permission : powerrush.start
     permission-message : Vous n'êtes pas administrateur ! :(
+  forcestop :
+    description : Arrete la partie
+    permission : powerrush.forcestop
+    permission-message : Vous n'êtes pas administrateur ! :(
   saveinventory :
     description : Configure l'inventaire de départ
     permission : powerrush.saveinv
     permission-message : Vous n'êtes pas administrateur ! :(
     aliases: [saveinv, saveinventory]
+  showinventory :
+    description : Permet de voir l'inventaire de départ
+    permission : powerrush.showinv
+    permission-message : Si vous voyez ce message, veuillez prevenir la TeamKiwi !
+    aliases: [showinv, showinventory]
+  powerrushhelp:
+    description : Donne toutes les commandes du plugin et leurs utilitées
+    permission : powerrush.powerrushhelp
+    permission-message : Si vous voyez ce message, veuillez prevenir la TeamKiwi !
+    aliases: [prhelp, powerrushhelp]
     
 permissions :
   powerrush.config:
     default: op
   powerrush.start:
     default: op
+  powerrush.forcestop:
+    default: op
   powerrush.saveinv:
     default: op
+  powerrush.powerrushhelp:
+    default: true
+  powerrush.showinv:
+    default: true
