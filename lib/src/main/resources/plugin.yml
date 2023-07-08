@@ -35,8 +35,15 @@ commands :
     permission : powerrush.powerrushhelp
     permission-message : Si vous voyez ce message, veuillez prevenir la TeamKiwi !
     aliases: [prhelp, powerrushhelp]
+  selectkit :
+    description : Commande de debug permettant de choisir un kit
+    permission : powerrush.debug.selectkit
+    permission-message : Vous n'êtes pas administrateur ! :(
+    aliases: [selectkit, debugselectkit]
     
 permissions :
+  powerrush.debug.*:
+    default: op
   powerrush.config:
     default: op
   powerrush.start:

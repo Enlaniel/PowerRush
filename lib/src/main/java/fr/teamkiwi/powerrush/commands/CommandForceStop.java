@@ -19,6 +19,8 @@ public class CommandForceStop implements CommandExecutor {
 		//reset parameter
 		CommandStart.allPlayersInGame.clear();
 		CommandStart.isStarted = false;
+		CommandSaveInv.inventoryOnStartArmor = null;
+		CommandSaveInv.inventoryOnStartContent = null;
 		
 		
 		for(Player aPlayer : Bukkit.getOnlinePlayers()) {
