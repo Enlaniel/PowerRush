@@ -16,12 +16,19 @@ public class CommandStart implements CommandExecutor {
 		
 		//TODO: dipatch player and give inv, deop, open kis choice ...
 		
-		
+		//get all online players (spec exeption ??)
 		for(Player aPlayer : Bukkit.getOnlinePlayers()) {
 			
+			//si l'host n'a pas fait /saveinv, donner un inventaire default
+			if(CommandSaveInv.inventoryOnStartContent.length == 0) {
+				
+				new CommandSaveInv().setDefaultInventory();
+				
+			}
+			
+			//set inventory
 			aPlayer.getInventory().setArmorContents(CommandSaveInv.inventoryOnStartArmor);
 			aPlayer.getInventory().setContents(CommandSaveInv.inventoryOnStartContent);
-			
 			
 		}
 		
