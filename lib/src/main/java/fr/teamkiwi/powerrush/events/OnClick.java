@@ -13,7 +13,9 @@ public class OnClick implements Listener {
 	Main plugin;
 	
 	public OnClick(Main plugin) {
+
 		this.plugin = plugin;
+
 	}
 	
 	

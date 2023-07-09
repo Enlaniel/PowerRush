@@ -47,7 +47,7 @@ public class Main extends JavaPlugin {
     	getCommand("selectkit").setExecutor(new CommandSelectKit(this));
     	
     	//register event
-    	getServer().getPluginManager().registerEvents(new OnClickInventory(), this);
+    	getServer().getPluginManager().registerEvents(new OnClickInventory(this), this);
         getServer().getPluginManager().registerEvents(new WhenPlayerJoins(), this);
         getServer().getPluginManager().registerEvents(new OnClick(this), this);
     	

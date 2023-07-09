@@ -1,5 +1,6 @@
 package fr.teamkiwi.powerrush.events;
 
+import fr.teamkiwi.powerrush.Main;
 import fr.teamkiwi.powerrush.commands.CommandConfig;
 
 import java.util.ArrayList;
@@ -20,10 +21,17 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class OnClickInventory implements Listener {
 	
     public static final String consoleSender = "" + ChatColor.LIGHT_PURPLE + ChatColor.ITALIC + "[" + ChatColor.DARK_GREEN + ChatColor.ITALIC + "POWER RUSH" + ChatColor.  LIGHT_PURPLE + ChatColor.ITALIC + "] " + ChatColor.RESET;
-    public static int maxPlayerConnected = 30;
     public static String modeDeJeu = "Classique";
 
-    @EventHandler
+	Main plugin;
+
+	public OnClickInventory(Main plugin) {
+
+		this.plugin = plugin;
+
+	}
+
+	@EventHandler
     public void onClickInConfig(InventoryClickEvent event){
     	
         Inventory clickedInventory = event.getClickedInventory();
@@ -218,6 +226,8 @@ public class OnClickInventory implements Listener {
 	        
 	        //in max player count config menu
 	        if (clickedInventory.getTitle().equals(ChatColor. DARK_GREEN + "Max Players Count Menu")) {
+
+				int maxPlayerConnected = plugin.getConfig().getInt("config.maxPlayers");
 	
 	            switch (clickedItem.getType()) {
 	
