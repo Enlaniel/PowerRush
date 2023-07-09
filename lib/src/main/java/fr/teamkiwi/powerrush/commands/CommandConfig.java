@@ -1,5 +1,8 @@
 package fr.teamkiwi.powerrush.commands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -10,6 +13,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import fr.teamkiwi.powerrush.events.OnClickInventory;
 
 
 public class CommandConfig implements CommandExecutor {
@@ -48,23 +53,30 @@ public class CommandConfig implements CommandExecutor {
 				
 				//set all meta data
 				ItemMeta name = barrierBlock.getItemMeta();
+				List<String> lore = new ArrayList<>();
 				name.setDisplayName("Bordure");
 				barrierBlock.setItemMeta(name);
 				
-				name = grassBlock.getItemMeta();
 				name.setDisplayName("Map");
 				grassBlock.setItemMeta(name);
 				
-				name = commandBlock.getItemMeta();
 				name.setDisplayName("Mode de jeu");
+				lore.clear();
+				lore.add(ChatColor.AQUA + "Random Kits");
+				lore.add(ChatColor.AQUA + "Max Kit: 4");
+				name.setLore(lore);
 				commandBlock.setItemMeta(name);
 				
-				name = armor_stand.getItemMeta();
-				name.setDisplayName("Max Joueur");
+				lore.clear();
+				lore.add(ChatColor.AQUA + "Max Joueurs: " + OnClickInventory.maxPlayerConnected);
+				name.setLore(lore);
+				name.setDisplayName("Max Joueurs");
 				armor_stand.setItemMeta(name);
 				
-				name = bookAndQuill.getItemMeta();
+				
 				name.setDisplayName("On/Off Kits");
+				lore.clear();
+				name.setLore(lore);
 				bookAndQuill.setItemMeta(name);
 				
 				

@@ -29,6 +29,8 @@ public class Main extends JavaPlugin {
     	//TODO: dipatch player and give inv, deop, open kis choice ... in CommandStart
     	//TODO: no chat for spec in new onChat
     	//TODO: kits selection (with command for easy test or directly with 2nd game mode)
+    	//TODO: URGENT link OnClickInventory to config.yml
+    	//TODO: continue mode de jeu choisses
     	
     	
     	LOGGER.info("Plugin lancé avec succès");

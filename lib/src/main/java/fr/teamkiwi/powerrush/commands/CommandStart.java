@@ -39,6 +39,8 @@ public class CommandStart implements CommandExecutor {
 			aPlayer.getInventory().setArmorContents(CommandSaveInv.inventoryOnStartArmor);
 			aPlayer.getInventory().setContents(CommandSaveInv.inventoryOnStartContent);
 			
+			
+			
 		}
 		
 		
