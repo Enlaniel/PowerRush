@@ -2,6 +2,7 @@ package fr.teamkiwi.powerrush.events;
 
 import fr.teamkiwi.powerrush.CommandInitServer;
 import fr.teamkiwi.powerrush.Main;
+import fr.teamkiwi.powerrush.commands.CommandStart;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,14 +10,17 @@ import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.WorldBorder;
 import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scoreboard.Score;
 
 public class OnClickInventory implements Listener {
 	
@@ -32,6 +36,7 @@ public class OnClickInventory implements Listener {
 	}
     
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
     public void onClickInConfig(InventoryClickEvent event){
     	
@@ -183,10 +188,21 @@ public class OnClickInventory implements Listener {
 	                    
 	                    int i = 0;
 	                    
-	                    for(String aKit : CommandInitServer.allKits.keySet()) {
-	                    	ItemStack anItem = new ItemStack(CommandInitServer.allKits.get(aKit));
+	                    for(String aKit : CommandInitServer.allKitsMaterial.keySet()) {
+	                    	ItemStack anItem = new ItemStack(CommandInitServer.allKitsMaterial.get(aKit));
 	                    	
-	                    	name.setDisplayName(aKit);
+	                    	if(plugin.getConfig().getList("config.bannedKits").contains(aKit)) {
+	                    		name.setDisplayName(aKit);
+	                    		lore.clear();
+	                    		lore.add(ChatColor.RED + "Kit Banni");
+	                    		name.setLore(lore);
+	                    	}else {
+	                    		name.setDisplayName(aKit);
+	                    		lore.clear();
+	                    		lore.add(ChatColor.GREEN + "Kit En Jeu");
+	                    		name.setLore(lore);
+	                    	}
+	                    	
 	                    	anItem.setItemMeta(name);
 	                    	banKitsList[i] = anItem;
 	                    	
@@ -480,6 +496,126 @@ public class OnClickInventory implements Listener {
 	            }
 	
 	            event.setCancelled(true);
+	        }
+	        
+	        
+	        
+	        
+	        //check if in On/Off config menu
+	        if (clickedInventory.getTitle().equals(ChatColor. DARK_PURPLE + "Cliquez pour bannir")) {
+	        	
+	        	//check if clicking on an item
+	        	if(clickedItem.getItemMeta() != null) {
+	        		
+	        		//case arrow: go back
+		        	if(clickedItem.getType().equals(Material.ARROW)) {
+		        		Bukkit.dispatchCommand(player, "config");
+		        		
+		        	//case cobblstone wall: reinitialiser
+		        	}else if(clickedItem.getType().equals(Material.COBBLE_WALL)){
+		        		plugin.getConfig().set("config.bannedKits", new ArrayList<>());
+		        		
+		        		player.sendMessage(consoleSender + ChatColor.AQUA + "Les kits bannis ont ete reinitialises");
+		        		
+		        	//case on a kit
+		        	}else {
+		        		String aKitName = clickedItem.getItemMeta().getDisplayName();
+		        		
+		        		for(String aKit : CommandInitServer.allKits) {
+		        			
+		        			if(aKitName.equals(aKit)) {
+		        				
+		        				@SuppressWarnings("unchecked")
+								List<String> bannedKits = (List<String>) plugin.getConfig().getList("config.bannedKits");
+		        				
+		        				//check if kit is banned
+		        				if(bannedKits.contains(aKitName)){
+		        					bannedKits.remove(aKitName);
+		        					plugin.getConfig().set("config.bannedKits", bannedKits);
+		        					
+		        					player.sendMessage(consoleSender + ChatColor.AQUA + "Le kit " + ChatColor.GREEN + aKitName + ChatColor.AQUA + " a ete remis du jeu");
+		        					
+		        				}else {
+		        					bannedKits.add(aKitName);
+		        					plugin.getConfig().set("config.bannedKits", bannedKits);
+		        					
+		        					player.sendMessage(consoleSender + ChatColor.AQUA + "Le kit " + ChatColor.RED + aKitName + ChatColor.AQUA + " a ete retire du jeu");
+		        					
+		        				}
+		        			}
+		        		}
+		        	}
+	        	}
+	        	
+	        	event.setCancelled(true);
+	        	
+	        }
+	        
+	        
+	        
+	        
+	        if (clickedInventory.getTitle().equals(ChatColor.DARK_PURPLE + "Choissisez un kit")) {
+	        	
+	        	Score playerRound = Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Round").getScore((OfflinePlayer) player);
+	        	Score playerPoints = Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Points").getScore((OfflinePlayer) player);
+	        	
+	        	//check if clicking on an item
+	        	if(clickedItem.getItemMeta() != null) {
+	        		
+	        		if(!(playerRound.getScore() >= 5)) {
+	        		
+			        	//case cobblstone wall: reinitialiser
+			        	if(clickedItem.getType().equals(Material.COBBLE_WALL)){
+			        		
+			        		player.sendMessage(consoleSender + ChatColor.AQUA + "Vous n'avez pas choisis de kit");
+			        		playerRound.setScore(playerRound.getScore() + 1);
+			        		
+			        		new CommandStart(plugin).setClassique((Player) player);
+			        		
+			        	
+			        	}else if(clickedItem.getType().equals(Material.ARROW)) {
+			        		
+			        		
+			        	//case on a kit
+			        	}else {
+			        		String aKitName = clickedItem.getItemMeta().getDisplayName();
+			        		
+			        		for(String aKit : CommandInitServer.allKits) {
+			        			
+			        			if(aKitName.equals(aKit)) {
+			        				
+			        				if(playerPoints.getScore() >= CommandInitServer.allKitsCost.get(aKit)) {
+			        					
+			        					@SuppressWarnings("unchecked")
+										List<String> aKitList = (List<String>) plugin.getConfig().getList("kits." + aKit.toLowerCase());
+			        					aKitList.add(player.getName());
+			        					plugin.getConfig().set("kits." + aKit.toLowerCase(), aKitList);
+			        					
+			        					playerPoints.setScore(playerPoints.getScore() - CommandInitServer.allKitsCost.get(aKit));
+				        				playerRound.setScore(playerRound.getScore() + 1);
+				        				
+				        				player.sendMessage("Vous venez de recevoir le kit " + aKit);
+				        				
+				        				new CommandStart(plugin).setClassique((Player) player);
+				        				
+			        				}else {
+			        					player.sendMessage(ChatColor.DARK_RED + "Vous n'avez pas les points requis");
+			        				}
+			        				
+			        			}
+			        		}
+			        	}
+	        		}else {
+	        			ItemStack goldenApple = new ItemStack(Material.GOLDEN_APPLE, playerPoints.getScore());
+	        			
+	        			player.getInventory().addItem(goldenApple);
+	        			
+	        			player.closeInventory();
+	        		}
+	        			
+	        	}
+	        	
+	        	event.setCancelled(true);
 	        }
 	        
 	        

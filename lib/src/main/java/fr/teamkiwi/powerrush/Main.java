@@ -28,7 +28,8 @@ public class Main extends JavaPlugin {
     	
     	
     	//TODO: dipatch player and give inv, deop, open kis choice ... in CommandStart
-    	//TODO: no chat for spec in new onChat
+    	//TODO: create kits with help of PowerRush.txt
+    	//TODO: Il faut faire les repercution d'un bannissement dans la section start (impossible de les picks)
     	
     	LOGGER.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     	LOGGER.info("[PowerRush] Plugin lance avec succes");

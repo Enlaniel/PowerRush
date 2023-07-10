@@ -11,6 +11,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import fr.teamkiwi.powerrush.CommandInitServer;
 import fr.teamkiwi.powerrush.Main;
 import fr.teamkiwi.powerrush.events.OnClickInventory;
 
@@ -23,6 +24,7 @@ public class CommandForceStop implements CommandExecutor {
 	}
 	
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		
@@ -38,11 +40,11 @@ public class CommandForceStop implements CommandExecutor {
 		
 		
 		//reset all kits
-		@SuppressWarnings("unchecked")
-		List<String> allKits = (List<String>) plugin.getConfig().getList("kits.allkits");
+		List<String> allKits = CommandInitServer.allKits;
+		List<String> debugList = new ArrayList<String>();
 		
 		for(String aKit : allKits) {
-			plugin.getConfig().set("kits." + aKit.toLowerCase(), new ArrayList<String>());
+			plugin.getConfig().set("kits." + aKit.toLowerCase(), debugList);
 		}
 		
 		
@@ -54,8 +56,10 @@ public class CommandForceStop implements CommandExecutor {
 			aPlayer.getInventory().setArmorContents(null);
 			aPlayer.teleport(new Location(Bukkit.getWorld("world"), 0, 65, 0));
 			aPlayer.setGameMode(GameMode.SURVIVAL);
+			Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Points").getScore(aPlayer).setScore(plugin.getConfig().getInt("config.classique"));
+			Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Round").getScore(aPlayer).setScore(0);
 			
-			aPlayer.sendMessage(OnClickInventory.consoleSender + " La partie a bien ete arretee");
+			aPlayer.sendMessage(OnClickInventory.consoleSender + "La partie a bien ete arretee");
 			
 		}
 		
