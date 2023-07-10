@@ -23,13 +23,14 @@ public class OnClickInventory implements Listener {
     public static final String consoleSender = "" + ChatColor.LIGHT_PURPLE + ChatColor.ITALIC + "[" + ChatColor.DARK_GREEN + ChatColor.ITALIC + "POWER RUSH" + ChatColor.  LIGHT_PURPLE + ChatColor.ITALIC + "] " + ChatColor.RESET;
     public static String modeDeJeu = "Classique";
 
-	Main plugin;
 
-	public OnClickInventory(Main plugin) {
 
+    Main plugin;
+    
+    public OnClickInventory(Main plugin) {
 		this.plugin = plugin;
-
 	}
+    
 
 	@EventHandler
     public void onClickInConfig(InventoryClickEvent event){
@@ -275,7 +276,7 @@ public class OnClickInventory implements Listener {
 	
 	            case BEDROCK :
 	
-	            	modeDeJeu = "Random";
+	            	plugin.getConfig().set("config.modedejeu", "Random");
 	                player.sendMessage(consoleSender + "Le mode de jeu actuel est " + ChatColor.AQUA + modeDeJeu);
 	                
 	                
@@ -308,7 +309,7 @@ public class OnClickInventory implements Listener {
 	                
 	            case DIRT :
 	
-	                modeDeJeu = "Classique";
+	                plugin.getConfig().set("config.modedejeu", "Classique");
 	                player.sendMessage(consoleSender + "Le mode de jeu actuel est " + ChatColor.AQUA + modeDeJeu);
 	
 	                Inventory configClassiqueInv = Bukkit.createInventory(null, 9*1, ChatColor. DARK_PURPLE + "Combien de points ?");
@@ -341,7 +342,7 @@ public class OnClickInventory implements Listener {
 	                
 	            case TNT :
 	
-	                modeDeJeu = "Apocalypse";
+	            	plugin.getConfig().set("config.modedejeu", "Apocalypse");
 	                player.sendMessage(consoleSender + "Le mode de jeu actuel est " + ChatColor.AQUA + modeDeJeu);
 	                
 	                break;
@@ -360,8 +361,51 @@ public class OnClickInventory implements Listener {
 	
 	        	event.setCancelled(true);
 	        }
+	        
 	        	
+	        
+	        
+	        //set nombre de kits dans mode de jeu random
+	        if (clickedInventory.getTitle().equals(ChatColor. DARK_PURPLE + "Combien de kits max ?")) {
 	        	
+	            switch (clickedItem.getType()) {
+	
+	                case ACACIA_FENCE :
+	
+	                    plugin.getConfig().set("config.random", plugin.getConfig().getInt("config.random")-1);
+	                    player.sendMessage(consoleSender + "Le nombre maximum de joueurs a ete diminue de " + ChatColor.RED + "1 kit");
+	                    player.sendMessage(consoleSender + "Le nombre maximum de joueur est maintenant de " + ChatColor.AQUA + plugin.getConfig().getInt("config.random"));
+	
+	                    break;
+	
+	                case COBBLE_WALL :
+	
+	                	plugin.getConfig().set("config.random",30);
+	                    player.sendMessage(consoleSender + "Le nombre maximum de joueurs a ete reinitialise a " + ChatColor.AQUA + "30 joueurs");
+	
+	                    break;
+	
+	                case ACACIA_FENCE_GATE :
+	
+	                	plugin.getConfig().set("config.random", plugin.getConfig().getInt("config.random")+1);
+	                    player.sendMessage(consoleSender + "Le nombre maximum de joueurs a ete augmente de " + ChatColor.GREEN + "1 joueur");
+	                    player.sendMessage(consoleSender + "Le nombre maximum de joueur est maintenant de " + ChatColor.AQUA + plugin.getConfig().getInt("config.random"));
+	
+	                    break;
+	
+	                case ARROW :
+	
+	                    player.openInventory(CommandConfig.config);
+	
+	                    break;
+	
+	                default:
+	                    break;
+	
+	            }
+	
+	            event.setCancelled(true);
+	        }
 	        
 	        
 	        
