@@ -21,7 +21,6 @@ public class CommandSelectKit implements CommandExecutor {
 	
 	
 	final String separation = " " + ChatColor.DARK_AQUA + "|" + ChatColor.RESET + " ";
-	public static List<String> allKits = new ArrayList<>();
 	
 	
 	@Override
@@ -87,8 +86,11 @@ public class CommandSelectKit implements CommandExecutor {
 						
 			}
 			
-			//put all kits name here to use later
+			//TODO: put all kits name here to use later
+			List<String> allKits = new ArrayList<String>();
 			allKits.add("Katana");
+			
+			plugin.getConfig().set("kits.allkits", allKits);
 			
 		}
 		

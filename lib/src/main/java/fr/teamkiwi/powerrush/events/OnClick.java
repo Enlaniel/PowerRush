@@ -26,9 +26,12 @@ public class OnClick implements Listener {
 		Player player = event.getPlayer();
 		
 		//test if player has kit katana
-		if(plugin.getConfig().getList("kits.katana").contains(player.getName())) {
-			
-			new KitKatana().kitKatana(event);
+		if(! (plugin.getConfig().getList("kits.katana") == null)) {
+			if(plugin.getConfig().getList("kits.katana").contains(player.getName())) {
+				
+				new KitKatana().kitKatana(event);
+		}
+		
 			
 		}
 		

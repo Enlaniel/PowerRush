@@ -2,9 +2,11 @@ package fr.teamkiwi.powerrush.commands;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -35,7 +37,7 @@ public class CommandStart implements CommandExecutor {
 		for(Player aPlayer : Bukkit.getOnlinePlayers()) {
 			
 			//si l'host n'a pas fait /saveinv, donner un inventaire default
-			if(CommandSaveInv.inventoryOnStartContent.length == 0) {
+			if(CommandSaveInv.inventoryOnStartContent == null) {
 				
 				new CommandSaveInv().setDefaultInventory();
 			}
@@ -52,6 +54,8 @@ public class CommandStart implements CommandExecutor {
 			switch(plugin.getConfig().getString("config.modedejeu")) {
 			
 			case "Random":
+				
+				setRandom(aPlayer);
 				break;
 				
 				
@@ -75,6 +79,46 @@ public class CommandStart implements CommandExecutor {
 		
 		
 		return false;
+	}
+
+	
+	/*
+	 * Desciption:
+	 * Set les kits dans le mode de jeu random 
+	 * 
+	 */
+	
+	@SuppressWarnings("unchecked")
+	private void setRandom(Player player) {
+		
+		Random random = new Random();
+		List<String> allKits = (List<String>) plugin.getConfig().getList("kits.allkits");
+		
+		//if choosen random config is > than the number of kits
+		if(allKits.size() < plugin.getConfig().getInt("config.random")) {
+			plugin.getConfig().set("config.random", allKits.size());
+		}
+		
+		for(int i = 0; i < plugin.getConfig().getInt("config.random"); i++ ) {
+			
+			String randomKit = allKits.get(random.nextInt(allKits.size()));
+			List<String> randomKitList = (List<String>) plugin.getConfig().getList("kits." + randomKit.toLowerCase());
+			
+			//if player does not have the random kit, set it
+			if(! randomKitList.contains(player.getName())){
+				randomKitList.add(player.getName());
+				plugin.getConfig().set("kits." + randomKit.toLowerCase(), randomKitList);
+				
+				player.sendMessage(ChatColor.AQUA + "Vous venez de recevoir le kit " + ChatColor.GOLD + randomKit);
+			
+			//else restart the for loop
+			}else {
+				i--;
+			}
+			
+		}
+		
+		
 	}
 
 }

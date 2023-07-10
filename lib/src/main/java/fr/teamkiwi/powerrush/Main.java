@@ -36,7 +36,7 @@ public class Main extends JavaPlugin {
     	//set up commandes
     	getCommand("config").setExecutor(new CommandConfig(this));
     	getCommand("start").setExecutor(new CommandStart(this));
-    	getCommand("forcestop").setExecutor(new CommandForceStop());
+    	getCommand("forcestop").setExecutor(new CommandForceStop(this));
     	getCommand("saveinventory").setExecutor(new CommandSaveInv());
     	getCommand("showinventory").setExecutor(new CommandShowInv());
     	getCommand("powerrushhelp").setExecutor(new CommandHelp());
