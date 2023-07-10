@@ -10,16 +10,24 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import fr.teamkiwi.powerrush.Main;
+
 public class CommandStart implements CommandExecutor {
 
 	public static boolean isStarted = false;
 	public static List<UUID> allPlayersInGame = new ArrayList<>(); 
 	
+	Main plugin;
+	
+	public CommandStart(Main plugin) {
+		this.plugin = plugin;
+	}
+	
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		
-		//TODO: dipatch player and give inv, deop, open kis choice ...
+		//TODO: dipatch player and give inv, deop, open kits choice ...
 		
 		isStarted = true;
 		
@@ -38,6 +46,28 @@ public class CommandStart implements CommandExecutor {
 			//set inventory
 			aPlayer.getInventory().setArmorContents(CommandSaveInv.inventoryOnStartArmor);
 			aPlayer.getInventory().setContents(CommandSaveInv.inventoryOnStartContent);
+			
+			
+			switch(plugin.getConfig().getString("config.modedejeu")) {
+			
+			
+			case "Random":
+				break;
+				
+				
+			case "Classique":
+				break;
+				
+				
+			case "Apocalypse":
+				break;
+				
+				
+			default:
+				break;
+				
+			
+			}
 			
 			
 			

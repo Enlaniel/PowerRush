@@ -1,5 +1,6 @@
 package fr.teamkiwi.powerrush.commands;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.ChatColor;
@@ -20,12 +21,14 @@ public class CommandSelectKit implements CommandExecutor {
 	
 	
 	final String separation = " " + ChatColor.DARK_AQUA + "|" + ChatColor.RESET + " ";
+	public static List<String> allKits = new ArrayList<>();
 	
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		
 		//TODO compléter toutes les possibilité de choix de kit
+		
 		
 		//check if sender is a player
 		if(sender instanceof Player player) {
@@ -83,6 +86,9 @@ public class CommandSelectKit implements CommandExecutor {
 				
 						
 			}
+			
+			//put all kits name here to use later
+			allKits.add("Katana");
 			
 		}
 		

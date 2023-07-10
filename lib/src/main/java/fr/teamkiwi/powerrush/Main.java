@@ -26,7 +26,7 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
     	
-    	//TODO: add variable spawn with config.yml in CommandForceStop
+    	
     	//TODO: dipatch player and give inv, deop, open kis choice ... in CommandStart
     	//TODO: no chat for spec in new onChat
     	
@@ -35,7 +35,7 @@ public class Main extends JavaPlugin {
     	
     	//set up commandes
     	getCommand("config").setExecutor(new CommandConfig(this));
-    	getCommand("start").setExecutor(new CommandStart());
+    	getCommand("start").setExecutor(new CommandStart(this));
     	getCommand("forcestop").setExecutor(new CommandForceStop());
     	getCommand("saveinventory").setExecutor(new CommandSaveInv());
     	getCommand("showinventory").setExecutor(new CommandShowInv());
