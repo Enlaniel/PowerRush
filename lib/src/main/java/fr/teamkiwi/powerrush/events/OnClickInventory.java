@@ -1,5 +1,6 @@
 package fr.teamkiwi.powerrush.events;
 
+import fr.teamkiwi.powerrush.CommandInitServer;
 import fr.teamkiwi.powerrush.Main;
 
 import java.util.ArrayList;
@@ -168,7 +169,38 @@ public class OnClickInventory implements Listener {
 	                    
 	                    
 	                //Config des kits et de la partie en elle-même
-	                case WRITTEN_BOOK :
+	                case BOOK_AND_QUILL :
+	                	
+	                	Inventory banKitsInv = Bukkit.createInventory(null, 9*5, ChatColor. DARK_PURPLE + "Cliquez pour bannir");
+	                    ItemStack[] banKitsList = new ItemStack[9*5];
+
+	                    banKitsList[9*5-1] = arrow;
+	                    banKitsList[9*4+4] = cobblestoneWall;
+	                    banKitsList[9*4] = arrow;
+	                    
+	                    name.setDisplayName("Reinitialiser");
+	                    cobblestoneWall.setItemMeta(name);
+	                    
+	                    int i = 0;
+	                    
+	                    for(String aKit : CommandInitServer.allKits.keySet()) {
+	                    	ItemStack anItem = new ItemStack(CommandInitServer.allKits.get(aKit));
+	                    	
+	                    	name.setDisplayName(aKit);
+	                    	anItem.setItemMeta(name);
+	                    	banKitsList[i] = anItem;
+	                    	
+	                    	i++;
+	                    	
+	                    }
+	                    
+	                    
+	
+	                    banKitsInv.setContents(banKitsList);
+	
+	                    player.openInventory(banKitsInv);
+	                	
+	                	
 	                    break;
 	
 	                default :
@@ -233,7 +265,7 @@ public class OnClickInventory implements Listener {
 	
 	                    plugin.getConfig().set("config.maxPlayers", plugin.getConfig().getInt("config.maxPlayers")-1);
 	                    player.sendMessage(consoleSender + "Le nombre maximum de joueurs a ete diminue de " + ChatColor.RED + "1 joueur");
-	                    player.sendMessage(consoleSender + "Le nombre maximum de joueur est maintenant de " + ChatColor.AQUA + plugin.getConfig().getInt("config.maxPlayers"));
+	                    player.sendMessage(consoleSender + "Le nombre maximum de joueurs est maintenant de " + ChatColor.AQUA + plugin.getConfig().getInt("config.maxPlayers"));
 	
 	                    break;
 	
@@ -248,7 +280,7 @@ public class OnClickInventory implements Listener {
 
 						plugin.getConfig().set("config.maxPlayers", plugin.getConfig().getInt("config.maxPlayers")+1);
 	                    player.sendMessage(consoleSender + "Le nombre maximum de joueurs a ete augmente de " + ChatColor.GREEN + "1 joueur");
-	                    player.sendMessage(consoleSender + "Le nombre maximum de joueur est maintenant de " + ChatColor.AQUA + plugin.getConfig().getInt("config.maxPlayers"));
+	                    player.sendMessage(consoleSender + "Le nombre maximum de joueurs est maintenant de " + ChatColor.AQUA + plugin.getConfig().getInt("config.maxPlayers"));
 	
 	                    break;
 	
@@ -372,23 +404,23 @@ public class OnClickInventory implements Listener {
 	                case ACACIA_FENCE :
 	
 	                    plugin.getConfig().set("config.random", plugin.getConfig().getInt("config.random") - 1);
-	                    player.sendMessage(consoleSender + "Le nombre maximum de joueurs a ete diminue de " + ChatColor.RED + "1 kit");
-	                    player.sendMessage(consoleSender + "Le nombre maximum de joueur est maintenant de " + ChatColor.AQUA + plugin.getConfig().getInt("config.random"));
+	                    player.sendMessage(consoleSender + "Le nombre maximum de kits a ete diminue de " + ChatColor.RED + "1 kit");
+	                    player.sendMessage(consoleSender + "Le nombre maximum de kits est maintenant de " + ChatColor.AQUA + plugin.getConfig().getInt("config.random"));
 	
 	                    break;
 	
 	                case COBBLE_WALL :
 	
 	                	plugin.getConfig().set("config.random", 5);
-	                    player.sendMessage(consoleSender + "Le nombre maximum de joueurs a ete reinitialise a " + ChatColor.AQUA + "5 kits");
+	                    player.sendMessage(consoleSender + "Le nombre maximum de kits a ete reinitialise a " + ChatColor.AQUA + "5 kits");
 	
 	                    break;
 	
 	                case ACACIA_FENCE_GATE :
 	
 	                	plugin.getConfig().set("config.random", plugin.getConfig().getInt("config.random") + 1);
-	                    player.sendMessage(consoleSender + "Le nombre maximum de joueurs a ete augmente de " + ChatColor.GREEN + "1 kit");
-	                    player.sendMessage(consoleSender + "Le nombre maximum de joueur est maintenant de " + ChatColor.AQUA + plugin.getConfig().getInt("config.random"));
+	                    player.sendMessage(consoleSender + "Le nombre maximum de kits a ete augmente de " + ChatColor.GREEN + "1 kit");
+	                    player.sendMessage(consoleSender + "Le nombre maximum de kits est maintenant de " + ChatColor.AQUA + plugin.getConfig().getInt("config.random"));
 	
 	                    break;
 	
@@ -416,23 +448,23 @@ public class OnClickInventory implements Listener {
 	                case ACACIA_FENCE :
 	
 	                    plugin.getConfig().set("config.classique", plugin.getConfig().getInt("config.classique") - 2);
-	                    player.sendMessage(consoleSender + "Le nombre maximum de joueurs a ete diminue de " + ChatColor.RED + "2 points");
-	                    player.sendMessage(consoleSender + "Le nombre maximum de joueur est maintenant de " + ChatColor.AQUA + plugin.getConfig().getInt("config.classique"));
+	                    player.sendMessage(consoleSender + "Le nombre maximum de points a ete diminue de " + ChatColor.RED + "2 points");
+	                    player.sendMessage(consoleSender + "Le nombre maximum de points est maintenant de " + ChatColor.AQUA + plugin.getConfig().getInt("config.classique"));
 	
 	                    break;
 	
 	                case COBBLE_WALL :
 	
 	                	plugin.getConfig().set("config.classique",30);
-	                    player.sendMessage(consoleSender + "Le nombre maximum de joueurs a ete reinitialise a " + ChatColor.AQUA + "30 points");
+	                    player.sendMessage(consoleSender + "Le nombre maximum de points a ete reinitialise a " + ChatColor.AQUA + "30 points");
 	
 	                    break;
 	
 	                case ACACIA_FENCE_GATE :
 	
 	                	plugin.getConfig().set("config.classique", plugin.getConfig().getInt("config.classique") + 2);
-	                    player.sendMessage(consoleSender + "Le nombre maximum de joueurs a ete augmente de " + ChatColor.GREEN + "2 points");
-	                    player.sendMessage(consoleSender + "Le nombre maximum de joueur est maintenant de " + ChatColor.AQUA + plugin.getConfig().getInt("config.classique"));
+	                    player.sendMessage(consoleSender + "Le nombre maximum de points a ete augmente de " + ChatColor.GREEN + "2 points");
+	                    player.sendMessage(consoleSender + "Le nombre maximum de points est maintenant de " + ChatColor.AQUA + plugin.getConfig().getInt("config.classique"));
 	
 	                    break;
 	

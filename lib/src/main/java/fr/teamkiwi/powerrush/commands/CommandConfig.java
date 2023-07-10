@@ -34,11 +34,6 @@ public class CommandConfig implements CommandExecutor {
 	}
 	
 	
-	
-	
-	//create inventory
-	
-	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
@@ -59,34 +54,43 @@ public class CommandConfig implements CommandExecutor {
 				ItemStack grassBlock = new ItemStack(Material.GRASS);
 				ItemStack commandBlock = new ItemStack(Material.COMMAND);
 				ItemStack armor_stand = new ItemStack(Material.ARMOR_STAND);
-				ItemStack bookAndQuill = new ItemStack(Material.WRITTEN_BOOK);
+				ItemStack bookAndQuill = new ItemStack(Material.BOOK_AND_QUILL);
 				
 				//set all meta data
 				ItemMeta name = barrierBlock.getItemMeta();
 				List<String> lore = new ArrayList<>();
-				name.setDisplayName("Bordure");
+				
+				name.setDisplayName(ChatColor.DARK_PURPLE + "Bordure");
+				lore.clear();
+				lore.add(ChatColor.AQUA + "WorldBorder: " + ChatColor.GOLD + (Bukkit.getWorld("world").getWorldBorder().getSize()/2));
+				name.setLore(lore);
 				barrierBlock.setItemMeta(name);
 				
-				name.setDisplayName("Map");
+				
+				name.setDisplayName(ChatColor.DARK_PURPLE + "Map");
+				lore.clear();
+				name.setLore(lore);
 				grassBlock.setItemMeta(name);
 				
-				name.setDisplayName("Mode de jeu");
+				
+				name.setDisplayName(ChatColor.DARK_PURPLE + "Mode de jeu");
 				lore.clear();
 				lore.add(ChatColor.AQUA + plugin.getConfig().getString("config.modedejeu"));
-				lore.add(ChatColor.AQUA + String.valueOf(plugin.getConfig().getInt("config." + plugin.getConfig().getString("config.modedejeu").toLowerCase())));
+				lore.add(ChatColor.GOLD + String.valueOf(plugin.getConfig().getInt("config." + plugin.getConfig().getString("config.modedejeu").toLowerCase())));
 				name.setLore(lore);
 				commandBlock.setItemMeta(name);
 				
+				
+				name.setDisplayName(ChatColor.DARK_PURPLE + "Max Joueurs");
 				lore.clear();
-				lore.add(ChatColor.AQUA + "Max Joueurs: " + plugin.getConfig().getInt("config.maxPlayers"));
+				lore.add(ChatColor.AQUA + "Max Joueurs: " + ChatColor.GOLD + plugin.getConfig().getInt("config.maxPlayers"));
 				name.setLore(lore);
-				name.setDisplayName("Max Joueurs");
 				armor_stand.setItemMeta(name);
 				
 				
-				name.setDisplayName("On/Off Kits");
+				name.setDisplayName(ChatColor.DARK_PURPLE + "On/Off Kits");
 				lore.clear();
-				lore.add("Nombre de kits ban:" + 5);
+				lore.add(ChatColor.AQUA + "Nombre de kits ban: " + ChatColor.GOLD + plugin.getConfig().getList("config.bannedKits").size());
 				name.setLore(lore);
 				bookAndQuill.setItemMeta(name);
 				
@@ -104,11 +108,11 @@ public class CommandConfig implements CommandExecutor {
 				configList[(9*3)-1] = glassPane;
 				
 				
-				//set glass pane easely
+				//set glass pane easily
 				for (int i = 0; i <= 9; i++){
 					configList[i] = glassPane;
 				}
-				//set glass pane easely
+				//set glass pane easily
 				for (int i = (9*4)-1; i <= (9*5)-1; i++){
 					configList[i] = glassPane;
 				}
@@ -127,5 +131,3 @@ public class CommandConfig implements CommandExecutor {
 	}
 
 }
-
-//cool

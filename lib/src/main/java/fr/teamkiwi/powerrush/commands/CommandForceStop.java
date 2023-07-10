@@ -12,6 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import fr.teamkiwi.powerrush.Main;
+import fr.teamkiwi.powerrush.events.OnClickInventory;
 
 public class CommandForceStop implements CommandExecutor {
 
@@ -53,6 +54,8 @@ public class CommandForceStop implements CommandExecutor {
 			aPlayer.getInventory().setArmorContents(null);
 			aPlayer.teleport(new Location(Bukkit.getWorld("world"), 0, 65, 0));
 			aPlayer.setGameMode(GameMode.SURVIVAL);
+			
+			aPlayer.sendMessage(OnClickInventory.consoleSender + " La partie a bien ete arretee");
 			
 		}
 		

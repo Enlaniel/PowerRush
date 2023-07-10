@@ -12,8 +12,8 @@ apocalypse: pas de barre de sang (aucun cooldown), les joueurs choissisent tous 
 Une vingtaine de kit diffetents (30) :
 
 ✓ Katana: L'epee peut instant break les blocks
-- Requin: En cliquant sur un joueur avec l'item "Requin", une sphere d'eau de 50*50 ce crée pendant 1 minute. L'utilisateur a deapth strider 10.
-- Poupée: quand l'utilisateur tu qq, la personne tuée deviens son serviteur et rejoins son equipe
+- Requin: En cliquant sur un joueur avec l'item "Requin", une sphere d'eau de 50*50 ce crée pendant 1 minute. L'utilisateur a depth strider 10.
+- Poupée: quand l'utilisateur tu quelqu'un, la personne tuée deviens son serviteur et rejoins son equipe
 - Avenir: ressucite une fois dans la partie avec 8 coeurs
 - Trader: echange la place de l'utilisateur avec le joueur visé
 - Ange: Les pommes d'or ont un effet de régénération plus rapide (Régénération 3 pendant 2 secondes). 
@@ -40,8 +40,7 @@ Niveau 3:  Force 1 et Speed 2 et 4 coeurs perdus toutes les 30 secondes
 - Portail: Item qui téléporte aléatoirement l'utilisateur du pouvoir dans un endroit à 5 - 20 blocs de lui.
 - Serpent: Peut poser des fleurs (5 au total) invisibles au sol. Les personnes passant dessus écoperont de l'effet Poison 2 pendant 6 secondes.
 - Tenebres: Speed 1 durant la nuit. Peut mettre la nuit de force pendant 2 minutes. /cm night. La nuit, les dégâts de l'utilisateur du pouvoir sont augmentés de 15%.
-- Vampire: La nuit, lorsque la barre de sang de l'utilisateur du pouvoir se trouve au-dessus de 80%, régénération de : 1/2 coeurs toutes les 15 secondes, 2 sang toute les 15 secondes. 
-Pour avoir les mêmes avantages le jour, il faut se trouver sous un bloc.
+- Vampire: Quand l'utilisateur tu quelqu'un, il a la possibilité de voler un de ses kits.
 - Violence: Après 5 coups encaissés (pas d'affilée), le prochain coup infligé aura un boost de force de 20%
 - Poison: ​Création d'une zone toxique (rayon de 16 blocs) pendant 20 secondes. Les personnes restant dans la zone plus de 2 secondes écopent de l'effet Poison 1.
 - Zombie: Après avoir tapé un joueur, l'utilisateur du pouvoir peut se transformer en zombie, et invoquer par la même occasion, 30 zombies, qui encerclent l'ennemi touché.

@@ -1,6 +1,5 @@
 package fr.teamkiwi.powerrush.commands;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.ChatColor;
@@ -85,12 +84,6 @@ public class CommandSelectKit implements CommandExecutor {
 				
 						
 			}
-			
-			//TODO: put all kits name here to use later
-			List<String> allKits = new ArrayList<String>();
-			allKits.add("Katana");
-			
-			plugin.getConfig().set("kits.allkits", allKits);
 			
 		}
 		

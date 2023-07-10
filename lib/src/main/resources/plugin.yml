@@ -40,7 +40,11 @@ commands :
     permission : powerrush.debug.selectkit
     permission-message : Vous n'êtes pas administrateur ! :(
     aliases: [selectkit, debugselectkit]
-    
+  initserver :
+    description : Commande permettant d'init le config.yml
+    permission : powerrush.initserver
+    permission-message : Vous n'êtes pas administrateur ! :(
+   
 permissions :
   powerrush.debug.*:
     default: op
@@ -51,6 +55,8 @@ permissions :
   powerrush.forcestop:
     default: op
   powerrush.saveinv:
+    default: op
+  powerrush.initserver:
     default: op
   powerrush.powerrushhelp:
     default: true

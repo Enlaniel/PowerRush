@@ -30,8 +30,9 @@ public class Main extends JavaPlugin {
     	//TODO: dipatch player and give inv, deop, open kis choice ... in CommandStart
     	//TODO: no chat for spec in new onChat
     	
-    	
-    	LOGGER.info("Plugin lancé avec succès");
+    	LOGGER.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    	LOGGER.info("[PowerRush] Plugin lance avec succes");
+    	LOGGER.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     	
     	//set up commandes
     	getCommand("config").setExecutor(new CommandConfig(this));
@@ -41,6 +42,9 @@ public class Main extends JavaPlugin {
     	getCommand("showinventory").setExecutor(new CommandShowInv());
     	getCommand("powerrushhelp").setExecutor(new CommandHelp());
     	
+    	//init commande
+    	getCommand("initserver").setExecutor(new CommandInitServer(this));
+    	
     	//setup debug commands
     	getCommand("selectkit").setExecutor(new CommandSelectKit(this));
     	
@@ -49,6 +53,8 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new WhenPlayerJoins(this), this);
         getServer().getPluginManager().registerEvents(new OnClick(this), this);
 		getServer().getPluginManager().registerEvents(new OnChat(), this);
+		
+		new CommandInitServer(this).initKits();
         
     }
 	
