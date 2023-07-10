@@ -1,7 +1,6 @@
 package fr.teamkiwi.powerrush.events;
 
 import fr.teamkiwi.powerrush.Main;
-import fr.teamkiwi.powerrush.commands.CommandConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -212,7 +211,7 @@ public class OnClickInventory implements Listener {
 	
 	                case ARROW :
 	
-	                    player.openInventory(CommandConfig.config);
+	                    Bukkit.dispatchCommand(player, "config");
 	
 	                    break;
 	                default:
@@ -255,7 +254,7 @@ public class OnClickInventory implements Listener {
 	
 	                case ARROW :
 	
-	                    player.openInventory(CommandConfig.config);
+	                	Bukkit.dispatchCommand(player, "config");
 	
 	                    break;
 	
@@ -350,7 +349,7 @@ public class OnClickInventory implements Listener {
 	                
 	            case ARROW :
 	
-	                player.openInventory(CommandConfig.config);
+	            	Bukkit.dispatchCommand(player, "config");
 	
 	                break;
 	
@@ -395,7 +394,7 @@ public class OnClickInventory implements Listener {
 	
 	                case ARROW :
 	
-	                    player.openInventory(CommandConfig.config);
+	                	Bukkit.dispatchCommand(player, "config");
 	
 	                    break;
 	
@@ -431,7 +430,7 @@ public class OnClickInventory implements Listener {
 	
 	                case ACACIA_FENCE_GATE :
 	
-	                	plugin.getConfig().set("config.classique", plugin.getConfig().getInt("config.classique") + 1);
+	                	plugin.getConfig().set("config.classique", plugin.getConfig().getInt("config.classique") + 2);
 	                    player.sendMessage(consoleSender + "Le nombre maximum de joueurs a ete augmente de " + ChatColor.GREEN + "2 points");
 	                    player.sendMessage(consoleSender + "Le nombre maximum de joueur est maintenant de " + ChatColor.AQUA + plugin.getConfig().getInt("config.classique"));
 	
@@ -439,7 +438,7 @@ public class OnClickInventory implements Listener {
 	
 	                case ARROW :
 	
-	                    player.openInventory(CommandConfig.config);
+	                	Bukkit.dispatchCommand(player, "config");
 	
 	                    break;
 	

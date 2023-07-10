@@ -48,8 +48,8 @@ public class CommandStart implements CommandExecutor {
 			aPlayer.getInventory().setContents(CommandSaveInv.inventoryOnStartContent);
 			
 			
+			//check mode de jeu
 			switch(plugin.getConfig().getString("config.modedejeu")) {
-			
 			
 			case "Random":
 				break;

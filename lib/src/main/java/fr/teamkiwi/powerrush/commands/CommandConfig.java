@@ -37,7 +37,7 @@ public class CommandConfig implements CommandExecutor {
 	
 	
 	//create inventory
-	public static Inventory config = Bukkit.createInventory(null, 9*5, ChatColor.DARK_PURPLE + "Config Menu");
+	
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -48,7 +48,7 @@ public class CommandConfig implements CommandExecutor {
 			//check if game is started
 			if(! CommandStart.isStarted) {
 				
-			
+				Inventory config = Bukkit.createInventory(null, 9*5, ChatColor.DARK_PURPLE + "Config Menu");
 				//create itemStack list
 				ItemStack[] configList = new ItemStack[9*5];
 				
@@ -72,13 +72,13 @@ public class CommandConfig implements CommandExecutor {
 				
 				name.setDisplayName("Mode de jeu");
 				lore.clear();
-				lore.add(ChatColor.AQUA + "Random Kits");
-				lore.add(ChatColor.AQUA + "Max Kit: 4");
+				lore.add(ChatColor.AQUA + plugin.getConfig().getString("config.modedejeu"));
+				lore.add(ChatColor.AQUA + String.valueOf(plugin.getConfig().getInt("config." + plugin.getConfig().getString("config.modedejeu").toLowerCase())));
 				name.setLore(lore);
 				commandBlock.setItemMeta(name);
 				
 				lore.clear();
-				lore.add(ChatColor.AQUA + "Max Joueurs: " + plugin.getConfig().getInt("config.random"));
+				lore.add(ChatColor.AQUA + "Max Joueurs: " + plugin.getConfig().getInt("config.maxPlayers"));
 				name.setLore(lore);
 				name.setDisplayName("Max Joueurs");
 				armor_stand.setItemMeta(name);
@@ -86,6 +86,7 @@ public class CommandConfig implements CommandExecutor {
 				
 				name.setDisplayName("On/Off Kits");
 				lore.clear();
+				lore.add("Nombre de kits ban:" + 5);
 				name.setLore(lore);
 				bookAndQuill.setItemMeta(name);
 				
