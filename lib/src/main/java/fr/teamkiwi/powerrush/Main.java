@@ -2,6 +2,7 @@ package fr.teamkiwi.powerrush;
 
 import java.util.logging.Logger;
 
+import fr.teamkiwi.powerrush.events.OnChat;
 import fr.teamkiwi.powerrush.events.WhenPlayerJoins;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -28,8 +29,6 @@ public class Main extends JavaPlugin {
     	//TODO: add variable spawn with config.yml in CommandForceStop
     	//TODO: dipatch player and give inv, deop, open kis choice ... in CommandStart
     	//TODO: no chat for spec in new onChat
-    	//TODO: URGENT link OnClickInventory to config.yml
-    	//TODO: continue mode de jeu choisses
     	
     	
     	LOGGER.info("Plugin lancé avec succès");
@@ -49,6 +48,7 @@ public class Main extends JavaPlugin {
     	getServer().getPluginManager().registerEvents(new OnClickInventory(this), this);
         getServer().getPluginManager().registerEvents(new WhenPlayerJoins(this), this);
         getServer().getPluginManager().registerEvents(new OnClick(this), this);
+		getServer().getPluginManager().registerEvents(new OnChat(), this);
         
     }
 	
