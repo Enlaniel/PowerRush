@@ -14,7 +14,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import fr.teamkiwi.powerrush.events.OnClickInventory;
+import fr.teamkiwi.powerrush.Main;
 
 
 public class CommandConfig implements CommandExecutor {
@@ -26,6 +26,16 @@ public class CommandConfig implements CommandExecutor {
 	 * 
 	 */
 
+	
+	Main plugin;
+    
+    public CommandConfig(Main plugin) {
+		this.plugin = plugin;
+	}
+	
+	
+	
+	
 	//create inventory
 	public static Inventory config = Bukkit.createInventory(null, 9*5, ChatColor.DARK_PURPLE + "Config Menu");
 	
@@ -68,7 +78,7 @@ public class CommandConfig implements CommandExecutor {
 				commandBlock.setItemMeta(name);
 				
 				lore.clear();
-				lore.add(ChatColor.AQUA + "Max Joueurs: " + OnClickInventory.maxPlayerConnected);
+				lore.add(ChatColor.AQUA + "Max Joueurs: " + plugin.getConfig().getInt("config.random"));
 				name.setLore(lore);
 				name.setDisplayName("Max Joueurs");
 				armor_stand.setItemMeta(name);

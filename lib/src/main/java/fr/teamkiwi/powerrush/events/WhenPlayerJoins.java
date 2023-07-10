@@ -8,10 +8,21 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import fr.teamkiwi.powerrush.Main;
 import fr.teamkiwi.powerrush.commands.CommandStart;
 
 public class WhenPlayerJoins implements Listener {
 
+	
+	Main plugin;
+    
+    public WhenPlayerJoins(Main plugin) {
+		this.plugin = plugin;
+	}
+	
+	
+	
+	
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
     	
@@ -26,9 +37,9 @@ public class WhenPlayerJoins implements Listener {
 	    	
 	    		
 		    //else kick player
-		    if (Bukkit.getOnlinePlayers().size() > OnClickInventory.maxPlayerConnected && OnClickInventory.maxPlayerConnected > 0) {
+		    if (Bukkit.getOnlinePlayers().size() > plugin.getConfig().getInt("config.maxPlayers") && plugin.getConfig().getInt("config.maxPlayers") > 0) {
 		
-		    	player.kickPlayer("La partie est complete, il y a deja " + (Bukkit.getOnlinePlayers().size() - 1) + " / " + OnClickInventory.maxPlayerConnected + " joueurs connectes !");
+		    	player.kickPlayer("La partie est complete, il y a deja " + (Bukkit.getOnlinePlayers().size() - 1) + " / " + plugin.getConfig().getInt("config.maxPlayers") + " joueurs connectes !");
 		        event.setJoinMessage(OnClickInventory.consoleSender + player.getName() + ChatColor.AQUA + " essaie de rejoindre la partie");
 		            
 		    }
@@ -36,6 +47,7 @@ public class WhenPlayerJoins implements Listener {
 	    	
     	}else {
     		
+    		//if player is not IG set to spectator mode
     		if(! CommandStart.allPlayersInGame.contains(player.getUniqueId())) {
     			
     			player.setGameMode(GameMode.SPECTATOR);
@@ -44,7 +56,7 @@ public class WhenPlayerJoins implements Listener {
     			
     			
     		}else {
-	    		
+	    		//else comme back
 	    		event.setJoinMessage(OnClickInventory.consoleSender + player.getName() + ChatColor.AQUA + " est revenu en jeu !");
     			
     		}

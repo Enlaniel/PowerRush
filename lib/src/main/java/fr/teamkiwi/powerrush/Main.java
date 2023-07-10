@@ -28,7 +28,6 @@ public class Main extends JavaPlugin {
     	//TODO: add variable spawn with config.yml in CommandForceStop
     	//TODO: dipatch player and give inv, deop, open kis choice ... in CommandStart
     	//TODO: no chat for spec in new onChat
-    	//TODO: kits selection (with command for easy test or directly with 2nd game mode)
     	//TODO: URGENT link OnClickInventory to config.yml
     	//TODO: continue mode de jeu choisses
     	
@@ -36,7 +35,7 @@ public class Main extends JavaPlugin {
     	LOGGER.info("Plugin lancé avec succès");
     	
     	//set up commandes
-    	getCommand("config").setExecutor(new CommandConfig());
+    	getCommand("config").setExecutor(new CommandConfig(this));
     	getCommand("start").setExecutor(new CommandStart());
     	getCommand("forcestop").setExecutor(new CommandForceStop());
     	getCommand("saveinventory").setExecutor(new CommandSaveInv());
@@ -48,9 +47,9 @@ public class Main extends JavaPlugin {
     	
     	//register event
     	getServer().getPluginManager().registerEvents(new OnClickInventory(this), this);
-        getServer().getPluginManager().registerEvents(new WhenPlayerJoins(), this);
+        getServer().getPluginManager().registerEvents(new WhenPlayerJoins(this), this);
         getServer().getPluginManager().registerEvents(new OnClick(this), this);
-    	
+        
     }
 	
     public void onDisable() {
