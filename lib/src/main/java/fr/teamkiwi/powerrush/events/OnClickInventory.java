@@ -226,31 +226,29 @@ public class OnClickInventory implements Listener {
 	        
 	        //in max player count config menu
 	        if (clickedInventory.getTitle().equals(ChatColor. DARK_GREEN + "Max Players Count Menu")) {
-
-				int maxPlayerConnected = plugin.getConfig().getInt("config.maxPlayers");
 	
 	            switch (clickedItem.getType()) {
 	
 	                case ACACIA_FENCE :
 	
-	                    maxPlayerConnected --;
+	                    plugin.getConfig().set("config.maxPlayers", plugin.getConfig().getInt("config.maxPlayers")-1);
 	                    player.sendMessage(consoleSender + "Le nombre maximum de joueurs a ete diminue de " + ChatColor.RED + "1 joueur");
-	                    player.sendMessage(consoleSender + "Le nombre maximum de joueur est maintenant de " + ChatColor.AQUA + maxPlayerConnected);
+	                    player.sendMessage(consoleSender + "Le nombre maximum de joueur est maintenant de " + ChatColor.AQUA + plugin.getConfig().getInt("config.maxPlayers"));
 	
 	                    break;
 	
 	                case COBBLE_WALL :
-	
-	                    maxPlayerConnected = 30;
+
+						plugin.getConfig().set("config.maxPlayers", 30);
 	                    player.sendMessage(consoleSender + "Le nombre maximum de joueurs a ete reinitialise a " + ChatColor.AQUA + "30 joueurs");
 	
 	                    break;
 	
 	                case ACACIA_FENCE_GATE :
-	
-	                    maxPlayerConnected ++;
+
+						plugin.getConfig().set("config.maxPlayers", plugin.getConfig().getInt("config.maxPlayers")+1);
 	                    player.sendMessage(consoleSender + "Le nombre maximum de joueurs a ete augmente de " + ChatColor.GREEN + "1 joueur");
-	                    player.sendMessage(consoleSender + "Le nombre maximum de joueur est maintenant de " + ChatColor.AQUA + maxPlayerConnected);
+	                    player.sendMessage(consoleSender + "Le nombre maximum de joueur est maintenant de " + ChatColor.AQUA + plugin.getConfig().getInt("config.maxPlayers"));
 	
 	                    break;
 	
