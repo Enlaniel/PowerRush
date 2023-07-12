@@ -43,8 +43,11 @@ public class CommandInitServer implements CommandExecutor {
 	public void initKits() {
 		
 		allKitsMaterial.put("Katana", Material.DIAMOND_SWORD);
-		allKitsCost.put("Katana", 3);
+		allKitsCost.put("Katana", 4);
 		allKits.add("Katana");
+		allKitsMaterial.put("Ange", Material.GOLDEN_APPLE);
+		allKitsCost.put("Ange", 5);
+		allKits.add("Ange");
 		
 		
 		

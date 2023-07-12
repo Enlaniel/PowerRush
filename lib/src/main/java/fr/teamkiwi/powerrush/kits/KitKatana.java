@@ -9,8 +9,6 @@ public class KitKatana {
 	 * Katana kit:
 	 * If the player have a sword in hand, break block 
 	 * 
-	 * 
-	 * 
 	 */
 	
 	public void kitKatana(PlayerInteractEvent event) {

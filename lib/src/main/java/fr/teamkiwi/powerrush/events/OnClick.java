@@ -30,9 +30,8 @@ public class OnClick implements Listener {
 			if(plugin.getConfig().getList("kits.katana").contains(player.getName())) {
 				
 				new KitKatana().kitKatana(event);
-		}
+			}
 		
-			
 		}
 		
 	}
