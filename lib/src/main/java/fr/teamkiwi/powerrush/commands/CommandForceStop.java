@@ -24,7 +24,7 @@ public class CommandForceStop implements CommandExecutor {
 	}
 	
 	
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings({ "deprecation", "unchecked" })
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		
@@ -44,6 +44,8 @@ public class CommandForceStop implements CommandExecutor {
 		List<String> debugList = new ArrayList<String>();
 		
 		for(String aKit : allKits) {
+			debugList = (List<String>) plugin.getConfig().getList("kits." + aKit.toLowerCase());
+			debugList.clear();
 			plugin.getConfig().set("kits." + aKit.toLowerCase(), debugList);
 		}
 		

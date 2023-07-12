@@ -30,9 +30,16 @@ public class CommandInitServer implements CommandExecutor {
 		
 		
 		plugin.getConfig().set("config.bannedKits", new ArrayList<>());
+		plugin.getConfig().set("config.modedejeu", "Classique");
+		plugin.getConfig().set("config.classique", 30);
+		plugin.getConfig().set("config.random", 5);
+		plugin.getConfig().set("config.maxPlayers", 30);
 		
-		Bukkit.getScoreboardManager().getMainScoreboard().registerNewObjective("Points", "dummy");
-		Bukkit.getScoreboardManager().getMainScoreboard().registerNewObjective("Round", "dummy");
+		
+		if(Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Points") == null) {
+			Bukkit.getScoreboardManager().getMainScoreboard().registerNewObjective("Points", "dummy");
+			Bukkit.getScoreboardManager().getMainScoreboard().registerNewObjective("Round", "dummy");
+		}
 		
 		sender.sendMessage("Le serveur a bien ete initialise");
 		

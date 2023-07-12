@@ -17,8 +17,8 @@ import fr.teamkiwi.powerrush.events.OnClickInventory;
 public class CommandSaveInv implements CommandExecutor {
 
 	
-	static ItemStack[] inventoryOnStartContent = {};
-	static ItemStack[] inventoryOnStartArmor = {};
+	static ItemStack[] inventoryOnStartContent = null;
+	static ItemStack[] inventoryOnStartArmor = null;
 	static Inventory inventoryOnStart = Bukkit.createInventory(null, InventoryType.PLAYER);
 	
 	@Override

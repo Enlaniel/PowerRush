@@ -41,7 +41,7 @@ public class WhenPlayerJoins implements Listener {
 		
 		    	player.kickPlayer("La partie est complete, il y a deja " + (Bukkit.getOnlinePlayers().size() - 1) + " / " + plugin.getConfig().getInt("config.maxPlayers") + " joueurs connectes !");
 		        event.setJoinMessage(OnClickInventory.consoleSender + player.getName() + ChatColor.AQUA + " essaie de rejoindre la partie");
-		            
+		        
 		    }
 	    		
 	    	

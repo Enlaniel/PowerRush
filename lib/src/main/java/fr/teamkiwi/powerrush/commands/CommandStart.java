@@ -84,10 +84,7 @@ public class CommandStart implements CommandExecutor {
 			
 			}
 			
-			
-			
 		}
-		
 		
 		return false;
 	}
@@ -181,20 +178,21 @@ public class CommandStart implements CommandExecutor {
 	private void setRandom(Player player) {
 		
 		Random random = new Random();
-		List<String> allKits = (List<String>) plugin.getConfig().getList("kits.allkits");
+		List<String> allKits = CommandInitServer.allKits;
 		
 		//if choosen random config is > than the number of kits
 		if(allKits.size() < plugin.getConfig().getInt("config.random")) {
 			plugin.getConfig().set("config.random", allKits.size());
 		}
 		
-		for(int i = 0; i < plugin.getConfig().getInt("config.random"); i++ ) {
+		for(int i = 0; i <= plugin.getConfig().getInt("config.random"); i++ ) {
 			
 			String randomKit = allKits.get(random.nextInt(allKits.size()));
 			List<String> randomKitList = (List<String>) plugin.getConfig().getList("kits." + randomKit.toLowerCase());
 			
 			//if player does not have the random kit, set it
 			if(! randomKitList.contains(player.getName())){
+				
 				randomKitList.add(player.getName());
 				plugin.getConfig().set("kits." + randomKit.toLowerCase(), randomKitList);
 				

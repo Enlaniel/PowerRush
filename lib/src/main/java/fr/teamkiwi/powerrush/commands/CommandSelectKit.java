@@ -38,7 +38,7 @@ public class CommandSelectKit implements CommandExecutor {
 			//case help
 			}else if(args[0].equals("help")){
 				player.sendMessage(ChatColor.GOLD + "Voici tous les kits que vous pouvez choisir:");
-				player.sendMessage(ChatColor.AQUA + "katana" + separation + "");
+				player.sendMessage(ChatColor.AQUA + "katana" + separation + "ange");
 				
 			}
 			//check argument if args has an argument
@@ -52,11 +52,15 @@ public class CommandSelectKit implements CommandExecutor {
 				case "katana":
 					choosenKit = args[0];
 					break;
+					
+				case "ange":
+					choosenKit = args[0];
+					break;
 				
 					
 				default:
 					player.sendMessage(ChatColor.GOLD + "Voici tous les kits que vous pouvez choisir:");
-					player.sendMessage(ChatColor.AQUA + "katana" + separation + "");
+					player.sendMessage(ChatColor.AQUA + "katana" + separation + "ange");
 				
 				}
 				
