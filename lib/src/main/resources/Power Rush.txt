@@ -17,7 +17,7 @@ Une vingtaine de kit diffetents (30) :
 - Avenir: ressucite une fois dans la partie avec 8 coeurs
 - Trader: echange la place de l'utilisateur avec le joueur visé
 - Ange: Les pommes d'or ont un effet de régénération plus rapide (Régénération 3 pendant 2 secondes). 
-Si le joueur sneak pendant 5 secondes avant de manger une pomme d'or, gagne 5 coeurs d'absorption au lieu de 2
+Si le joueur sneak pendant 3 secondes avant de manger une pomme d'or, gagne 4 coeurs d'absorption au lieu de 2
 - Araignée: Grappin permettant d'effectuer de longs saut en avant, le chemin parcouru est tracé sous forme de toile d'araignée OU
 peut lancer une boule de neige qui crée une toile d'araignée
 - Balle: Effectue un dash d'une longueur de 30 blocks détruisant tout sur son passage dans un rayon de 8 blocks. Les joueurs touchés par l'impact perdent 5 coeurs 

@@ -22,13 +22,7 @@ public class OnItemConsume implements Listener {
 		
 		Player player = event.getPlayer();
 		
-		//DEBUG
-		player.sendMessage("Event Check");
-		
 		if(plugin.getConfig().getList("kits.ange").contains(player.getName())) {
-			
-			//DEBUG
-			player.sendMessage("Kit Check");
 			
 			new KitAnge().kitAnge(event);
 			

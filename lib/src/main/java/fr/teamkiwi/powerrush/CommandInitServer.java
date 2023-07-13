@@ -38,7 +38,10 @@ public class CommandInitServer implements CommandExecutor {
 		
 		if(Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Points") == null) {
 			Bukkit.getScoreboardManager().getMainScoreboard().registerNewObjective("Points", "dummy");
+		}if(Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Round") == null) {
 			Bukkit.getScoreboardManager().getMainScoreboard().registerNewObjective("Round", "dummy");
+		}if(Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Ange") == null) {
+			Bukkit.getScoreboardManager().getMainScoreboard().registerNewObjective("Ange", "dummy");
 		}
 		
 		sender.sendMessage("Le serveur a bien ete initialise");
