@@ -38,16 +38,20 @@ public class OnClick implements Listener {
 			}
 		
 		}
-		
-		if(! (plugin.getConfig().getList("kits.doppage") == null)) {
-			if(plugin.getConfig().getList("kits.doppage").contains(player.getName())) {
-				if(clickedItem.getType() == Material.SUGAR) {
+		if(clickedItem != null) {
+			
+			if(! (plugin.getConfig().getList("kits.doppage") == null)) {
+				if(plugin.getConfig().getList("kits.doppage").contains(player.getName())) {
 					
-					new KitDoppage().kitDoppage(event);
+					if(clickedItem.getType() == Material.SUGAR) {
+						
+						new KitDoppage().kitDoppage(event);
+					}
+						
 				}
-					
 			}
 		}
+		
 		
 	}
 	

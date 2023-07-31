@@ -36,7 +36,7 @@ public class CommandStart implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		
-		//TODO: dipatch player and give inv, deop, open kits choice ...
+		//TODO: dipatch player and give inv, deop, give kits item
 		
 		isStarted = true;
 		
@@ -202,6 +202,32 @@ public class CommandStart implements CommandExecutor {
 		}
 		
 		
+		giveKitItems(player);
+		
+		
 	}
+	
+	
+	public void giveKitItems(Player player) {
+		
+		for(String aKit : CommandInitServer.allKits) {
+			
+			if(plugin.getConfig().getList("kits." + aKit.toLowerCase()).contains(player.getName())){
+				
+				ItemStack aKitItem = new ItemStack(CommandInitServer.allKitsMaterial.get(aKit));
+				ItemMeta aKitItemMeta = aKitItem.getItemMeta();
+				
+				aKitItemMeta.setDisplayName(aKit);
+				
+				aKitItem.setItemMeta(aKitItemMeta);
+				
+				player.getInventory().addItem(aKitItem);
+				
+			}
+			
+		}
+		
+	}
+	
 
 }

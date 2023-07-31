@@ -14,15 +14,18 @@ public class KitDoppage {
 	public void kitDoppage(PlayerInteractEvent event) {
 		
 		Player player = event.getPlayer();
-		
 		Objective objectiveDoppage = Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Doppage");
+		PotionEffect speed = new PotionEffect(PotionEffectType.SPEED, 20*3, 4, true, false);
+		
 		
 		if(objectiveDoppage.getScore(player).getScore() >= 120) {
 			
-			player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 3, 4, false, false));
+			player.addPotionEffect(speed);
+			
+			objectiveDoppage.getScore(player).setScore(0);
 			
 		}else {
-			player.sendMessage("Kit Doppage pret dans " + objectiveDoppage.getScore(player).getScore() + " s");
+			player.sendMessage("Kit Doppage pret dans " + (120 - objectiveDoppage.getScore(player).getScore()) + " s");
 		}
 		
 		

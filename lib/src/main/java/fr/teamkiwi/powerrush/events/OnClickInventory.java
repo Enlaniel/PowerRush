@@ -553,7 +553,7 @@ public class OnClickInventory implements Listener {
 	        
 	        
 	        
-	        
+	        //classique choose kit menu
 	        if (clickedInventory.getTitle().equals(ChatColor.DARK_PURPLE + "Choissisez un kit")) {
 	        	
 	        	Score playerRound = Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Round").getScore((OfflinePlayer) player);
@@ -611,6 +611,9 @@ public class OnClickInventory implements Listener {
 	        			player.getInventory().addItem(goldenApple);
 	        			
 	        			player.closeInventory();
+	        			
+	        			new CommandStart(plugin).giveKitItems((Player) player);
+	        			
 	        		}
 	        			
 	        	}
