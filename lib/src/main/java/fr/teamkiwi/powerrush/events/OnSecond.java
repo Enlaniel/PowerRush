@@ -16,6 +16,8 @@ public class OnSecond implements Runnable {
 	
 	@SuppressWarnings("unchecked")
 	List<String> kitAnge = (List<String>) plugin.getConfig().getList("kits.ange");
+	@SuppressWarnings("unchecked")
+	List<String> kitDoppage = (List<String>) plugin.getConfig().getList("kits.doppage");
 	
 	
 	@SuppressWarnings("deprecation")
@@ -25,6 +27,8 @@ public class OnSecond implements Runnable {
 		Collection<? extends Player> allPlayers = Bukkit.getOnlinePlayers();
 		
 		Objective objectiveAnge = Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Ange");
+		Objective objectiveDoppage = Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Doppage");
+		
 		
 		for(Player aPlayer : allPlayers) {
 
@@ -32,7 +36,7 @@ public class OnSecond implements Runnable {
 				
 				if(aPlayer.isSneaking()) {
 					
-					if(objectiveAnge.getScore(aPlayer).getScore() >= 2) {
+					if(objectiveAnge.getScore(aPlayer).getScore() == 2) {
 						aPlayer.sendMessage("Capacite Ange rechargee");
 					}
 					
@@ -41,6 +45,14 @@ public class OnSecond implements Runnable {
 				}else {
 					objectiveAnge.getScore(aPlayer).setScore(0);
 				}
+				
+			}if(kitDoppage.contains(aPlayer.getName())) {
+				
+				if(objectiveDoppage.getScore(aPlayer).getScore() == 120) {
+					aPlayer.sendMessage("Capacite Doppage rechargee");
+				}
+				
+				objectiveDoppage.getScore(aPlayer).setScore(objectiveDoppage.getScore(aPlayer).getScore() + 1);
 				
 			}
 			

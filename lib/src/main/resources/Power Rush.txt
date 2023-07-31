@@ -16,7 +16,7 @@ Une vingtaine de kit diffetents (30) :
 - Poupée: quand l'utilisateur tu quelqu'un, la personne tuée deviens son serviteur et rejoins son equipe
 - Avenir: ressucite une fois dans la partie avec 8 coeurs
 - Trader: echange la place de l'utilisateur avec le joueur visé
-- Ange: Les pommes d'or ont un effet de régénération plus rapide (Régénération 3 pendant 2 secondes). 
+✓ Ange: Les pommes d'or ont un effet de régénération plus rapide (Régénération 3 pendant 2 secondes). 
 Si le joueur sneak pendant 3 secondes avant de manger une pomme d'or, gagne 4 coeurs d'absorption au lieu de 2
 - Araignée: Grappin permettant d'effectuer de longs saut en avant, le chemin parcouru est tracé sous forme de toile d'araignée OU
 peut lancer une boule de neige qui crée une toile d'araignée
@@ -26,7 +26,7 @@ et sont temporairement ralentis
 Resistance au dégats d'explosion.
 - Chauve-souris: Possibilité de voler pendant 10 secondes et de propulser des joueurs en l'air en les touchant
 - Glitch: La vie au-dessus de la tête de l'utilisateur du pouvoir est erronée indiquant à chaque coup reçu un pourcentage de vie aléatoire
-- Doppage: Objet permettant d'obtenir l'effet speed 5 pendant 3 secondes
+- Doppage: Objet permettant d'obtenir l'effet speed 5 pendant 3 secondes. COOLDOWN: 2 minutes
 - Electrique: Création d'une zone électrique de 15 de rayon secondes. Les joueurs présents dans la zone sont paralysés pendant 3 secondes à l'activation et 10 secondes après
 - Pyromane: 10% de chance que les coups donnés soient enflammés. Resistance au feu permanent.
 - Fantome: Empêche les gens dans un rayon de taper l'utilisateur pendant 1 minute. Si l'utilisateur tape un joueur, il redeviendra vulnérable

@@ -42,6 +42,8 @@ public class CommandInitServer implements CommandExecutor {
 			Bukkit.getScoreboardManager().getMainScoreboard().registerNewObjective("Round", "dummy");
 		}if(Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Ange") == null) {
 			Bukkit.getScoreboardManager().getMainScoreboard().registerNewObjective("Ange", "dummy");
+		}if(Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Doppage") == null) {
+			Bukkit.getScoreboardManager().getMainScoreboard().registerNewObjective("Doppage", "dummy");
 		}
 		
 		sender.sendMessage("Le serveur a bien ete initialise");
@@ -58,6 +60,9 @@ public class CommandInitServer implements CommandExecutor {
 		allKitsMaterial.put("Ange", Material.GOLDEN_APPLE);
 		allKitsCost.put("Ange", 5);
 		allKits.add("Ange");
+		allKitsMaterial.put("Doppage", Material.SUGAR);
+		allKitsCost.put("Doppage", 3);
+		allKits.add("Doppage");
 		
 		
 		
