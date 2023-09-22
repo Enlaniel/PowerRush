@@ -27,8 +27,7 @@ public class Main extends JavaPlugin {
 
 	@Override
     public void onEnable() {
-    	
-    	
+		
     	//TODO: dipatch player and give inv, deop, open kis choice ... in CommandStart
     	//TODO: create kits with help of PowerRush.txt
     	//TODO: Il faut faire les repercution d'un bannissement dans la section start (impossible de les picks)

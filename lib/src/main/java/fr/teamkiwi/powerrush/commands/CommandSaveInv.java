@@ -28,7 +28,7 @@ public class CommandSaveInv implements CommandExecutor {
 		if(sender instanceof Player player) {
 			
 			//check if game is started
-			if(! CommandStart.isStarted) {
+			if(! CommandStart.isStarted && player.getInventory().getContents() != null) {
 				
 				inventoryOnStartContent = player.getInventory().getContents();
 				inventoryOnStartArmor = player.getInventory().getArmorContents();
@@ -38,6 +38,8 @@ public class CommandSaveInv implements CommandExecutor {
 				player.getInventory().clear();
 				player.getInventory().setArmorContents(null);
 				
+			}if(! CommandStart.isStarted && args[1] != null) {
+				setDefaultInventory();
 			}
 			
 		}

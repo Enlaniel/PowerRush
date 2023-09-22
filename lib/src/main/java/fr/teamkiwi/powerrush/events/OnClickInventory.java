@@ -176,46 +176,7 @@ public class OnClickInventory implements Listener {
 	                //Config des kits et de la partie en elle-même
 	                case BOOK_AND_QUILL :
 	                	
-	                	Inventory banKitsInv = Bukkit.createInventory(null, 9*5, ChatColor. DARK_PURPLE + "Cliquez pour bannir");
-	                    ItemStack[] banKitsList = new ItemStack[9*5];
-
-	                    banKitsList[9*5-1] = arrow;
-	                    banKitsList[9*4+4] = cobblestoneWall;
-	                    banKitsList[9*4] = arrow;
-	                    
-	                    name.setDisplayName("Reinitialiser");
-	                    cobblestoneWall.setItemMeta(name);
-	                    
-	                    int i = 0;
-	                    
-	                    for(String aKit : CommandInitServer.allKitsMaterial.keySet()) {
-	                    	ItemStack anItem = new ItemStack(CommandInitServer.allKitsMaterial.get(aKit));
-	                    	
-	                    	if(plugin.getConfig().getList("config.bannedKits").contains(aKit)) {
-	                    		name.setDisplayName(aKit);
-	                    		lore.clear();
-	                    		lore.add(ChatColor.RED + "Kit Banni");
-	                    		name.setLore(lore);
-	                    	}else {
-	                    		name.setDisplayName(aKit);
-	                    		lore.clear();
-	                    		lore.add(ChatColor.GREEN + "Kit En Jeu");
-	                    		name.setLore(lore);
-	                    	}
-	                    	
-	                    	anItem.setItemMeta(name);
-	                    	banKitsList[i] = anItem;
-	                    	
-	                    	i++;
-	                    	
-	                    }
-	                    
-	                    
-	
-	                    banKitsInv.setContents(banKitsList);
-	
-	                    player.openInventory(banKitsInv);
-	                	
+	                	createBannedKitInventory((Player) player);
 	                	
 	                    break;
 	
@@ -544,6 +505,8 @@ public class OnClickInventory implements Listener {
 		        				}
 		        			}
 		        		}
+		        		
+		        		createBannedKitInventory((Player) player);
 		        	}
 	        	}
 	        	
@@ -634,5 +597,53 @@ public class OnClickInventory implements Listener {
 	        
 	    }
     }
+
+
+	private void createBannedKitInventory(Player player) {
+		
+		ItemStack cobblestoneWall = new ItemStack(Material.COBBLE_WALL);
+		ItemStack arrow = new ItemStack(Material.ARROW);
+        ItemMeta name = arrow.getItemMeta();
+        List<String> lore = new ArrayList<>();
+		
+		Inventory banKitsInv = Bukkit.createInventory(null, 9*5, ChatColor. DARK_PURPLE + "Cliquez pour bannir");
+        ItemStack[] banKitsList = new ItemStack[9*5];
+
+        banKitsList[9*5-1] = arrow;
+        banKitsList[9*4+4] = cobblestoneWall;
+        banKitsList[9*4] = arrow;
+        
+        name.setDisplayName("Reinitialiser");
+        cobblestoneWall.setItemMeta(name);
+        
+        int i = 0;
+        
+        for(String aKit : CommandInitServer.allKitsMaterial.keySet()) {
+        	ItemStack anItem = new ItemStack(CommandInitServer.allKitsMaterial.get(aKit));
+        	
+        	if(plugin.getConfig().getList("config.bannedKits").contains(aKit)) {
+        		name.setDisplayName(aKit);
+        		lore.clear();
+        		lore.add(ChatColor.RED + "Kit Banni");
+        		name.setLore(lore);
+        	}else {
+        		name.setDisplayName(aKit);
+        		lore.clear();
+        		lore.add(ChatColor.GREEN + "Kit En Jeu");
+        		name.setLore(lore);
+        	}
+        	
+        	anItem.setItemMeta(name);
+        	banKitsList[i] = anItem;
+        	
+        	i++;
+        	
+        }
+        
+        banKitsInv.setContents(banKitsList);
+    	
+        player.openInventory(banKitsInv);
+		
+	}
 
 }
