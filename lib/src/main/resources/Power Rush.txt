@@ -9,7 +9,7 @@ les joueurs ont 2 minutes pour choisir les kits de leurs choix avec un systeme d
 apocalypse: pas de barre de sang (aucun cooldown), les joueurs choissisent tous les kits qu'ils veulent. Ils ont 3 minutes pour le faire
 
 
-Une vingtaine de kit diffetents (30) :
+Une vingtaine de kit differents (30) :
 
 ✓ Katana: L'epee peut instant break les blocks
 - Requin: En cliquant sur un joueur avec l'item "Requin", une sphere d'eau de 50*50 ce crée pendant 1 minute. L'utilisateur a depth strider 10.
@@ -22,7 +22,7 @@ Si le joueur sneak pendant 3 secondes avant de manger une pomme d'or, gagne 4 co
 peut lancer une boule de neige qui crée une toile d'araignée
 - Balle: Effectue un dash d'une longueur de 30 blocks détruisant tout sur son passage dans un rayon de 8 blocks. Les joueurs touchés par l'impact perdent 5 coeurs 
 et sont temporairement ralentis
-- Bombe: Crée une explosion de 50 blocks de rayon es personnes touchées par l'impact de la bombe perdent 4 coeurs et sont expulsés de 20 blocks. 
+- Bombe: Créé une explosion de 50 blocks de rayon les personnes touchées par l'impact de la bombe perdent 4 coeurs et sont expulsés de 20 blocks. 
 Resistance au dégats d'explosion.
 - Chauve-souris: Possibilité de voler pendant 10 secondes et de propulser des joueurs en l'air en les touchant
 - Glitch: La vie au-dessus de la tête de l'utilisateur du pouvoir est erronée indiquant à chaque coup reçu un pourcentage de vie aléatoire

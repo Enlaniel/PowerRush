@@ -35,6 +35,7 @@ public class CommandSaveInv implements CommandExecutor {
 				
 				player.sendMessage(OnClickInventory.consoleSender + ChatColor.AQUA + "Votre inventaire a bien ete sauvegarde !");
 				
+				
 				player.getInventory().clear();
 				player.getInventory().setArmorContents(null);
 				
