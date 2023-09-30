@@ -529,7 +529,7 @@ public class OnClickInventory implements Listener {
 	        		if(!(playerRound.getScore() >= 5)) {
 	        		
 			        	//case cobblstone wall: reinitialiser
-			        	if(clickedItem.getType().equals(Material.COBBLE_WALL)){
+			        	if(clickedItem.getType().equals(Material.ARROW)){
 			        		
 			        		player.sendMessage(consoleSender + ChatColor.AQUA + "Vous n'avez pas choisis de kit");
 			        		playerRound.setScore(playerRound.getScore() + 1);
@@ -537,10 +537,6 @@ public class OnClickInventory implements Listener {
 			        		new CommandStart(plugin).setClassique((Player) player);
 			        		
 			        	
-			        	}else if(clickedItem.getType().equals(Material.ARROW)) {
-			        		
-			        		
-			        	//case on a kit
 			        	}else {
 			        		String aKitName = clickedItem.getItemMeta().getDisplayName();
 			        		
@@ -558,7 +554,7 @@ public class OnClickInventory implements Listener {
 			        					playerPoints.setScore(playerPoints.getScore() - aKit.getPrice());
 				        				playerRound.setScore(playerRound.getScore() + 1);
 				        				
-				        				player.sendMessage("Vous venez de recevoir le kit " + aKit);
+				        				player.sendMessage("Vous venez de recevoir le kit " + aKit.getName());
 				        				
 				        				new CommandStart(plugin).setClassique((Player) player);
 				        				
@@ -606,6 +602,7 @@ public class OnClickInventory implements Listener {
 		ItemStack arrow = new ItemStack(Material.ARROW);
         ItemMeta name = arrow.getItemMeta();
         List<String> lore = new ArrayList<>();
+        
 		
 		Inventory banKitsInv = Bukkit.createInventory(null, 9*5, ChatColor. DARK_PURPLE + "Cliquez pour bannir");
         ItemStack[] banKitsList = new ItemStack[9*5];

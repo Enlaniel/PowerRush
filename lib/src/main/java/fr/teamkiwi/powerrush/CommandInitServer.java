@@ -9,6 +9,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+import fr.teamkiwi.powerrush.commands.CommandSaveInv;
+
 public class CommandInitServer implements CommandExecutor {
 
 	Main plugin;
@@ -48,6 +50,8 @@ public class CommandInitServer implements CommandExecutor {
 
 	
 	public void initKits() {
+		
+		new CommandSaveInv().setDefaultInventory();
 		
 		Kit katana = new Kit("Katana", Material.DIAMOND_SWORD, 4, false);
 		Kit ange = new Kit("Ange", Material.GOLDEN_APPLE, 5, false);

@@ -205,7 +205,7 @@ public class CommandStart implements CommandExecutor {
 			
 			plugin.getConfig().set("kits." + randomKit.getName().toLowerCase(), randomKitList);
 			
-			player.sendMessage(ChatColor.AQUA + "Vous venez de recevoir le kit " + ChatColor.GOLD + randomKit);
+			player.sendMessage(ChatColor.AQUA + "Vous venez de recevoir le kit " + ChatColor.GOLD + randomKit.getName());
 			
 		}
 		

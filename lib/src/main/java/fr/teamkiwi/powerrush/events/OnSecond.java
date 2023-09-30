@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Objective;
 
 import fr.teamkiwi.powerrush.Main;
+import fr.teamkiwi.powerrush.commands.CommandStart;
 
 public class OnSecond implements Runnable {
 
@@ -31,6 +32,10 @@ public class OnSecond implements Runnable {
 		
 		
 		for(Player aPlayer : allPlayers) {
+			
+			if(! CommandStart.isStarted) {
+				aPlayer.setFoodLevel(20);
+			}
 
 			if(kitAnge.contains(aPlayer.getName())) {
 				

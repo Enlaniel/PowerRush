@@ -6,6 +6,7 @@ import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -35,16 +36,17 @@ public class CommandForceStop implements CommandExecutor {
 		//reset parameter
 		CommandStart.allPlayersInGame.clear();
 		CommandStart.isStarted = false;
-		CommandSaveInv.inventoryOnStartArmor = null;
-		CommandSaveInv.inventoryOnStartContent = null;
 		
 		Location spawn = new Location(Bukkit.getWorld("world"), 0, 101, 0);
-		
 		
 		
 		//reset all kits
 		List<Kit> allKits = CommandInitServer.allKits;
 		List<String> debugList = new ArrayList<String>();
+		
+		for(OfflinePlayer player : Bukkit.getOfflinePlayers()) {
+			Bukkit.getScoreboardManager().getMainScoreboard().resetScores(player);
+		}
 		
 		for(Kit aKit : allKits) {
 			debugList = (List<String>) plugin.getConfig().getList("kits." + aKit.getName().toLowerCase());

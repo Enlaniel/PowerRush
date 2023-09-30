@@ -21,10 +21,13 @@ public class CommandShowInv implements CommandExecutor {
 			
 			//set up the content of the show inv
 			showInv.setContents(CommandSaveInv.inventoryOnStartContent);
-			showInv.setItem(9*4, CommandSaveInv.inventoryOnStartArmor[0]);
-			showInv.setItem(9*4 + 1, CommandSaveInv.inventoryOnStartArmor[1]);
-			showInv.setItem(9*4 + 2, CommandSaveInv.inventoryOnStartArmor[2]);
-			showInv.setItem(9*4 + 3, CommandSaveInv.inventoryOnStartArmor[3]);
+			if(CommandSaveInv.inventoryOnStartArmor != null) {
+				showInv.setItem(9*4, CommandSaveInv.inventoryOnStartArmor[0]);
+				showInv.setItem(9*4 + 1, CommandSaveInv.inventoryOnStartArmor[1]);
+				showInv.setItem(9*4 + 2, CommandSaveInv.inventoryOnStartArmor[2]);
+				showInv.setItem(9*4 + 3, CommandSaveInv.inventoryOnStartArmor[3]);
+			}
+			
 			
 			//open inv
 			player.openInventory(showInv);
