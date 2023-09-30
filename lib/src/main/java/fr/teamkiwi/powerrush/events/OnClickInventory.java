@@ -1,6 +1,7 @@
 package fr.teamkiwi.powerrush.events;
 
 import fr.teamkiwi.powerrush.CommandInitServer;
+import fr.teamkiwi.powerrush.Kit;
 import fr.teamkiwi.powerrush.Main;
 import fr.teamkiwi.powerrush.commands.CommandStart;
 
@@ -482,9 +483,9 @@ public class OnClickInventory implements Listener {
 		        	}else {
 		        		String aKitName = clickedItem.getItemMeta().getDisplayName();
 		        		
-		        		for(String aKit : CommandInitServer.allKits) {
+		        		for(Kit aKit : CommandInitServer.allKits) {
 		        			
-		        			if(aKitName.equals(aKit)) {
+		        			if(aKitName.equals(aKit.getName())) {
 		        				
 		        				@SuppressWarnings("unchecked")
 								List<String> bannedKits = (List<String>) plugin.getConfig().getList("config.bannedKits");
@@ -543,18 +544,18 @@ public class OnClickInventory implements Listener {
 			        	}else {
 			        		String aKitName = clickedItem.getItemMeta().getDisplayName();
 			        		
-			        		for(String aKit : CommandInitServer.allKits) {
+			        		for(Kit aKit : CommandInitServer.allKits) {
 			        			
-			        			if(aKitName.equals(aKit)) {
+			        			if(aKitName.equals(aKit.getName())) {
 			        				
-			        				if(playerPoints.getScore() >= CommandInitServer.allKitsCost.get(aKit)) {
+			        				if(playerPoints.getScore() >= aKit.getPrice()) {
 			        					
 			        					@SuppressWarnings("unchecked")
-										List<String> aKitList = (List<String>) plugin.getConfig().getList("kits." + aKit.toLowerCase());
+										List<String> aKitList = (List<String>) plugin.getConfig().getList("kits." + aKit.getName().toLowerCase());
 			        					aKitList.add(player.getName());
-			        					plugin.getConfig().set("kits." + aKit.toLowerCase(), aKitList);
+			        					plugin.getConfig().set("kits." + aKit.getName().toLowerCase(), aKitList);
 			        					
-			        					playerPoints.setScore(playerPoints.getScore() - CommandInitServer.allKitsCost.get(aKit));
+			        					playerPoints.setScore(playerPoints.getScore() - aKit.getPrice());
 				        				playerRound.setScore(playerRound.getScore() + 1);
 				        				
 				        				player.sendMessage("Vous venez de recevoir le kit " + aKit);
@@ -618,16 +619,16 @@ public class OnClickInventory implements Listener {
         
         int i = 0;
         
-        for(String aKit : CommandInitServer.allKitsMaterial.keySet()) {
-        	ItemStack anItem = new ItemStack(CommandInitServer.allKitsMaterial.get(aKit));
+        for(Kit aKit : CommandInitServer.allKits) {
+        	ItemStack anItem = new ItemStack(aKit.getMaterial());
         	
-        	if(plugin.getConfig().getList("config.bannedKits").contains(aKit)) {
-        		name.setDisplayName(aKit);
+        	if(plugin.getConfig().getList("config.bannedKits").contains(aKit.getName())) {
+        		name.setDisplayName(aKit.getName());
         		lore.clear();
         		lore.add(ChatColor.RED + "Kit Banni");
         		name.setLore(lore);
         	}else {
-        		name.setDisplayName(aKit);
+        		name.setDisplayName(aKit.getName());
         		lore.clear();
         		lore.add(ChatColor.GREEN + "Kit En Jeu");
         		name.setLore(lore);

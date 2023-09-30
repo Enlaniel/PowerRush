@@ -12,6 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import fr.teamkiwi.powerrush.CommandInitServer;
+import fr.teamkiwi.powerrush.Kit;
 import fr.teamkiwi.powerrush.Main;
 import fr.teamkiwi.powerrush.events.OnClickInventory;
 
@@ -37,18 +38,20 @@ public class CommandForceStop implements CommandExecutor {
 		CommandSaveInv.inventoryOnStartArmor = null;
 		CommandSaveInv.inventoryOnStartContent = null;
 		
+		Location spawn = new Location(Bukkit.getWorld("world"), 0, 101, 0);
+		
 		
 		
 		//reset all kits
-		List<String> allKits = CommandInitServer.allKits;
+		List<Kit> allKits = CommandInitServer.allKits;
 		List<String> debugList = new ArrayList<String>();
 		
-		for(String aKit : allKits) {
-			debugList = (List<String>) plugin.getConfig().getList("kits." + aKit.toLowerCase());
+		for(Kit aKit : allKits) {
+			debugList = (List<String>) plugin.getConfig().getList("kits." + aKit.getName().toLowerCase());
+			
 			debugList.clear();
-			plugin.getConfig().set("kits." + aKit.toLowerCase(), debugList);
+			plugin.getConfig().set("kits." + aKit.getName().toLowerCase(), debugList);
 		}
-		
 		
 		
 		for(Player aPlayer : Bukkit.getOnlinePlayers()) {
@@ -56,8 +59,10 @@ public class CommandForceStop implements CommandExecutor {
 			//reset players
 			aPlayer.getInventory().clear();
 			aPlayer.getInventory().setArmorContents(null);
-			aPlayer.teleport(new Location(Bukkit.getWorld("world"), 0, 65, 0));
+			aPlayer.teleport(spawn);
 			aPlayer.setGameMode(GameMode.SURVIVAL);
+			aPlayer.setHealth(aPlayer.getMaxHealth());
+			aPlayer.setFoodLevel(20);
 			Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Points").getScore(aPlayer).setScore(plugin.getConfig().getInt("config.classique"));
 			Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Round").getScore(aPlayer).setScore(0);
 			

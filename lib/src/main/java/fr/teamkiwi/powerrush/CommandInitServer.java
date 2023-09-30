@@ -1,9 +1,7 @@
 package fr.teamkiwi.powerrush;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -19,10 +17,7 @@ public class CommandInitServer implements CommandExecutor {
 		this.plugin = plugin;
 	}
 	
-	
-	public static Map<String, Material> allKitsMaterial = new HashMap<String, Material>();
-	public static Map<String, Integer> allKitsCost = new HashMap<String, Integer>();
-	public static List<String> allKits = new ArrayList<>();
+	public static List<Kit> allKits = new ArrayList<>();
 	
 
 	@Override
@@ -54,16 +49,14 @@ public class CommandInitServer implements CommandExecutor {
 	
 	public void initKits() {
 		
-		allKitsMaterial.put("Katana", Material.DIAMOND_SWORD);
-		allKitsCost.put("Katana", 4);
-		allKits.add("Katana");
-		allKitsMaterial.put("Ange", Material.GOLDEN_APPLE);
-		allKitsCost.put("Ange", 5);
-		allKits.add("Ange");
-		allKitsMaterial.put("Doppage", Material.SUGAR);
-		allKitsCost.put("Doppage", 3);
-		allKits.add("Doppage");
+		Kit katana = new Kit("Katana", Material.DIAMOND_SWORD, 4, false);
+		Kit ange = new Kit("Ange", Material.GOLDEN_APPLE, 5, false);
+		Kit doppage = new Kit("Doppage", Material.SUGAR, 3, true);
 		
+		
+		allKits.add(katana);
+		allKits.add(ange);
+		allKits.add(doppage);
 		
 		
 	}

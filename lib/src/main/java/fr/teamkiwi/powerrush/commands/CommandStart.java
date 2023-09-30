@@ -7,6 +7,8 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -15,9 +17,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.Score;
 
 import fr.teamkiwi.powerrush.CommandInitServer;
+import fr.teamkiwi.powerrush.Kit;
 import fr.teamkiwi.powerrush.Main;
 
 public class CommandStart implements CommandExecutor {
@@ -56,6 +61,14 @@ public class CommandStart implements CommandExecutor {
 			aPlayer.getInventory().setArmorContents(CommandSaveInv.inventoryOnStartArmor);
 			aPlayer.getInventory().setContents(CommandSaveInv.inventoryOnStartContent);
 			
+			aPlayer.setGameMode(GameMode.SURVIVAL);
+			
+			aPlayer.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20*60*2, 255, true, false));
+			
+			double border = Bukkit.getWorld("world").getWorldBorder().getSize()/2;
+			aPlayer.teleport(new Location(Bukkit.getWorld("world"), new Random().nextDouble(border), 80, new Random().nextDouble(border)));
+			
+			
 			
 			//check mode de jeu
 			switch(plugin.getConfig().getString("config.modedejeu")) {
@@ -83,9 +96,7 @@ public class CommandStart implements CommandExecutor {
 				
 			
 			}
-			
 		}
-		
 		return false;
 	}
 
@@ -107,37 +118,36 @@ public class CommandStart implements CommandExecutor {
 			ItemStack[] choicesList = new ItemStack[9*2];
 			
 			//get all random kits
-			String randomKit1 = CommandInitServer.allKits.get(random.nextInt(CommandInitServer.allKits.size()));
-			String randomKit2 = CommandInitServer.allKits.get(random.nextInt(CommandInitServer.allKits.size()));
-			String randomKit3 = CommandInitServer.allKits.get(random.nextInt(CommandInitServer.allKits.size()));
+			Kit randomKit1 = CommandInitServer.allKits.get(random.nextInt(CommandInitServer.allKits.size()));
+			Kit randomKit2 = CommandInitServer.allKits.get(random.nextInt(CommandInitServer.allKits.size()));
+			Kit randomKit3 = CommandInitServer.allKits.get(random.nextInt(CommandInitServer.allKits.size()));
 			
 			//get all random items
-			ItemStack randomKit1Item = new ItemStack(CommandInitServer.allKitsMaterial.get(randomKit1));
-			ItemStack randomKit2Item = new ItemStack(CommandInitServer.allKitsMaterial.get(randomKit2));
-			ItemStack randomKit3Item = new ItemStack(CommandInitServer.allKitsMaterial.get(randomKit3));
+			ItemStack randomKit1Item = new ItemStack(randomKit1.getMaterial());
+			ItemStack randomKit2Item = new ItemStack(randomKit2.getMaterial());
+			ItemStack randomKit3Item = new ItemStack(randomKit3.getMaterial());
 			
 			ItemStack arrow = new ItemStack(Material.ARROW);
-			ItemStack cobbleWall = new ItemStack(Material.COBBLE_WALL);
 			
 			//get meta
 			ItemMeta itemMeta = randomKit1Item.getItemMeta();
 			
 			//set all meta
 			lore.clear();
-			lore.add(ChatColor.AQUA + "Cost: " + ChatColor.GOLD + CommandInitServer.allKitsCost.get(randomKit1));
-			itemMeta.setDisplayName(randomKit1);
+			lore.add(ChatColor.AQUA + "Cost: " + ChatColor.GOLD + randomKit1.getPrice());
+			itemMeta.setDisplayName(randomKit1.getName());
 			itemMeta.setLore(lore);
 			randomKit1Item.setItemMeta(itemMeta);
 			
 			lore.clear();
-			lore.add(ChatColor.AQUA + "Cost: " + ChatColor.GOLD + CommandInitServer.allKitsCost.get(randomKit2));
-			itemMeta.setDisplayName(randomKit2);
+			lore.add(ChatColor.AQUA + "Cost: " + ChatColor.GOLD + randomKit1.getPrice());
+			itemMeta.setDisplayName(randomKit2.getName());
 			itemMeta.setLore(lore);
 			randomKit2Item.setItemMeta(itemMeta);
 			
 			lore.clear();
-			lore.add(ChatColor.AQUA + "Cost: " + ChatColor.GOLD + CommandInitServer.allKitsCost.get(randomKit3));
-			itemMeta.setDisplayName(randomKit3);
+			lore.add(ChatColor.AQUA + "Cost: " + ChatColor.GOLD + randomKit1.getPrice());
+			itemMeta.setDisplayName(randomKit3.getName());
 			itemMeta.setLore(lore);
 			randomKit3Item.setItemMeta(itemMeta);
 			
@@ -149,15 +159,13 @@ public class CommandStart implements CommandExecutor {
 			lore.clear();
 			itemMeta.setDisplayName("Skip");
 			itemMeta.setLore(lore);
-			cobbleWall.setItemMeta(itemMeta);
+			arrow.setItemMeta(itemMeta);
 			
 			
 			choicesList[2] = randomKit1Item;
 			choicesList[4] = randomKit2Item;
 			choicesList[6] = randomKit3Item;
-			choicesList[9] = arrow;
-			choicesList[17] = arrow;
-			choicesList[13] = cobbleWall;
+			choicesList[13] = arrow;
 			
 			
 			choicesInv.setContents(choicesList);
@@ -178,7 +186,7 @@ public class CommandStart implements CommandExecutor {
 	private void setRandom(Player player) {
 		
 		Random random = new Random();
-		List<String> allKits = CommandInitServer.allKits;
+		List<Kit> allKits = CommandInitServer.allKits;
 		
 		//if choosen random config is > than the number of kits
 		if(allKits.size() < plugin.getConfig().getInt("config.random")) {
@@ -188,14 +196,14 @@ public class CommandStart implements CommandExecutor {
 		
 		for(int i = 0; i < plugin.getConfig().getInt("config.random"); i++ ) {
 			
-			String randomKit = allKits.get(random.nextInt(allKits.size()));
-			List<String> randomKitList = (List<String>) plugin.getConfig().getList("kits." + randomKit.toLowerCase());
+			Kit randomKit = allKits.get(random.nextInt(allKits.size()));
+			List<String> randomKitList = (List<String>) plugin.getConfig().getList("kits." + randomKit.getName().toLowerCase());
 			
 			
 			randomKitList.add(player.getName());
 			allKits.remove(randomKit);
 			
-			plugin.getConfig().set("kits." + randomKit.toLowerCase(), randomKitList);
+			plugin.getConfig().set("kits." + randomKit.getName().toLowerCase(), randomKitList);
 			
 			player.sendMessage(ChatColor.AQUA + "Vous venez de recevoir le kit " + ChatColor.GOLD + randomKit);
 			
@@ -210,19 +218,22 @@ public class CommandStart implements CommandExecutor {
 	
 	public void giveKitItems(Player player) {
 		
-		for(String aKit : CommandInitServer.allKits) {
+		for(Kit aKit : CommandInitServer.allKits) {
 			
-			if(plugin.getConfig().getList("kits." + aKit.toLowerCase()).contains(player.getName())){
+			if(aKit.isGivingMaterial()) {
 				
-				ItemStack aKitItem = new ItemStack(CommandInitServer.allKitsMaterial.get(aKit));
-				ItemMeta aKitItemMeta = aKitItem.getItemMeta();
-				
-				aKitItemMeta.setDisplayName(aKit);
-				
-				aKitItem.setItemMeta(aKitItemMeta);
-				
-				player.getInventory().addItem(aKitItem);
-				
+				if(plugin.getConfig().getList("kits." + aKit.getName().toLowerCase()).contains(player.getName())){
+					
+					ItemStack aKitItem = new ItemStack(aKit.getMaterial());
+					ItemMeta aKitItemMeta = aKitItem.getItemMeta();
+					
+					aKitItemMeta.setDisplayName(aKit.getName());
+					
+					aKitItem.setItemMeta(aKitItemMeta);
+					
+					player.getInventory().addItem(aKitItem);
+					
+				}
 			}
 			
 		}
