@@ -16,6 +16,7 @@ import fr.teamkiwi.powerrush.commands.CommandShowInv;
 import fr.teamkiwi.powerrush.commands.CommandStart;
 import fr.teamkiwi.powerrush.events.OnClick;
 import fr.teamkiwi.powerrush.events.OnClickInventory;
+import fr.teamkiwi.powerrush.events.OnDead;
 import fr.teamkiwi.powerrush.events.OnItemConsume;
 import fr.teamkiwi.powerrush.events.OnSecond;
 
@@ -57,6 +58,7 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new OnClick(this), this);
 		getServer().getPluginManager().registerEvents(new OnChat(), this);
 		getServer().getPluginManager().registerEvents(new OnItemConsume(this), this);
+		getServer().getPluginManager().registerEvents(new OnDead(this), this);
 		getServer().getScheduler().runTaskTimer(this, new OnSecond(), 0, 1*20);
 		
 		new CommandInitServer(this).initKits();
