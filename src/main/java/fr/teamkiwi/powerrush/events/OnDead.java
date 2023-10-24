@@ -10,7 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
 import fr.teamkiwi.powerrush.CommandInitServer;
-import fr.teamkiwi.powerrush.Kit;
+import fr.teamkiwi.powerrush.utils.Kit;
 import fr.teamkiwi.powerrush.Main;
 import fr.teamkiwi.powerrush.Stop;
 import fr.teamkiwi.powerrush.commands.CommandStart;

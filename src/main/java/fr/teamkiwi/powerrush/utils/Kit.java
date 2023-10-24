@@ -1,4 +1,4 @@
-package fr.teamkiwi.powerrush;
+package fr.teamkiwi.powerrush.utils;
 
 import org.bukkit.Material;
 
@@ -9,7 +9,7 @@ public class Kit {
 	int price;
 	boolean giveMaterial;
 	
-	Kit(String name, Material material, int price, boolean giveMaterial){
+	public Kit(String name, Material material, int price, boolean giveMaterial){
 		
 		this.name = name;
 		this.material = material;

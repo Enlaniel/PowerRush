@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 
 import fr.teamkiwi.powerrush.commands.CommandStart;
 import fr.teamkiwi.powerrush.events.OnClickInventory;
+import fr.teamkiwi.powerrush.utils.Kit;
 
 public class Stop {
 	

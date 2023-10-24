@@ -10,6 +10,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 import fr.teamkiwi.powerrush.commands.CommandSaveInv;
+import fr.teamkiwi.powerrush.utils.Kit;
 
 public class CommandInitServer implements CommandExecutor {
 

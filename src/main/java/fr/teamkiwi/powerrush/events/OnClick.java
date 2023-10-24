@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import fr.teamkiwi.powerrush.Main;
 import fr.teamkiwi.powerrush.kits.KitDoppage;
 import fr.teamkiwi.powerrush.kits.KitKatana;
+import fr.teamkiwi.powerrush.kits.KitTrader;
 
 public class OnClick implements Listener {
 	
@@ -50,6 +51,18 @@ public class OnClick implements Listener {
 						
 				}
 			}
+			
+			if(! (plugin.getConfig().getList("kits.trader") == null)) {
+				if(plugin.getConfig().getList("kits.trader").contains(player.getName())) {
+					
+					if(clickedItem.getType() == Material.EMERALD) {
+						
+						new KitTrader().kitTrader(event);
+					}
+						
+				}
+			}
+			
 		}
 		
 		

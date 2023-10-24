@@ -10,20 +10,20 @@ commands :
   config :
     description : Ouvre le menu de configuration
     permission : powerrush.config
-    permission-message : Vous n'êtes pas administrateur ! :(
+    permission-message : Vous n'êtes pas administrateur !
     aliases: [config, cfg, configs]
   start :
     description : Lance la partie
     permission : powerrush.start
-    permission-message : Vous n'êtes pas administrateur ! :(
+    permission-message : Vous n'êtes pas administrateur !
   forcestop :
     description : Arrete la partie
     permission : powerrush.forcestop
-    permission-message : Vous n'êtes pas administrateur ! :(
+    permission-message : Vous n'êtes pas administrateur !
   saveinventory :
     description : Configure l'inventaire de départ
     permission : powerrush.saveinv
-    permission-message : Vous n'êtes pas administrateur ! :(
+    permission-message : Vous n'êtes pas administrateur !
     aliases: [saveinv, saveinventory]
   showinventory :
     description : Permet de voir l'inventaire de départ
@@ -38,13 +38,13 @@ commands :
   selectkit :
     description : Commande de debug permettant de choisir un kit
     permission : powerrush.debug.selectkit
-    permission-message : Vous n'êtes pas administrateur ! :(
+    permission-message : Vous n'êtes pas administrateur !
     aliases: [selectkit, debugselectkit]
   initserver :
     description : Commande permettant d'init le config.yml
     permission : powerrush.initserver
-    permission-message : Vous n'êtes pas administrateur ! :(
-   
+    permission-message : Vous n'êtes pas administrateur !
+  
 permissions :
   powerrush.debug.*:
     default: op
