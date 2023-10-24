@@ -13,6 +13,7 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -24,6 +25,8 @@ import org.bukkit.scoreboard.Score;
 import fr.teamkiwi.powerrush.CommandInitServer;
 import fr.teamkiwi.powerrush.Kit;
 import fr.teamkiwi.powerrush.Main;
+import net.minecraft.server.v1_8_R3.NBTTagCompound;
+import net.minecraft.server.v1_8_R3.NBTTagList;
 
 public class CommandStart implements CommandExecutor {
 
@@ -231,6 +234,8 @@ public class CommandStart implements CommandExecutor {
 					
 					aKitItem.setItemMeta(aKitItemMeta);
 					
+					addGlow(aKitItem);
+					
 					player.getInventory().addItem(aKitItem);
 					
 				}
@@ -238,6 +243,22 @@ public class CommandStart implements CommandExecutor {
 			
 		}
 		
+	}
+	
+
+
+	public static ItemStack addGlow(ItemStack item){ 
+		net.minecraft.server.v1_8_R3.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
+		NBTTagCompound tag = null;
+		if (!nmsStack.hasTag()) {
+			tag = new NBTTagCompound();
+			nmsStack.setTag(tag);
+		}
+		if (tag == null) tag = nmsStack.getTag();
+		NBTTagList ench = new NBTTagList();
+		tag.set("ench", ench);
+		nmsStack.setTag(tag);
+		return CraftItemStack.asCraftMirror(nmsStack);
 	}
 	
 

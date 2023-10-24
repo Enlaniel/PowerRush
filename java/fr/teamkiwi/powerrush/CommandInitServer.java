@@ -56,11 +56,13 @@ public class CommandInitServer implements CommandExecutor {
 		Kit katana = new Kit("Katana", Material.DIAMOND_SWORD, 4, false);
 		Kit ange = new Kit("Ange", Material.GOLDEN_APPLE, 5, false);
 		Kit doppage = new Kit("Doppage", Material.SUGAR, 3, true);
+		Kit trader = new Kit("Trader", Material.EMERALD, 3, true);
 		
 		
 		allKits.add(katana);
 		allKits.add(ange);
 		allKits.add(doppage);
+		allKits.add(trader);
 		
 		
 	}

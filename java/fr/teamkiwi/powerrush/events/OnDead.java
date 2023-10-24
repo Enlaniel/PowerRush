@@ -33,7 +33,6 @@ public class OnDead implements Listener {
 		killPlayer(event);
 		
 		
-		
 	}
 	
 	
@@ -41,6 +40,7 @@ public class OnDead implements Listener {
 	public void killPlayer(PlayerDeathEvent event) {
 		
 		Player player = event.getEntity();
+		
 		
 		String deadPlayerKits = "";
 		

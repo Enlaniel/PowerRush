@@ -12,10 +12,10 @@ apocalypse: pas de barre de sang (aucun cooldown), les joueurs choissisent tous 
 Une vingtaine de kit differents (30) :
 
 ✓ Katana: L'epee peut instant break les blocks
-- Requin: En cliquant sur un joueur avec l'item "Requin", une sphere d'eau de 50*50 ce crée pendant 1 minute. L'utilisateur a depth strider 10.
+- Requin: En cliquant sur un joueur avec l'item "Requin", une sphere d'eau de 50*50 ce créer pendant 1 minute. L'utilisateur a depth strider 10.
 - Poupée: quand l'utilisateur tu quelqu'un, la personne tuée deviens son serviteur et rejoins son equipe
 - Avenir: ressucite une fois dans la partie avec 8 coeurs
-- Trader: echange la place de l'utilisateur avec le joueur visé
+- Trader: echange la place de l'utilisateur avec l'entité visée
 ✓ Ange: Les pommes d'or ont un effet de régénération plus rapide (Régénération 3 pendant 2 secondes). 
 Si le joueur sneak pendant 3 secondes avant de manger une pomme d'or, gagne 4 coeurs d'absorption au lieu de 2
 - Araignée: Grappin permettant d'effectuer de longs saut en avant, le chemin parcouru est tracé sous forme de toile d'araignée OU
