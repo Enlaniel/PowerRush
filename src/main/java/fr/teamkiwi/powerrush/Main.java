@@ -13,6 +13,7 @@ import fr.teamkiwi.powerrush.commands.CommandHelp;
 import fr.teamkiwi.powerrush.commands.CommandSaveInv;
 import fr.teamkiwi.powerrush.commands.CommandSelectKit;
 import fr.teamkiwi.powerrush.commands.CommandShowInv;
+import fr.teamkiwi.powerrush.commands.CommandShowYML;
 import fr.teamkiwi.powerrush.commands.CommandStart;
 import fr.teamkiwi.powerrush.events.OnClick;
 import fr.teamkiwi.powerrush.events.OnClickInventory;
@@ -32,7 +33,9 @@ public class Main extends JavaPlugin {
     	//TODO: dipatch player and give inv, deop, open kis choice ... in CommandStart
     	//TODO: create kits with help of PowerRush.txt
     	//TODO: Il faut faire les repercution d'un bannissement dans la section start (impossible de les picks)
-		//TODO: ON GIVE ITEM FOR KIT, GIVE ALL ITEMS
+		
+		//TODO: FIX BANNISHMENT IN CLASSIQUE GAMEMODE
+		//TODO: FIX CLASSIQUE TWO TIME SAME KIT
     	
     	LOGGER.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     	LOGGER.info("[PowerRush] Plugin lance avec succes");
@@ -51,6 +54,7 @@ public class Main extends JavaPlugin {
     	
     	//setup debug commands
     	getCommand("selectkit").setExecutor(new CommandSelectKit(this));
+    	getCommand("showyml").setExecutor(new CommandShowYML(this));
     	
     	//register event
     	getServer().getPluginManager().registerEvents(new OnClickInventory(this), this);

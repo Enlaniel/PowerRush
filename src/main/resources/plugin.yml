@@ -40,6 +40,11 @@ commands :
     permission : powerrush.debug.selectkit
     permission-message : Vous n'êtes pas administrateur !
     aliases: [selectkit, debugselectkit]
+  showyml :
+    description : Montre le fichier config.yml
+    permission : powerrush.debug.showyml
+    permission-message : Vous n'êtes pas administrateur !
+    aliases: [showyml, debugshowyml]
   initserver :
     description : Commande permettant d'init le config.yml
     permission : powerrush.initserver

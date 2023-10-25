@@ -8,13 +8,15 @@ public class Kit {
 	Material material;
 	int price;
 	boolean giveMaterial;
+	boolean hasCooldown;
 	
-	public Kit(String name, Material material, int price, boolean giveMaterial){
+	public Kit(String name, Material material, int price, boolean giveMaterial, boolean hasCooldown){
 		
 		this.name = name;
 		this.material = material;
 		this.price = price;
 		this.giveMaterial = giveMaterial;
+		this.hasCooldown = hasCooldown;
 		
 	}
 	
@@ -33,5 +35,9 @@ public class Kit {
 	
 	public boolean isGivingMaterial() {
 		return giveMaterial;
+	}
+	
+	public boolean hasCooldown() {
+		return hasCooldown;
 	}
 }

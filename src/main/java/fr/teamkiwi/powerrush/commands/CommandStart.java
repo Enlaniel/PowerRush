@@ -21,6 +21,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
 
 import fr.teamkiwi.powerrush.CommandInitServer;
@@ -116,7 +117,7 @@ public class CommandStart implements CommandExecutor {
 		if(playerRound.getScore() <= 5) {
 			
 			//create inventory
-			Inventory choicesInv = Bukkit.createInventory(null, 9*2, ChatColor.DARK_PURPLE + "Choissisez un kit");
+			Inventory choicesInv = Bukkit.createInventory(null, 9*2, ChatColor.DARK_PURPLE + "Choisissez un kit");
 			ItemStack[] choicesList = new ItemStack[9*2];
 			
 			//get all random kits
@@ -188,13 +189,26 @@ public class CommandStart implements CommandExecutor {
 	private void setRandom(Player player) {
 		
 		Random random = new Random();
-		List<Kit> allKits = CommandInitServer.allKits;
+		List<Kit> allKits = new ArrayList<>();
+		
+		//to avoid changement on CommandInitServer.allKits
+		for(Kit aKit : CommandInitServer.allKits) {
+			allKits.add(aKit);
+		}
+		
+		//ban the banned kits with config.bannedKits list in config.yml
+		List<Kit> removedKits = new ArrayList<>();
+		for(Kit aKit : allKits) {
+			if(plugin.getConfig().getList("config.bannedKits").contains(aKit.getName())) {
+				removedKits.add(aKit);
+			}
+		}
+		allKits.removeAll(removedKits);
 		
 		//if choosen random config is > than the number of kits
 		if(allKits.size() < plugin.getConfig().getInt("config.random")) {
 			plugin.getConfig().set("config.random", allKits.size());
 		}
-		
 		
 		for(int i = 0; i < plugin.getConfig().getInt("config.random"); i++ ) {
 			
@@ -218,10 +232,18 @@ public class CommandStart implements CommandExecutor {
 	}
 	
 	
+	@SuppressWarnings("deprecation")
 	public void giveKitItems(Player player) {
 		
 		for(Kit aKit : CommandInitServer.allKits) {
 			
+			//set cooldown
+			if(aKit.hasCooldown()) {
+				Objective obj = Bukkit.getScoreboardManager().getMainScoreboard().getObjective(aKit.getName());
+				obj.getScore(player).setScore(0);
+			}
+			
+			//give items
 			if(aKit.isGivingMaterial()) {
 				
 				if(plugin.getConfig().getList("kits." + aKit.getName().toLowerCase()).contains(player.getName())){

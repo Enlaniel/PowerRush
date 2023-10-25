@@ -23,8 +23,12 @@ public class KitTrader implements Listener {
 		if(target != null && block == null) {
 			player.teleport(target.getLocation());
 			target.teleport(playerLoc);
+			
+			player.sendMessage(ChatColor.AQUA + "Vous avez echange votre position avec " + ChatColor.GOLD + target.getName());
+			target.sendMessage(ChatColor.AQUA + "Vous avez echange votre position avec " + ChatColor.GOLD + player.getName());
+			
 		} else {
-			player.sendMessage(ChatColor.RED + "Vous ne ciblez aucune entité");
+			player.sendMessage(ChatColor.RED + "Vous ne ciblez aucune entite");
 		}
 		
 	}

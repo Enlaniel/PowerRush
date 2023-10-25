@@ -8,6 +8,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
 
 import fr.teamkiwi.powerrush.commands.CommandStart;
 import fr.teamkiwi.powerrush.events.OnClickInventory;
@@ -18,7 +19,7 @@ public class Stop {
 	Main plugin = Main.getPlugin(Main.class);
 	
 	
-	@SuppressWarnings({ "deprecation", "unchecked" })
+	@SuppressWarnings({ "deprecation" })
 	public void stop() {
 		
 		
@@ -35,16 +36,16 @@ public class Stop {
 		//reset all kits
 		List<Kit> allKits = CommandInitServer.allKits;
 		List<String> debugList = new ArrayList<String>();
+		debugList.add("");
+		
+		
+		for(Kit aKit : allKits) {
+			plugin.getConfig().set("kits." + aKit.getName().toLowerCase(), debugList);
+		}
+		
 		
 		for(OfflinePlayer player : Bukkit.getOfflinePlayers()) {
 			Bukkit.getScoreboardManager().getMainScoreboard().resetScores(player);
-		}
-		
-		for(Kit aKit : allKits) {
-			debugList = (List<String>) plugin.getConfig().getList("kits." + aKit.getName().toLowerCase());
-			
-			debugList.clear();
-			plugin.getConfig().set("kits." + aKit.getName().toLowerCase(), debugList);
 		}
 		
 		
@@ -59,6 +60,10 @@ public class Stop {
 			aPlayer.setFoodLevel(20);
 			Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Points").getScore(aPlayer).setScore(plugin.getConfig().getInt("config.classique"));
 			Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Round").getScore(aPlayer).setScore(0);
+			for(PotionEffect effect : aPlayer.getActivePotionEffects()) {
+				aPlayer.removePotionEffect(effect.getType());
+			}
+			
 			
 			aPlayer.sendMessage(OnClickInventory.consoleSender + "La partie a bien ete arretee");
 			

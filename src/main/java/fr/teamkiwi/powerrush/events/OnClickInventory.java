@@ -13,12 +13,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.WorldBorder;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scoreboard.Score;
@@ -518,7 +520,7 @@ public class OnClickInventory implements Listener {
 	        
 	        
 	        //classique choose kit menu
-	        if (clickedInventory.getTitle().equals(ChatColor.DARK_PURPLE + "Choissisez un kit")) {
+	        if (clickedInventory.getTitle().equals(ChatColor.DARK_PURPLE + "Choisissez un kit")) {
 	        	
 	        	Score playerRound = Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Round").getScore((OfflinePlayer) player);
 	        	Score playerPoints = Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Points").getScore((OfflinePlayer) player);
@@ -539,8 +541,25 @@ public class OnClickInventory implements Listener {
 			        	
 			        	}else {
 			        		String aKitName = clickedItem.getItemMeta().getDisplayName();
+			        		List<Kit> allKits = new ArrayList<>();
 			        		
+			        		//to avoid changement on CommandInitServer.allKits
 			        		for(Kit aKit : CommandInitServer.allKits) {
+			        			allKits.add(aKit);
+			        		}
+			        		
+			        		
+			        		//ban the banned kits with config.bannedKits list in config.yml
+			        		List<Kit> removedKits = new ArrayList<>();
+			        		for(Kit aKit : allKits) {
+			        			if(plugin.getConfig().getList("config.bannedKits").contains(aKit.getName())) {
+			        				removedKits.add(aKit);
+			        			}
+			        		}
+			        		allKits.removeAll(removedKits);
+			        		
+			        		
+			        		for(Kit aKit : allKits) {
 			        			
 			        			if(aKitName.equals(aKit.getName())) {
 			        				
@@ -614,10 +633,14 @@ public class OnClickInventory implements Listener {
         name.setDisplayName("Reinitialiser");
         cobblestoneWall.setItemMeta(name);
         
+        name.setDisplayName("Back");
+        arrow.setItemMeta(name);
+        
         int i = 0;
         
         for(Kit aKit : CommandInitServer.allKits) {
         	ItemStack anItem = new ItemStack(aKit.getMaterial());
+        	
         	
         	if(plugin.getConfig().getList("config.bannedKits").contains(aKit.getName())) {
         		name.setDisplayName(aKit.getName());
@@ -631,7 +654,10 @@ public class OnClickInventory implements Listener {
         		name.setLore(lore);
         	}
         	
+        	name.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        	
         	anItem.setItemMeta(name);
+        	anItem.addUnsafeEnchantment(Enchantment.DURABILITY, 100);
         	banKitsList[i] = anItem;
         	
         	i++;

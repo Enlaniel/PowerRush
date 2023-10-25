@@ -47,8 +47,10 @@ public class OnDead implements Listener {
 		CommandStart.allPlayersInGame.remove(player.getUniqueId());
 		
 		for(Kit aKit : CommandInitServer.allKits) {
+			
 			if(plugin.getConfig().getList("kits." + aKit.getName().toLowerCase()).contains(player.getName())){
-				deadPlayerKits.concat(ChatColor.GOLD + aKit.getName() + "\n");
+				deadPlayerKits = deadPlayerKits + ChatColor.GOLD +  "- " + aKit.getName() + "\n";
+				
 			}
 		}
 		
