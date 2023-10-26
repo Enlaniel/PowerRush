@@ -15,7 +15,7 @@ public class KitDoppage {
 		
 		Player player = event.getPlayer();
 		Objective objectiveDoppage = Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Doppage");
-		PotionEffect speed = new PotionEffect(PotionEffectType.SPEED, 20*3, 4, true, false);
+		PotionEffect speed = new PotionEffect(PotionEffectType.SPEED, 20*3, 9, true, false);
 		
 		
 		if(objectiveDoppage.getScore(player).getScore() >= 120) {

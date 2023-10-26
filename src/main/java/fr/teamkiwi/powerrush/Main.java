@@ -11,10 +11,10 @@ import fr.teamkiwi.powerrush.commands.CommandConfig;
 import fr.teamkiwi.powerrush.commands.CommandForceStop;
 import fr.teamkiwi.powerrush.commands.CommandHelp;
 import fr.teamkiwi.powerrush.commands.CommandSaveInv;
-import fr.teamkiwi.powerrush.commands.CommandSelectKit;
 import fr.teamkiwi.powerrush.commands.CommandShowInv;
-import fr.teamkiwi.powerrush.commands.CommandShowYML;
 import fr.teamkiwi.powerrush.commands.CommandStart;
+import fr.teamkiwi.powerrush.commands.debug.CommandSelectKit;
+import fr.teamkiwi.powerrush.commands.debug.CommandShowYML;
 import fr.teamkiwi.powerrush.events.OnClick;
 import fr.teamkiwi.powerrush.events.OnClickInventory;
 import fr.teamkiwi.powerrush.events.OnDead;
@@ -32,9 +32,9 @@ public class Main extends JavaPlugin {
 		
     	//TODO: dipatch player and give inv, deop, open kis choice ... in CommandStart
     	//TODO: create kits with help of PowerRush.txt
-    	//TODO: Il faut faire les repercution d'un bannissement dans la section start (impossible de les picks)
+		//TODO: scoreboard with timer, player alive...
+		//TODO: scenarios/possibility to add teams
 		
-		//TODO: FIX BANNISHMENT IN CLASSIQUE GAMEMODE
 		//TODO: FIX CLASSIQUE TWO TIME SAME KIT
     	
     	LOGGER.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");

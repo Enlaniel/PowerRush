@@ -1,4 +1,4 @@
-package fr.teamkiwi.powerrush.commands;
+package fr.teamkiwi.powerrush.commands.debug;
 
 import java.util.List;
 
@@ -8,7 +8,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import fr.teamkiwi.powerrush.CommandInitServer;
 import fr.teamkiwi.powerrush.Main;
+import fr.teamkiwi.powerrush.utils.Kit;
 
 public class CommandSelectKit implements CommandExecutor {
 
@@ -26,10 +28,17 @@ public class CommandSelectKit implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		
 		//TODO compléter toutes les possibilité de choix de kit
-		
+		List<Kit> allKits = CommandInitServer.allKits;
 		
 		//check if sender is a player
 		if(sender instanceof Player player) {
+			
+			//create string message that will be send if error
+			String message = "";
+			for(Kit aKit : allKits) {
+				message = message + ChatColor.AQUA + aKit.getName() + separation;
+			}
+			player.sendMessage(message);
 			
 			//check if wrong parameter
 			if(args.length == 0 || args.length > 1) {
@@ -38,30 +47,20 @@ public class CommandSelectKit implements CommandExecutor {
 			//case help
 			}else if(args[0].equals("help")){
 				player.sendMessage(ChatColor.GOLD + "Voici tous les kits que vous pouvez choisir:");
-				player.sendMessage(ChatColor.AQUA + "katana" + separation + "ange");
+				player.sendMessage(message);
+				
 				
 			}
 			//check argument if args has an argument
-			if(args.length == 1 && ! (args[0].equals("help"))) {
+			if(args.length == 1 && !(args[0].equals("help"))) {
 				
 				String choosenKit = "";
 				
-				
-				switch (args[0]) {
+				for(Kit aKit : allKits) {
 					
-				case "katana":
-					choosenKit = args[0];
-					break;
-					
-				case "ange":
-					choosenKit = args[0];
-					break;
-				
-					
-				default:
-					player.sendMessage(ChatColor.GOLD + "Voici tous les kits que vous pouvez choisir:");
-					player.sendMessage(ChatColor.AQUA + "katana" + separation + "ange");
-				
+					if(aKit.getName().equalsIgnoreCase(args[0])) {
+						choosenKit = aKit.getName();
+					}
 				}
 				
 				//check if a kit is choosen
@@ -69,7 +68,8 @@ public class CommandSelectKit implements CommandExecutor {
 					
 					//get config.yml
 					@SuppressWarnings("unchecked")
-					List<String> kitConfigList = (List<String>) plugin.getConfig().getList("kits." + choosenKit);
+					List<String> kitConfigList = (List<String>) plugin.getConfig().getList("kits." + choosenKit.toLowerCase());
+					
 					
 					//if player has kit, remove it. else add kit to player
 					if(kitConfigList.contains(player.getName())) {
@@ -81,11 +81,13 @@ public class CommandSelectKit implements CommandExecutor {
 						player.sendMessage(ChatColor.GREEN + "Vous venez de vous rajouter le kit " + ChatColor.AQUA + choosenKit);
 					}
 					//apply
-					plugin.getConfig().set("kits." + choosenKit, kitConfigList);
+					plugin.getConfig().set("kits." + choosenKit.toLowerCase(), kitConfigList);
 					
+				}else {
+				
+					player.sendMessage(ChatColor.GOLD + "Voici tous les kits que vous pouvez choisir:");
+					player.sendMessage(ChatColor.AQUA + message);
 				}
-				
-				
 						
 			}
 			

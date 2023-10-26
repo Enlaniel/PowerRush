@@ -14,21 +14,21 @@ public class OnSecond implements Runnable {
 
 	private Main plugin = Main.getPlugin(Main.class);
 	
-	
-	@SuppressWarnings("unchecked")
-	List<String> kitAnge = (List<String>) plugin.getConfig().getList("kits.ange");
-	@SuppressWarnings("unchecked")
-	List<String> kitDoppage = (List<String>) plugin.getConfig().getList("kits.doppage");
-	
-	
 	@SuppressWarnings("deprecation")
 	@Override
 	public void run() {
 
 		Collection<? extends Player> allPlayers = Bukkit.getOnlinePlayers();
 		
+		//TODO: AUTOMATIC ADD +1 FOR ALL KITS
+		
 		Objective objectiveAnge = Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Ange");
 		Objective objectiveDoppage = Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Doppage");
+		
+		@SuppressWarnings("unchecked")
+		List<String> kitAnge = (List<String>) plugin.getConfig().getList("kits.ange");
+		@SuppressWarnings("unchecked")
+		List<String> kitDoppage = (List<String>) plugin.getConfig().getList("kits.doppage");
 		
 		
 		for(Player aPlayer : allPlayers) {

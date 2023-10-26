@@ -480,6 +480,7 @@ public class OnClickInventory implements Listener {
 		        		plugin.getConfig().set("config.bannedKits", new ArrayList<>());
 		        		
 		        		player.sendMessage(consoleSender + ChatColor.AQUA + "Les kits bannis ont ete reinitialises");
+		        		createBannedKitInventory((Player) player);
 		        		
 		        	//case on a kit
 		        	}else {
@@ -510,7 +511,9 @@ public class OnClickInventory implements Listener {
 		        		}
 		        		
 		        		createBannedKitInventory((Player) player);
+		        		
 		        	}
+		        	
 	        	}
 	        	
 	        	event.setCancelled(true);
@@ -530,7 +533,7 @@ public class OnClickInventory implements Listener {
 	        		
 	        		if(!(playerRound.getScore() >= 5)) {
 	        		
-			        	//case cobblstone wall: reinitialiser
+			        	//case arrow wall: skip
 			        	if(clickedItem.getType().equals(Material.ARROW)){
 			        		
 			        		player.sendMessage(consoleSender + ChatColor.AQUA + "Vous n'avez pas choisis de kit");
@@ -585,9 +588,12 @@ public class OnClickInventory implements Listener {
 			        		}
 			        	}
 	        		}else {
-	        			ItemStack goldenApple = new ItemStack(Material.GOLDEN_APPLE, playerPoints.getScore());
 	        			
-	        			player.getInventory().addItem(goldenApple);
+	        			//exception if to not give a stack of 0
+	        			if(playerPoints.getScore() > 0) {
+	        				ItemStack goldenApple = new ItemStack(Material.GOLDEN_APPLE, playerPoints.getScore());
+	        				player.getInventory().addItem(goldenApple);
+	        			}
 	        			
 	        			player.closeInventory();
 	        			

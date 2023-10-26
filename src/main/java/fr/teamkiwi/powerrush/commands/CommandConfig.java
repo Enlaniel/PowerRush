@@ -94,6 +94,11 @@ public class CommandConfig implements CommandExecutor {
 				name.setLore(lore);
 				bookAndQuill.setItemMeta(name);
 				
+				name.setDisplayName(" ");
+				lore.clear();
+				name.setLore(lore);
+				glassPane.setItemMeta(name);
+				
 				
 				//set in the correct order items
 				configList[(9*1)+2] = barrierBlock;

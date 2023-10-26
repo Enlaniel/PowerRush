@@ -1,4 +1,4 @@
-package fr.teamkiwi.powerrush.commands;
+package fr.teamkiwi.powerrush.commands.debug;
 
 import java.util.Map;
 
