@@ -20,4 +20,11 @@
 		<nature>org.eclipse.buildship.core.gradleprojectnature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/main/resources/Power Rush.txt</name>
+			<type>1</type>
+			<location>C:/Users/augus/OneDrive/Bureau/Power Rush.txt</location>
+		</link>
+	</linkedResources>
 </projectDescription>

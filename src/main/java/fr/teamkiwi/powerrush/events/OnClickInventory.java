@@ -27,7 +27,7 @@ import org.bukkit.scoreboard.Score;
 
 public class OnClickInventory implements Listener {
 	
-    public static final String consoleSender = "" + ChatColor.LIGHT_PURPLE + ChatColor.ITALIC + "[" + ChatColor.DARK_GREEN + ChatColor.ITALIC + "POWER RUSH" + ChatColor.  LIGHT_PURPLE + ChatColor.ITALIC + "] " + ChatColor.RESET;
+    public static final String consoleSender = "" + ChatColor.DARK_GRAY + ChatColor.ITALIC + "[" + ChatColor.DARK_GREEN + ChatColor.ITALIC + "POWER RUSH" + ChatColor.DARK_GRAY + ChatColor.ITALIC + "] " + ChatColor.RESET;
     public static String modeDeJeu = "Classique";
 
 
@@ -41,7 +41,7 @@ public class OnClickInventory implements Listener {
 
 	@SuppressWarnings("deprecation")
 	@EventHandler
-    public void onClickInConfig(InventoryClickEvent event){
+    public void onClick(InventoryClickEvent event){
     	
         Inventory clickedInventory = event.getClickedInventory();
         ItemStack clickedItem = event.getCurrentItem();
@@ -49,7 +49,7 @@ public class OnClickInventory implements Listener {
         
         if(clickedInventory != null) {
         	
-	        ItemStack cobblestoneWall = new ItemStack(Material.COBBLE_WALL);
+	        ItemStack beacon = new ItemStack(Material.BEACON);
 	        ItemStack acaciaFenceGate = new ItemStack(Material.ACACIA_FENCE_GATE);
 	        ItemStack acaciaFence = new ItemStack(Material.ACACIA_FENCE);
 	        ItemMeta name = acaciaFence.getItemMeta();
@@ -57,7 +57,7 @@ public class OnClickInventory implements Listener {
 	
 	
 	        ItemStack arrow = new ItemStack(Material.ARROW);
-	        name.setDisplayName("Back");
+	        name.setDisplayName(ChatColor.RED + "Back");
 	        arrow.setItemMeta(name);
 	
 	
@@ -76,18 +76,18 @@ public class OnClickInventory implements Listener {
 	                    Inventory border = Bukkit.createInventory(null, 9*1, ChatColor.AQUA + "Border Menu");
 	                    ItemStack[] borderList = new ItemStack[9*1];
 	
-	                    name.setDisplayName("Reduire de 50 blocs");
+	                    name.setDisplayName(ChatColor.RESET + "Reduire de 50 blocs");
 	                    acaciaFence.setItemMeta(name);
 	                    
-	                    name.setDisplayName("Reinitaliser a 500 blocs");
-	                    cobblestoneWall.setItemMeta(name);
+	                    name.setDisplayName(ChatColor.RESET + "Reinitaliser a 500 blocs");
+	                    beacon.setItemMeta(name);
 	                    
-	                    name.setDisplayName("Augmenter de 50 blocs");
+	                    name.setDisplayName(ChatColor.RESET + "Augmenter de 50 blocs");
 	                    acaciaFenceGate.setItemMeta(name);
 	                    
 	                    borderList[0] = arrow;
 	                    borderList[2] = acaciaFence;
-	                    borderList[4] = cobblestoneWall;
+	                    borderList[4] = beacon;
 	                    borderList[6] = acaciaFenceGate;
 	                    borderList[8] = arrow;
 	
@@ -121,19 +121,19 @@ public class OnClickInventory implements Listener {
 	                	modeDeJeuList[6] = tnt;
 	                	modeDeJeuList[8] = arrow;
 	                	
-	                	name.setDisplayName("Random");
+	                	name.setDisplayName(ChatColor.RESET + "Random");
 	                	lore.clear();
 	                	lore.add(ChatColor.AQUA + "Permet de decouvrir les kits");
 	                	name.setLore(lore);
 	                	bedrock.setItemMeta(name);
 	                	
-	                	name.setDisplayName("Classique");
+	                	name.setDisplayName(ChatColor.RESET + "Classique");
 	                	lore.clear();
 	                	lore.add(ChatColor.AQUA + "Choisissez entre 3 kits");
 	                	name.setLore(lore);
 	                	dirt.setItemMeta(name);
 	                	
-	                	name.setDisplayName("Apocalypse");
+	                	name.setDisplayName(ChatColor.RESET + "Apocalypse");
 	                	lore.clear();
 	                	lore.add(ChatColor.AQUA + "Aucune limite de kits");
 	                	name.setLore(lore);
@@ -155,18 +155,18 @@ public class OnClickInventory implements Listener {
 	
 	                    maxPlayersList[0] = arrow;
 	                    maxPlayersList[2] = acaciaFence;
-	                    maxPlayersList[4] = cobblestoneWall;
+	                    maxPlayersList[4] = beacon;
 	                    maxPlayersList[6] = acaciaFenceGate;
 	                    maxPlayersList[8] = arrow;
 	
-	                    name.setDisplayName("Augmenter de 1 joueur");
+	                    name.setDisplayName(ChatColor.RESET + "Augmenter de 1 joueur");
 	                    acaciaFenceGate.setItemMeta(name);
 	                    
-	                    name.setDisplayName("Diminuer de 1 joueur");
+	                    name.setDisplayName(ChatColor.RESET + "Diminuer de 1 joueur");
 	                    acaciaFence.setItemMeta(name);
 	                    
-	                    name.setDisplayName("Reinitialiser a 30 joueurs");
-	                    cobblestoneWall.setItemMeta(name);
+	                    name.setDisplayName(ChatColor.RESET + "Reinitialiser a 30 joueurs");
+	                    beacon.setItemMeta(name);
 	
 	                    maxPlayers.setContents(maxPlayersList);
 	
@@ -206,7 +206,7 @@ public class OnClickInventory implements Listener {
 	
 	                    break;
 	
-	                case COBBLE_WALL :
+	                case BEACON :
 	
 	                    wb.setSize(1000);
 	                    player.sendMessage(consoleSender + "La taille de la bordure a ete reinitialisee a " + ChatColor.AQUA + "500 blocs");
@@ -237,7 +237,7 @@ public class OnClickInventory implements Listener {
 	        
 	        
 	        //in max player count config menu
-	        if (clickedInventory.getTitle().equals(ChatColor. DARK_GREEN + "Max Players Count Menu")) {
+	        if (clickedInventory.getTitle().equals(ChatColor.DARK_GREEN + "Max Players Count Menu")) {
 	
 	            switch (clickedItem.getType()) {
 	
@@ -249,7 +249,7 @@ public class OnClickInventory implements Listener {
 	
 	                    break;
 	
-	                case COBBLE_WALL :
+	                case BEACON :
 
 						plugin.getConfig().set("config.maxPlayers", 30);
 	                    player.sendMessage(consoleSender + "Le nombre maximum de joueurs a ete reinitialise a " + ChatColor.AQUA + "30 joueurs");
@@ -291,12 +291,12 @@ public class OnClickInventory implements Listener {
 	                player.sendMessage(consoleSender + "Le mode de jeu actuel est " + ChatColor.AQUA + plugin.getConfig().getString("config.modedejeu"));
 	                
 	                
-	                Inventory configRandomInv = Bukkit.createInventory(null, 9*1, ChatColor. DARK_PURPLE + "Combien de kits max ?");
+	                Inventory configRandomInv = Bukkit.createInventory(null, 9*1, ChatColor.DARK_PURPLE + "Combien de kits max ?");
 	                ItemStack[] configRandomList = new ItemStack[9*1];
 
 	                configRandomList[0] = arrow;
 	                configRandomList[2] = acaciaFence;
-	                configRandomList[4] = cobblestoneWall;
+	                configRandomList[4] = beacon;
 	                configRandomList[6] = acaciaFenceGate;
 	                configRandomList[8] = arrow;
 
@@ -307,7 +307,7 @@ public class OnClickInventory implements Listener {
 	                acaciaFence.setItemMeta(name);
 	                
 	                name.setDisplayName("Reinitialiser a 5 kit");
-	                cobblestoneWall.setItemMeta(name);
+	                beacon.setItemMeta(name);
 
 	                
 	                configRandomInv.setContents(configRandomList);
@@ -323,12 +323,12 @@ public class OnClickInventory implements Listener {
 	                plugin.getConfig().set("config.modedejeu", "Classique");
 	                player.sendMessage(consoleSender + "Le mode de jeu actuel est " + ChatColor.AQUA + plugin.getConfig().getString("config.modedejeu"));
 	
-	                Inventory configClassiqueInv = Bukkit.createInventory(null, 9*1, ChatColor. DARK_PURPLE + "Combien de points ?");
+	                Inventory configClassiqueInv = Bukkit.createInventory(null, 9*1, ChatColor.DARK_PURPLE + "Combien de points ?");
 	                ItemStack[] configClassiqueList = new ItemStack[9*1];
 
 	                configClassiqueList[0] = arrow;
 	                configClassiqueList[2] = acaciaFence;
-	                configClassiqueList[4] = cobblestoneWall;
+	                configClassiqueList[4] = beacon;
 	                configClassiqueList[6] = acaciaFenceGate;
 	                configClassiqueList[8] = arrow;
 
@@ -339,7 +339,7 @@ public class OnClickInventory implements Listener {
 	                acaciaFence.setItemMeta(name);
 	                
 	                name.setDisplayName("Reinitialiser a 30 points");
-	                cobblestoneWall.setItemMeta(name);
+	                beacon.setItemMeta(name);
 
 	                
 	                configClassiqueInv.setContents(configClassiqueList);
@@ -377,7 +377,7 @@ public class OnClickInventory implements Listener {
 	        
 	        
 	        //set nombre de kits dans mode de jeu random
-	        if (clickedInventory.getTitle().equals(ChatColor. DARK_PURPLE + "Combien de kits max ?")) {
+	        if (clickedInventory.getTitle().equals(ChatColor.DARK_PURPLE + "Combien de kits max ?")) {
 	        	
 	            switch (clickedItem.getType()) {
 	
@@ -389,7 +389,7 @@ public class OnClickInventory implements Listener {
 	
 	                    break;
 	
-	                case COBBLE_WALL :
+	                case BEACON :
 	
 	                	plugin.getConfig().set("config.random", 5);
 	                    player.sendMessage(consoleSender + "Le nombre maximum de kits a ete reinitialise a " + ChatColor.AQUA + "5 kits");
@@ -433,7 +433,7 @@ public class OnClickInventory implements Listener {
 	
 	                    break;
 	
-	                case COBBLE_WALL :
+	                case BEACON :
 	
 	                	plugin.getConfig().set("config.classique",30);
 	                    player.sendMessage(consoleSender + "Le nombre maximum de points a ete reinitialise a " + ChatColor.AQUA + "30 points");
@@ -476,7 +476,7 @@ public class OnClickInventory implements Listener {
 		        		Bukkit.dispatchCommand(player, "config");
 		        		
 		        	//case cobblstone wall: reinitialiser
-		        	}else if(clickedItem.getType().equals(Material.COBBLE_WALL)){
+		        	}else if(clickedItem.getType().equals(Material.BEACON)){
 		        		plugin.getConfig().set("config.bannedKits", new ArrayList<>());
 		        		
 		        		player.sendMessage(consoleSender + ChatColor.AQUA + "Les kits bannis ont ete reinitialises");
@@ -484,7 +484,7 @@ public class OnClickInventory implements Listener {
 		        		
 		        	//case on a kit
 		        	}else {
-		        		String aKitName = clickedItem.getItemMeta().getDisplayName();
+		        		String aKitName = clickedItem.getItemMeta().getDisplayName().substring(2);
 		        		
 		        		for(Kit aKit : CommandInitServer.allKits) {
 		        			
@@ -573,10 +573,11 @@ public class OnClickInventory implements Listener {
 			        					aKitList.add(player.getName());
 			        					plugin.getConfig().set("kits." + aKit.getName().toLowerCase(), aKitList);
 			        					
+			        					
 			        					playerPoints.setScore(playerPoints.getScore() - aKit.getPrice());
 				        				playerRound.setScore(playerRound.getScore() + 1);
 				        				
-				        				player.sendMessage("Vous venez de recevoir le kit " + aKit.getName());
+				        				player.sendMessage(ChatColor.AQUA + "Vous venez de recevoir le kit " + ChatColor.GOLD + aKit.getName());
 				        				
 				        				new CommandStart(plugin).setClassique((Player) player);
 				        				
@@ -623,7 +624,7 @@ public class OnClickInventory implements Listener {
 
 	private void createBannedKitInventory(Player player) {
 		
-		ItemStack cobblestoneWall = new ItemStack(Material.COBBLE_WALL);
+		ItemStack beacon = new ItemStack(Material.BEACON);
 		ItemStack arrow = new ItemStack(Material.ARROW);
         ItemMeta name = arrow.getItemMeta();
         List<String> lore = new ArrayList<>();
@@ -633,13 +634,13 @@ public class OnClickInventory implements Listener {
         ItemStack[] banKitsList = new ItemStack[9*5];
 
         banKitsList[9*5-1] = arrow;
-        banKitsList[9*4+4] = cobblestoneWall;
+        banKitsList[9*4+4] = beacon;
         banKitsList[9*4] = arrow;
         
-        name.setDisplayName("Reinitialiser");
-        cobblestoneWall.setItemMeta(name);
+        name.setDisplayName(ChatColor.RESET + "Reinitialiser");
+        beacon.setItemMeta(name);
         
-        name.setDisplayName("Back");
+        name.setDisplayName(ChatColor.RED + "Back");
         arrow.setItemMeta(name);
         
         int i = 0;
@@ -647,19 +648,17 @@ public class OnClickInventory implements Listener {
         for(Kit aKit : CommandInitServer.allKits) {
         	ItemStack anItem = new ItemStack(aKit.getMaterial());
         	
+        	name.setDisplayName(ChatColor.RESET + aKit.getName());
+        	lore.clear();
         	
         	if(plugin.getConfig().getList("config.bannedKits").contains(aKit.getName())) {
-        		name.setDisplayName(aKit.getName());
-        		lore.clear();
         		lore.add(ChatColor.RED + "Kit Banni");
-        		name.setLore(lore);
         	}else {
-        		name.setDisplayName(aKit.getName());
-        		lore.clear();
         		lore.add(ChatColor.GREEN + "Kit En Jeu");
-        		name.setLore(lore);
+        		
         	}
         	
+        	name.setLore(lore);
         	name.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         	
         	anItem.setItemMeta(name);

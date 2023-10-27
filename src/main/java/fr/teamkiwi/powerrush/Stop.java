@@ -35,12 +35,10 @@ public class Stop {
 		
 		//reset all kits
 		List<Kit> allKits = CommandInitServer.allKits;
-		List<String> debugList = new ArrayList<String>();
-		debugList.add("");
 		
 		
 		for(Kit aKit : allKits) {
-			plugin.getConfig().set("kits." + aKit.getName().toLowerCase(), debugList);
+			plugin.getConfig().set("kits." + aKit.getName().toLowerCase(), new ArrayList<>());
 		}
 		
 		

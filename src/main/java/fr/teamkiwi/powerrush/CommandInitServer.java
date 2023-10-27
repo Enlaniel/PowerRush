@@ -54,10 +54,10 @@ public class CommandInitServer implements CommandExecutor {
 		
 		new CommandSaveInv().setDefaultInventory();
 		
-		Kit katana = new Kit("Katana", Material.DIAMOND_SWORD, 4, false, false);
-		Kit ange = new Kit("Ange", Material.GOLDEN_APPLE, 5, false, true);
-		Kit doppage = new Kit("Doppage", Material.SUGAR, 3, true, true);
-		Kit trader = new Kit("Trader", Material.EMERALD, 3, true, true);
+		Kit katana = new Kit("Katana", Material.DIAMOND_SWORD, 4, 0, false);
+		Kit ange = new Kit("Ange", Material.GOLDEN_APPLE, 5, 0, false);
+		Kit doppage = new Kit("Doppage", Material.SUGAR, 3, 120, true);
+		Kit trader = new Kit("Trader", Material.EMERALD, 3, 120, true);
 		
 		
 		allKits.add(katana);

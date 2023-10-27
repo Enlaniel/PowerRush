@@ -34,8 +34,11 @@ public class Main extends JavaPlugin {
     	//TODO: create kits with help of PowerRush.txt
 		//TODO: scoreboard with timer, player alive...
 		//TODO: scenarios/possibility to add teams
+		//TODO: setup initServer command
 		
 		//TODO: FIX CLASSIQUE TWO TIME SAME KIT
+		//TODO: PORBLEM WITH SELECT KIT
+		//TODO: BIG PROBLEM/MAIN PROBLEM WITH KITS GIVEN AND CONFIG
     	
     	LOGGER.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     	LOGGER.info("[PowerRush] Plugin lance avec succes");
