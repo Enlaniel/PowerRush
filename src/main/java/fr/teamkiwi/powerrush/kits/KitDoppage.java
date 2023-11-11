@@ -35,7 +35,7 @@ public class KitDoppage {
 			objectiveDoppage.getScore(player).setScore(0);
 			
 		}else {
-			player.sendMessage(ChatColor.AQUA + "Kit Trader pret dans " + ChatColor.RED + (doppage.getCooldown() - objectiveDoppage.getScore(player).getScore()) + ChatColor.AQUA + " s");
+			player.sendMessage(ChatColor.AQUA + "Kit Trader pret dans " + ChatColor.RED + (doppage.getCooldown() - objectiveDoppage.getScore(player).getScore()) + "s");
 		}
 		
 		

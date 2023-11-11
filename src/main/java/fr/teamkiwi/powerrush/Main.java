@@ -18,7 +18,9 @@ import fr.teamkiwi.powerrush.commands.debug.CommandShowYML;
 import fr.teamkiwi.powerrush.events.OnClick;
 import fr.teamkiwi.powerrush.events.OnClickInventory;
 import fr.teamkiwi.powerrush.events.OnDead;
+import fr.teamkiwi.powerrush.events.OnInteractAtEntity;
 import fr.teamkiwi.powerrush.events.OnItemConsume;
+import fr.teamkiwi.powerrush.events.OnRespawn;
 import fr.teamkiwi.powerrush.events.OnSecond;
 
 
@@ -32,14 +34,11 @@ public class Main extends JavaPlugin {
 		
     	//TODO: dipatch player and give inv, deop, open kis choice ... in CommandStart
     	//TODO: create kits with help of PowerRush.txt
-		//TODO: scoreboard with timer, player alive...
+		//TODO: scoreboard with timer, players alive...
 		//TODO: scenarios/possibility to add teams
 		//TODO: setup initServer command
-		
-		//TODO: FIX CLASSIQUE TWO TIME SAME KIT
-		//TODO: PORBLEM WITH SELECT KIT
-		//TODO: BIG PROBLEM/MAIN PROBLEM WITH KITS GIVEN AND CONFIG
     	
+		
     	LOGGER.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     	LOGGER.info("[PowerRush] Plugin lance avec succes");
     	LOGGER.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -65,7 +64,9 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new OnClick(this), this);
 		getServer().getPluginManager().registerEvents(new OnChat(), this);
 		getServer().getPluginManager().registerEvents(new OnItemConsume(this), this);
+		getServer().getPluginManager().registerEvents(new OnInteractAtEntity(this), this);
 		getServer().getPluginManager().registerEvents(new OnDead(this), this);
+		getServer().getPluginManager().registerEvents(new OnRespawn(), this);
 		getServer().getScheduler().runTaskTimer(this, new OnSecond(), 0, 1*20);
 		
 		new CommandInitServer(this).initKits();

@@ -29,9 +29,9 @@ public class OnDead implements Listener {
 		
 		Player deadPlayer = event.getEntity();
 		
-		
-		killPlayer(event);
-		
+		if(! plugin.getConfig().getList("kits.avenir").contains(deadPlayer.getName())) {
+			killPlayer(event);
+		}
 		
 	}
 	

@@ -566,25 +566,32 @@ public class OnClickInventory implements Listener {
 			        			
 			        			if(aKitName.equals(aKit.getName())) {
 			        				
-			        				if(playerPoints.getScore() >= aKit.getPrice()) {
+			        				if(! plugin.getConfig().getList("kits." + aKit.getName().toLowerCase()).contains(player.getName())) {
 			        					
-			        					@SuppressWarnings("unchecked")
-										List<String> aKitList = (List<String>) plugin.getConfig().getList("kits." + aKit.getName().toLowerCase());
-			        					aKitList.add(player.getName());
-			        					plugin.getConfig().set("kits." + aKit.getName().toLowerCase(), aKitList);
-			        					
-			        					
-			        					playerPoints.setScore(playerPoints.getScore() - aKit.getPrice());
-				        				playerRound.setScore(playerRound.getScore() + 1);
-				        				
-				        				player.sendMessage(ChatColor.AQUA + "Vous venez de recevoir le kit " + ChatColor.GOLD + aKit.getName());
-				        				
-				        				new CommandStart(plugin).setClassique((Player) player);
-				        				
-			        				}else {
-			        					player.sendMessage(ChatColor.DARK_RED + "Vous n'avez pas les points requis");
-			        				}
 			        				
+			        				
+			        					if(playerPoints.getScore() >= aKit.getPrice()) {
+			        					
+			        						@SuppressWarnings("unchecked")
+			        						List<String> aKitList = (List<String>) plugin.getConfig().getList("kits." + aKit.getName().toLowerCase());
+			        						aKitList.add(player.getName());
+			        						plugin.getConfig().set("kits." + aKit.getName().toLowerCase(), aKitList);
+			        					
+			        					
+			        						playerPoints.setScore(playerPoints.getScore() - aKit.getPrice());
+			        						playerRound.setScore(playerRound.getScore() + 1);
+				        				
+			        						player.sendMessage(ChatColor.AQUA + "Vous venez de recevoir le kit " + ChatColor.GOLD + aKit.getName());
+				        				
+			        						new CommandStart(plugin).setClassique((Player) player);
+				        				
+			        					}else {
+			        						player.sendMessage(ChatColor.DARK_RED + "Vous n'avez pas les points requis");
+			        					}
+			        				}else {
+			        					player.sendMessage(ChatColor.DARK_RED + "Vous possedez deja le kit " + aKit.getName());
+			        				}
+			        					
 			        			}
 			        		}
 			        	}

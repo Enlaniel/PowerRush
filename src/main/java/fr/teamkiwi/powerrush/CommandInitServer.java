@@ -58,12 +58,16 @@ public class CommandInitServer implements CommandExecutor {
 		Kit ange = new Kit("Ange", Material.GOLDEN_APPLE, 5, 0, false);
 		Kit doppage = new Kit("Doppage", Material.SUGAR, 3, 120, true);
 		Kit trader = new Kit("Trader", Material.EMERALD, 3, 120, true);
+		Kit sangsue = new Kit("Sangsue", Material.FERMENTED_SPIDER_EYE, 4, 0, false);
+		Kit avenir = new Kit("Avenir", Material.BEACON, 7, 0, false);
 		
 		
 		allKits.add(katana);
 		allKits.add(ange);
 		allKits.add(doppage);
 		allKits.add(trader);
+		allKits.add(sangsue);
+		allKits.add(avenir);
 		
 		
 	}

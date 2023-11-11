@@ -48,7 +48,7 @@ public class KitTrader implements Listener {
 			}
 			
 		}else {
-			player.sendMessage(ChatColor.AQUA + "Kit Trader pret dans " + ChatColor.RED + (trader.getCooldown() - objectiveTrader.getScore(player).getScore()) + ChatColor.AQUA + " s");
+			player.sendMessage(ChatColor.AQUA + "Kit Trader pret dans " + ChatColor.RED + (trader.getCooldown() - objectiveTrader.getScore(player).getScore()) + "s");
 		}
 		
 		
