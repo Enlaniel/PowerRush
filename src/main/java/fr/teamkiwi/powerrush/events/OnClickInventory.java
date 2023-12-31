@@ -323,7 +323,7 @@ public class OnClickInventory implements Listener {
 	                plugin.getConfig().set("config.modedejeu", "Classique");
 	                player.sendMessage(consoleSender + "Le mode de jeu actuel est " + ChatColor.AQUA + plugin.getConfig().getString("config.modedejeu"));
 	
-	                Inventory configClassiqueInv = Bukkit.createInventory(null, 9*1, ChatColor.DARK_PURPLE + "Combien de points ?");
+	                Inventory configClassiqueInv = Bukkit.createInventory(null, 9*1, ChatColor.DARK_PURPLE + "Combien de kits totaux ?");
 	                ItemStack[] configClassiqueList = new ItemStack[9*1];
 
 	                configClassiqueList[0] = arrow;
@@ -332,13 +332,13 @@ public class OnClickInventory implements Listener {
 	                configClassiqueList[6] = acaciaFenceGate;
 	                configClassiqueList[8] = arrow;
 
-	                name.setDisplayName("Augmenter de 2 points");
+	                name.setDisplayName("Ajouter 1 kit");
 	                acaciaFenceGate.setItemMeta(name);
 	                
-	                name.setDisplayName("Diminuer de 2 points");
+	                name.setDisplayName("Enlever 1 kit");
 	                acaciaFence.setItemMeta(name);
 	                
-	                name.setDisplayName("Reinitialiser a 30 points");
+	                name.setDisplayName("Reinitialiser a 5 kits");
 	                beacon.setItemMeta(name);
 
 	                
@@ -421,30 +421,30 @@ public class OnClickInventory implements Listener {
 	        
 	        
 	        //set nombre de points dans mode de jeu classique
-	        if (clickedInventory.getTitle().equals(ChatColor. DARK_PURPLE + "Combien de points ?")) {
+	        if (clickedInventory.getTitle().equals(ChatColor. DARK_PURPLE + "Combien de kits totaux ?")) {
 	        	
 	            switch (clickedItem.getType()) {
 	
 	                case ACACIA_FENCE :
 	
-	                    plugin.getConfig().set("config.classique", plugin.getConfig().getInt("config.classique") - 2);
-	                    player.sendMessage(consoleSender + "Le nombre maximum de points a ete diminue de " + ChatColor.RED + "2 points");
-	                    player.sendMessage(consoleSender + "Le nombre maximum de points est maintenant de " + ChatColor.AQUA + plugin.getConfig().getInt("config.classique"));
+	                    plugin.getConfig().set("config.classique", plugin.getConfig().getInt("config.classique") - 1);
+	                    player.sendMessage(consoleSender + "Le nombre maximum de kits a ete diminue de " + ChatColor.RED + "1 kit");
+	                    player.sendMessage(consoleSender + "Le nombre maximum de kits est maintenant de " + ChatColor.AQUA + plugin.getConfig().getInt("config.classique"));
 	
 	                    break;
 	
 	                case BEACON :
 	
-	                	plugin.getConfig().set("config.classique",30);
-	                    player.sendMessage(consoleSender + "Le nombre maximum de points a ete reinitialise a " + ChatColor.AQUA + "30 points");
+	                	plugin.getConfig().set("config.classique",5);
+	                    player.sendMessage(consoleSender + "Le nombre maximum de kits a ete reinitialise a " + ChatColor.AQUA + "5 kits");
 	
 	                    break;
 	
 	                case ACACIA_FENCE_GATE :
 	
-	                	plugin.getConfig().set("config.classique", plugin.getConfig().getInt("config.classique") + 2);
-	                    player.sendMessage(consoleSender + "Le nombre maximum de points a ete augmente de " + ChatColor.GREEN + "2 points");
-	                    player.sendMessage(consoleSender + "Le nombre maximum de points est maintenant de " + ChatColor.AQUA + plugin.getConfig().getInt("config.classique"));
+	                	plugin.getConfig().set("config.classique", plugin.getConfig().getInt("config.classique") + 1);
+	                    player.sendMessage(consoleSender + "Le nombre maximum de kits a ete augmente de " + ChatColor.GREEN + "1 kit");
+	                    player.sendMessage(consoleSender + "Le nombre maximum de kits est maintenant de " + ChatColor.AQUA + plugin.getConfig().getInt("config.classique"));
 	
 	                    break;
 	
@@ -526,18 +526,17 @@ public class OnClickInventory implements Listener {
 	        if (clickedInventory.getTitle().equals(ChatColor.DARK_PURPLE + "Choisissez un kit")) {
 	        	
 	        	Score playerRound = Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Round").getScore((OfflinePlayer) player);
-	        	Score playerPoints = Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Points").getScore((OfflinePlayer) player);
 	        	
 	        	//check if clicking on an item
 	        	if(clickedItem.getItemMeta() != null) {
 	        		
-	        		if(!(playerRound.getScore() >= 5)) {
+	        		if(!(playerRound.getScore() <= 0)) {
 	        		
 			        	//case arrow wall: skip
 			        	if(clickedItem.getType().equals(Material.ARROW)){
 			        		
 			        		player.sendMessage(consoleSender + ChatColor.AQUA + "Vous n'avez pas choisis de kit");
-			        		playerRound.setScore(playerRound.getScore() + 1);
+			        		playerRound.setScore(playerRound.getScore() - 1);
 			        		
 			        		new CommandStart(plugin).setClassique((Player) player);
 			        		
@@ -568,26 +567,17 @@ public class OnClickInventory implements Listener {
 			        				
 			        				if(! plugin.getConfig().getList("kits." + aKit.getName().toLowerCase()).contains(player.getName())) {
 			        					
+		        						@SuppressWarnings("unchecked")
+		        						List<String> aKitList = (List<String>) plugin.getConfig().getList("kits." + aKit.getName().toLowerCase());
+		        						aKitList.add(player.getName());
+		        						plugin.getConfig().set("kits." + aKit.getName().toLowerCase(), aKitList);
+		        					
+		        						playerRound.setScore(playerRound.getScore() - 1);
 			        				
+		        						player.sendMessage(ChatColor.AQUA + "Vous venez de recevoir le kit " + ChatColor.GOLD + aKit.getName());
 			        				
-			        					if(playerPoints.getScore() >= aKit.getPrice()) {
-			        					
-			        						@SuppressWarnings("unchecked")
-			        						List<String> aKitList = (List<String>) plugin.getConfig().getList("kits." + aKit.getName().toLowerCase());
-			        						aKitList.add(player.getName());
-			        						plugin.getConfig().set("kits." + aKit.getName().toLowerCase(), aKitList);
-			        					
-			        					
-			        						playerPoints.setScore(playerPoints.getScore() - aKit.getPrice());
-			        						playerRound.setScore(playerRound.getScore() + 1);
-				        				
-			        						player.sendMessage(ChatColor.AQUA + "Vous venez de recevoir le kit " + ChatColor.GOLD + aKit.getName());
-				        				
-			        						new CommandStart(plugin).setClassique((Player) player);
-				        				
-			        					}else {
-			        						player.sendMessage(ChatColor.DARK_RED + "Vous n'avez pas les points requis");
-			        					}
+		        						new CommandStart(plugin).setClassique((Player) player);
+			        				
 			        				}else {
 			        					player.sendMessage(ChatColor.DARK_RED + "Vous possedez deja le kit " + aKit.getName());
 			        				}
@@ -598,8 +588,8 @@ public class OnClickInventory implements Listener {
 	        		}else {
 	        			
 	        			//exception if to not give a stack of 0
-	        			if(playerPoints.getScore() > 0) {
-	        				ItemStack goldenApple = new ItemStack(Material.GOLDEN_APPLE, playerPoints.getScore());
+	        			if(playerRound.getScore() > 0) {
+	        				ItemStack goldenApple = new ItemStack(Material.GOLDEN_APPLE, playerRound.getScore()*3);
 	        				player.getInventory().addItem(goldenApple);
 	        			}
 	        			

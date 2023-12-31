@@ -27,7 +27,7 @@ public class KitTrader implements Listener {
 		Kit trader = null;
 		
 		for(Kit aKit : CommandInitServer.allKits) {
-			if(aKit.getName().equals("Doppage")) {
+			if(aKit.getName().equals("Trader")) {
 				trader = aKit;
 			}
 		}

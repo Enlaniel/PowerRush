@@ -84,8 +84,7 @@ public class CommandStart implements CommandExecutor {
 				
 			case "Classique":
 				
-				Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Points").getScore(aPlayer).setScore(plugin.getConfig().getInt("config.classique"));
-				Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Round").getScore(aPlayer).setScore(0);
+				Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Round").getScore(aPlayer).setScore(plugin.getConfig().getInt("config.classique"));
 				setClassique(aPlayer);
 				break;
 				
@@ -111,7 +110,6 @@ public class CommandStart implements CommandExecutor {
 		
 		Random random = new Random();
 		List<String> lore = new ArrayList<>();
-		Score playerPoints = Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Points").getScore(player);
 		Score playerRound = Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Round").getScore(player);
 		
 		List<Kit> allKits = new ArrayList<>();
@@ -131,7 +129,7 @@ public class CommandStart implements CommandExecutor {
 		}
 		allKits.removeAll(removedKits);
 		
-		if(playerRound.getScore() <= 5) {
+		if(playerRound.getScore() <= 0) {
 			
 			//create inventory
 			Inventory choicesInv = Bukkit.createInventory(null, 9*2, ChatColor.DARK_PURPLE + "Choisissez un kit");
@@ -154,25 +152,25 @@ public class CommandStart implements CommandExecutor {
 			
 			//set all meta
 			lore.clear();
-			lore.add(ChatColor.AQUA + "Cost: " + ChatColor.GOLD + randomKit1.getPrice());
+			lore.add(ChatColor.AQUA + randomKit1.getName() + " : " + ChatColor.GOLD + randomKit1.getDescription());
 			itemMeta.setDisplayName(randomKit1.getName());
 			itemMeta.setLore(lore);
 			randomKit1Item.setItemMeta(itemMeta);
 			
 			lore.clear();
-			lore.add(ChatColor.AQUA + "Cost: " + ChatColor.GOLD + randomKit2.getPrice());
+			lore.add(ChatColor.AQUA + randomKit2.getName() + " : " + ChatColor.GOLD + randomKit2.getDescription());
 			itemMeta.setDisplayName(randomKit2.getName());
 			itemMeta.setLore(lore);
 			randomKit2Item.setItemMeta(itemMeta);
 			
 			lore.clear();
-			lore.add(ChatColor.AQUA + "Cost: " + ChatColor.GOLD + randomKit3.getPrice());
+			lore.add(ChatColor.AQUA + randomKit3.getName() + " : " + ChatColor.GOLD + randomKit3.getDescription());
 			itemMeta.setDisplayName(randomKit3.getName());
 			itemMeta.setLore(lore);
 			randomKit3Item.setItemMeta(itemMeta);
 			
 			lore.clear();
-			lore.add(ChatColor.AQUA + "Vos Points: " + ChatColor.GOLD + playerPoints.getScore());
+			lore.add(ChatColor.AQUA + "Il vous reste : " + ChatColor.GOLD + playerRound.getScore() + " kits");
 			itemMeta.setDisplayName("Skip");
 			itemMeta.setLore(lore);
 			arrow.setItemMeta(itemMeta);

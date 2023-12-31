@@ -6,17 +6,17 @@ public class Kit {
 	
 	String name;
 	Material material;
-	int price;
 	int cooldown;
 	boolean giveMaterial;
+	String description;
 	
-	public Kit(String name, Material material, int price, int cooldown, boolean giveMaterial){
+	public Kit(String name, Material material, int cooldown, boolean giveMaterial, String description){
 		
 		this.name = name;
 		this.material = material;
-		this.price = price;
 		this.giveMaterial = giveMaterial;
 		this.cooldown = cooldown;
+		this.description = description;
 		
 	}
 	
@@ -28,10 +28,6 @@ public class Kit {
 	public Material getMaterial() {
 		return material;
 	}
-
-	public int getPrice() {
-		return price;
-	}
 	
 	public int getCooldown() {
 		return cooldown;
@@ -39,6 +35,10 @@ public class Kit {
 	
 	public boolean isGivingMaterial() {
 		return giveMaterial;
+	}
+	
+	public String getDescription() {
+		return description;
 	}
 	
 	public boolean hasCooldown() {
