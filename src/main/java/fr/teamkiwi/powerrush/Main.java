@@ -33,7 +33,6 @@ public class Main extends JavaPlugin {
     public void onEnable() {
 		
     	//TODO: dipatch player and give inv, deop, open kis choice ... in CommandStart
-    	//TODO: create kits with help of PowerRush.txt
 		//TODO: scoreboard with timer, players alive...
 		//TODO: scenarios/possibility to add teams
 		//TODO: setup initServer command

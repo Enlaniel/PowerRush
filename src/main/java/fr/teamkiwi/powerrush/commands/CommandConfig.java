@@ -38,7 +38,8 @@ public class CommandConfig implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
 		//check if it is a player who send command
-		if(sender instanceof Player player) {
+		if(sender instanceof Player) {
+			Player player = (Player) sender;
 			
 			//check if game is started
 			if(! CommandStart.isStarted) {

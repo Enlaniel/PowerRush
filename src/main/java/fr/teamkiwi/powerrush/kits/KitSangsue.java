@@ -15,9 +15,10 @@ public class KitSangsue implements Listener {
 		
 		Entity damager = event.getDamager();
 		
-		if(damager instanceof Player player) {
+		if(damager instanceof Player) {
+			Player player = (Player) damager;
 			
-			if(new Random().nextInt(1, 100) <= 20) {
+			if(new Random().nextInt(100) <= 20) {
 				
 				int regen = 0;
 				

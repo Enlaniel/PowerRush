@@ -31,7 +31,8 @@ public class CommandSelectKit implements CommandExecutor {
 		List<Kit> allKits = CommandInitServer.allKits;
 		
 		//check if sender is a player
-		if(sender instanceof Player player) {
+		if(sender instanceof Player) {
+			Player player = (Player) sender;
 			
 			//create string message that will be send if error
 			String message = "";

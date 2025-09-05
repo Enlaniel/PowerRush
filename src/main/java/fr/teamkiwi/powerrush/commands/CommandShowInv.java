@@ -14,7 +14,8 @@ public class CommandShowInv implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		
 		//check if sender is in game
-		if(sender instanceof Player player) {
+		if(sender instanceof Player) {
+			Player player = (Player) sender;
 			
 			//create showinv
 			Inventory showInv = Bukkit.createInventory(null, 9*5, ChatColor.DARK_GRAY + "Inventaire de Depart");

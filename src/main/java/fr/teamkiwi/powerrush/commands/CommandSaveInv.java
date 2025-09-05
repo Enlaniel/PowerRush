@@ -25,7 +25,8 @@ public class CommandSaveInv implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		
 		//check if the sender is a Player
-		if(sender instanceof Player player) {
+		if(sender instanceof Player) {
+			Player player = (Player) sender;
 			
 			//check if game is started
 			if(! CommandStart.isStarted && player.getInventory().getContents()[0] != null && args.length == 0) {

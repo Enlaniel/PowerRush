@@ -69,7 +69,7 @@ public class CommandStart implements CommandExecutor {
 			aPlayer.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20*60*2, 255, true, false));
 			
 			double border = Bukkit.getWorld("world").getWorldBorder().getSize()/2;
-			aPlayer.teleport(new Location(Bukkit.getWorld("world"), new Random().nextDouble(border), 80, new Random().nextDouble(border)));
+			aPlayer.teleport(new Location(Bukkit.getWorld("world"), new Random().nextInt((int) border), 80, new Random().nextInt((int) border)));
 			
 			
 			
