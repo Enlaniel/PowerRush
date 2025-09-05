@@ -2,6 +2,7 @@ package fr.teamkiwi.powerrush;
 
 import java.util.logging.Logger;
 
+import fr.teamkiwi.powerrush.commands.debug.CommandJoinGame;
 import fr.teamkiwi.powerrush.events.OnChat;
 import fr.teamkiwi.powerrush.events.WhenPlayerJoins;
 import org.bukkit.Bukkit;
@@ -43,8 +44,8 @@ public class Main extends JavaPlugin {
     	LOGGER.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     	
     	//set up commandes
-    	getCommand("config").setExecutor(new CommandConfig(this));
-    	getCommand("start").setExecutor(new CommandStart(this));
+    	getCommand("config").setExecutor(new CommandConfig());
+    	getCommand("start").setExecutor(new CommandStart());
     	getCommand("forcestop").setExecutor(new CommandForceStop());
     	getCommand("saveinventory").setExecutor(new CommandSaveInv());
     	getCommand("showinventory").setExecutor(new CommandShowInv());
@@ -56,10 +57,11 @@ public class Main extends JavaPlugin {
     	//setup debug commands
     	getCommand("selectkit").setExecutor(new CommandSelectKit(this));
     	getCommand("showyml").setExecutor(new CommandShowYML(this));
-    	
+    	getCommand("joingame").setExecutor(new CommandJoinGame());
+
     	//register event
     	getServer().getPluginManager().registerEvents(new OnClickInventory(this), this);
-        getServer().getPluginManager().registerEvents(new WhenPlayerJoins(this), this);
+        getServer().getPluginManager().registerEvents(new WhenPlayerJoins(), this);
         getServer().getPluginManager().registerEvents(new OnClick(this), this);
 		getServer().getPluginManager().registerEvents(new OnChat(), this);
 		getServer().getPluginManager().registerEvents(new OnItemConsume(this), this);

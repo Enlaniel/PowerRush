@@ -3,6 +3,7 @@ package fr.teamkiwi.powerrush.commands;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.teamkiwi.powerrush.Game;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -14,8 +15,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import fr.teamkiwi.powerrush.Main;
-
 
 public class CommandConfig implements CommandExecutor {
 
@@ -26,23 +25,21 @@ public class CommandConfig implements CommandExecutor {
 	 * 
 	 */
 
-	
-	Main plugin;
-    
-    public CommandConfig(Main plugin) {
-		this.plugin = plugin;
-	}
-	
-	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
 		//check if it is a player who send command
 		if(sender instanceof Player) {
 			Player player = (Player) sender;
+
+			Game game = Game.getPlayerGame(player);
+			if(game == null) {
+				sender.sendMessage("Vous n'etes pas dans une partie !");
+				return false;
+			}
 			
 			//check if game is started
-			if(! CommandStart.isStarted) {
+			if(! game.hasStarted()) {
 				
 				Inventory config = Bukkit.createInventory(null, 9*5, ChatColor.DARK_PURPLE + "Config Menu");
 				//create itemStack list
@@ -76,22 +73,23 @@ public class CommandConfig implements CommandExecutor {
 				
 				name.setDisplayName(ChatColor.DARK_PURPLE + "Mode de jeu");
 				lore.clear();
-				lore.add(ChatColor.AQUA + plugin.getConfig().getString("config.modedejeu"));
-				lore.add(ChatColor.GOLD + String.valueOf(plugin.getConfig().getInt("config." + plugin.getConfig().getString("config.modedejeu").toLowerCase())));
+				lore.add(ChatColor.AQUA + game.getGameMode().toString());
+				//lore.add(ChatColor.GOLD + String.valueOf(plugin.getConfig().getInt("config." + plugin.getConfig().getString("config.modedejeu").toLowerCase())));
+				lore.add(ChatColor.GOLD + "<mod>");
 				name.setLore(lore);
 				commandBlock.setItemMeta(name);
 				
 				
 				name.setDisplayName(ChatColor.DARK_PURPLE + "Max Joueurs");
 				lore.clear();
-				lore.add(ChatColor.AQUA + "Max Joueurs: " + ChatColor.GOLD + plugin.getConfig().getInt("config.maxPlayers"));
+				lore.add(ChatColor.AQUA + "Max Joueurs: " + ChatColor.GOLD + game.getMaxPlayers());
 				name.setLore(lore);
 				armor_stand.setItemMeta(name);
 				
 				
 				name.setDisplayName(ChatColor.DARK_PURPLE + "On/Off Kits");
 				lore.clear();
-				lore.add(ChatColor.AQUA + "Nombre de kits ban: " + ChatColor.GOLD + plugin.getConfig().getList("config.bannedKits").size());
+				lore.add(ChatColor.AQUA + "Nombre de kits ban: " + ChatColor.GOLD + game.getBannedKits().size());
 				name.setLore(lore);
 				bookAndQuill.setItemMeta(name);
 				

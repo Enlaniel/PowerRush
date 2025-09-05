@@ -1,9 +1,10 @@
 package fr.teamkiwi.powerrush.events;
 
 import fr.teamkiwi.powerrush.CommandInitServer;
+import fr.teamkiwi.powerrush.Game;
+import fr.teamkiwi.powerrush.GameMode;
 import fr.teamkiwi.powerrush.utils.Kit;
 import fr.teamkiwi.powerrush.Main;
-import fr.teamkiwi.powerrush.commands.CommandStart;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,6 @@ import org.bukkit.scoreboard.Score;
 public class OnClickInventory implements Listener {
 	
     public static final String consoleSender = "" + ChatColor.DARK_GRAY + ChatColor.ITALIC + "[" + ChatColor.DARK_GREEN + ChatColor.ITALIC + "POWER RUSH" + ChatColor.DARK_GRAY + ChatColor.ITALIC + "] " + ChatColor.RESET;
-    public static String modeDeJeu = "Classique";
 
 
 
@@ -46,6 +46,15 @@ public class OnClickInventory implements Listener {
         Inventory clickedInventory = event.getClickedInventory();
         ItemStack clickedItem = event.getCurrentItem();
         HumanEntity player = event.getWhoClicked();
+
+		Game game = null;
+		if(player instanceof Player) {
+			game = Game.getPlayerGame((Player) player);
+		}
+
+		if(game == null) {
+			return;
+		}
         
         if(clickedInventory != null) {
         	
@@ -73,8 +82,8 @@ public class OnClickInventory implements Listener {
 	                //Config de bordure
 	                case BARRIER :
 	
-	                    Inventory border = Bukkit.createInventory(null, 9*1, ChatColor.AQUA + "Border Menu");
-	                    ItemStack[] borderList = new ItemStack[9*1];
+	                    Inventory border = Bukkit.createInventory(null, 9, ChatColor.AQUA + "Border Menu");
+	                    ItemStack[] borderList = new ItemStack[9];
 	
 	                    name.setDisplayName(ChatColor.RESET + "Reduire de 50 blocs");
 	                    acaciaFence.setItemMeta(name);
@@ -107,8 +116,8 @@ public class OnClickInventory implements Listener {
 	                //Changement de mode de jeu
 	                case COMMAND :
 	                	
-	                	Inventory modeDeJeuInv = Bukkit.createInventory(null, 9*1, ChatColor.DARK_PURPLE + "Choisissez un mode de jeu");
-	                	ItemStack[] modeDeJeuList = new ItemStack[9*1];
+	                	Inventory modeDeJeuInv = Bukkit.createInventory(null, 9, ChatColor.DARK_PURPLE + "Choisissez un mode de jeu");
+	                	ItemStack[] modeDeJeuList = new ItemStack[9];
 	                	
 	                	ItemStack bedrock = new ItemStack(Material.BEDROCK);
 	                	ItemStack dirt = new ItemStack(Material.DIRT);
@@ -150,8 +159,8 @@ public class OnClickInventory implements Listener {
 	                //Config du nombre de joueurs
 	                case ARMOR_STAND :
 	
-	                    Inventory maxPlayers = Bukkit.createInventory(null, 9*1, ChatColor. DARK_GREEN + "Max Players Count Menu");
-	                    ItemStack[] maxPlayersList = new ItemStack[9*1];
+	                    Inventory maxPlayers = Bukkit.createInventory(null, 9, ChatColor. DARK_GREEN + "Max Players Count Menu");
+	                    ItemStack[] maxPlayersList = new ItemStack[9];
 	
 	                    maxPlayersList[0] = arrow;
 	                    maxPlayersList[2] = acaciaFence;
@@ -180,7 +189,6 @@ public class OnClickInventory implements Listener {
 	                case BOOK_AND_QUILL :
 	                	
 	                	createBannedKitInventory((Player) player);
-	                	
 	                    break;
 	
 	                default :
@@ -222,7 +230,8 @@ public class OnClickInventory implements Listener {
 	                    break;
 	
 	                case ARROW :
-	
+
+						//TODO AFFREUX A CHANGER
 	                    Bukkit.dispatchCommand(player, "config");
 	
 	                    break;
@@ -242,25 +251,28 @@ public class OnClickInventory implements Listener {
 	            switch (clickedItem.getType()) {
 	
 	                case ACACIA_FENCE :
-	
-	                    plugin.getConfig().set("config.maxPlayers", plugin.getConfig().getInt("config.maxPlayers")-1);
+
+						game.setMaxPlayers(game.getMaxPlayers()-1);
+	                    //plugin.getConfig().set("config.maxPlayers", plugin.getConfig().getInt("config.maxPlayers")-1);
 	                    player.sendMessage(consoleSender + "Le nombre maximum de joueurs a ete diminue de " + ChatColor.RED + "1 joueur");
-	                    player.sendMessage(consoleSender + "Le nombre maximum de joueurs est maintenant de " + ChatColor.AQUA + plugin.getConfig().getInt("config.maxPlayers"));
+	                    player.sendMessage(consoleSender + "Le nombre maximum de joueurs est maintenant de " + ChatColor.AQUA + game.getMaxPlayers());
 	
 	                    break;
 	
 	                case BEACON :
 
-						plugin.getConfig().set("config.maxPlayers", 30);
+						game.setMaxPlayers(30);
+						//plugin.getConfig().set("config.maxPlayers", 30);
 	                    player.sendMessage(consoleSender + "Le nombre maximum de joueurs a ete reinitialise a " + ChatColor.AQUA + "30 joueurs");
 	
 	                    break;
 	
 	                case ACACIA_FENCE_GATE :
 
-						plugin.getConfig().set("config.maxPlayers", plugin.getConfig().getInt("config.maxPlayers")+1);
+						game.setMaxPlayers(game.getMaxPlayers()+1);
+						//plugin.getConfig().set("config.maxPlayers", plugin.getConfig().getInt("config.maxPlayers")+1);
 	                    player.sendMessage(consoleSender + "Le nombre maximum de joueurs a ete augmente de " + ChatColor.GREEN + "1 joueur");
-	                    player.sendMessage(consoleSender + "Le nombre maximum de joueurs est maintenant de " + ChatColor.AQUA + plugin.getConfig().getInt("config.maxPlayers"));
+	                    player.sendMessage(consoleSender + "Le nombre maximum de joueurs est maintenant de " + ChatColor.AQUA + game.getMaxPlayers());
 	
 	                    break;
 	
@@ -286,13 +298,14 @@ public class OnClickInventory implements Listener {
 	        	switch (clickedItem.getType()) {
 	
 	            case BEDROCK :
-	
-	            	plugin.getConfig().set("config.modedejeu", "Random");
-	                player.sendMessage(consoleSender + "Le mode de jeu actuel est " + ChatColor.AQUA + plugin.getConfig().getString("config.modedejeu"));
+
+					game.setGameMode(GameMode.RANDOM);
+	            	//plugin.getConfig().set("config.modedejeu", "Random");
+	                player.sendMessage(consoleSender + "Le mode de jeu actuel est " + ChatColor.AQUA + game.getGameMode().toString());
 	                
 	                
-	                Inventory configRandomInv = Bukkit.createInventory(null, 9*1, ChatColor.DARK_PURPLE + "Combien de kits max ?");
-	                ItemStack[] configRandomList = new ItemStack[9*1];
+	                Inventory configRandomInv = Bukkit.createInventory(null, 9, ChatColor.DARK_PURPLE + "Combien de kits max ?");
+	                ItemStack[] configRandomList = new ItemStack[9];
 
 	                configRandomList[0] = arrow;
 	                configRandomList[2] = acaciaFence;
@@ -319,12 +332,13 @@ public class OnClickInventory implements Listener {
 	                
 	                
 	            case DIRT :
+
+					game.setGameMode(GameMode.CLASSIQUE);
+	                //plugin.getConfig().set("config.modedejeu", "Classique");
+	                player.sendMessage(consoleSender + "Le mode de jeu actuel est " + ChatColor.AQUA + game.getGameMode().toString());
 	
-	                plugin.getConfig().set("config.modedejeu", "Classique");
-	                player.sendMessage(consoleSender + "Le mode de jeu actuel est " + ChatColor.AQUA + plugin.getConfig().getString("config.modedejeu"));
-	
-	                Inventory configClassiqueInv = Bukkit.createInventory(null, 9*1, ChatColor.DARK_PURPLE + "Combien de kits totaux ?");
-	                ItemStack[] configClassiqueList = new ItemStack[9*1];
+	                Inventory configClassiqueInv = Bukkit.createInventory(null, 9, ChatColor.DARK_PURPLE + "Combien de kits totaux ?");
+	                ItemStack[] configClassiqueList = new ItemStack[9];
 
 	                configClassiqueList[0] = arrow;
 	                configClassiqueList[2] = acaciaFence;
@@ -352,9 +366,10 @@ public class OnClickInventory implements Listener {
 	                
 	                
 	            case TNT :
-	
-	            	plugin.getConfig().set("config.modedejeu", "Apocalypse");
-	                player.sendMessage(consoleSender + "Le mode de jeu actuel est " + ChatColor.AQUA + plugin.getConfig().getString("config.modedejeu"));
+
+					game.setGameMode(GameMode.APOCALYSPE);
+	            	//plugin.getConfig().set("config.modedejeu", "Apocalypse");
+	                player.sendMessage(consoleSender + "Le mode de jeu actuel est " + ChatColor.AQUA + game.getGameMode().toString());
 	                
 	                break;
 	
@@ -476,33 +491,36 @@ public class OnClickInventory implements Listener {
 		        		Bukkit.dispatchCommand(player, "config");
 		        		
 		        	//case cobblstone wall: reinitialiser
-		        	}else if(clickedItem.getType().equals(Material.BEACON)){
-		        		plugin.getConfig().set("config.bannedKits", new ArrayList<>());
-		        		
+		        	} else if(clickedItem.getType().equals(Material.BEACON)){
+		        		//plugin.getConfig().set("config.bannedKits", new ArrayList<>());
+		        		game.resetBannedKits();
+
 		        		player.sendMessage(consoleSender + ChatColor.AQUA + "Les kits bannis ont ete reinitialises");
 		        		createBannedKitInventory((Player) player);
 		        		
 		        	//case on a kit
-		        	}else {
+		        	} else {
 		        		String aKitName = clickedItem.getItemMeta().getDisplayName().substring(2);
 		        		
 		        		for(Kit aKit : CommandInitServer.allKits) {
 		        			
 		        			if(aKitName.equals(aKit.getName())) {
 		        				
-		        				@SuppressWarnings("unchecked")
-								List<String> bannedKits = (List<String>) plugin.getConfig().getList("config.bannedKits");
+		        				//@SuppressWarnings("unchecked")
+								//List<String> bannedKits = (List<String>) plugin.getConfig().getList("config.bannedKits");
+								game.addBannedKit(aKit);
 		        				
 		        				//check if kit is banned
-		        				if(bannedKits.contains(aKitName)){
-		        					bannedKits.remove(aKitName);
-		        					plugin.getConfig().set("config.bannedKits", bannedKits);
+		        				if(game.getBannedKits().contains(aKit)){
+		        					game.removeBannedKit(aKit);
+		        					//plugin.getConfig().set("config.bannedKits", bannedKits);
 		        					
 		        					player.sendMessage(consoleSender + ChatColor.AQUA + "Le kit " + ChatColor.GREEN + aKitName + ChatColor.AQUA + " a ete remis du jeu");
 		        					
-		        				}else {
-		        					bannedKits.add(aKitName);
-		        					plugin.getConfig().set("config.bannedKits", bannedKits);
+		        				} else {
+									game.addBannedKit(aKit);
+		        					//bannedKits.add(aKitName);
+		        					//plugin.getConfig().set("config.bannedKits", bannedKits);
 		        					
 		        					player.sendMessage(consoleSender + ChatColor.AQUA + "Le kit " + ChatColor.RED + aKitName + ChatColor.AQUA + " a ete retire du jeu");
 		        					
@@ -538,27 +556,15 @@ public class OnClickInventory implements Listener {
 			        		player.sendMessage(consoleSender + ChatColor.AQUA + "Vous n'avez pas choisis de kit");
 			        		playerRound.setScore(playerRound.getScore() - 1);
 			        		
-			        		new CommandStart(plugin).setClassique((Player) player);
+			        		game.setClassique((Player) player);
 			        		
 			        	
-			        	}else {
+			        	} else {
 			        		String aKitName = clickedItem.getItemMeta().getDisplayName();
-			        		List<Kit> allKits = new ArrayList<>();
+			        		List<Kit> allKits = new ArrayList<>(CommandInitServer.allKits);
 			        		
-			        		//to avoid changement on CommandInitServer.allKits
-			        		for(Kit aKit : CommandInitServer.allKits) {
-			        			allKits.add(aKit);
-			        		}
-			        		
-			        		
-			        		//ban the banned kits with config.bannedKits list in config.yml
-			        		List<Kit> removedKits = new ArrayList<>();
-			        		for(Kit aKit : allKits) {
-			        			if(plugin.getConfig().getList("config.bannedKits").contains(aKit.getName())) {
-			        				removedKits.add(aKit);
-			        			}
-			        		}
-			        		allKits.removeAll(removedKits);
+			        		//ban the banned kits
+			        		allKits.removeAll(game.getBannedKits());
 			        		
 			        		
 			        		for(Kit aKit : allKits) {
@@ -576,7 +582,7 @@ public class OnClickInventory implements Listener {
 			        				
 		        						player.sendMessage(ChatColor.AQUA + "Vous venez de recevoir le kit " + ChatColor.GOLD + aKit.getName());
 			        				
-		        						new CommandStart(plugin).setClassique((Player) player);
+		        						game.setClassique((Player) player);
 			        				
 			        				}else {
 			        					player.sendMessage(ChatColor.DARK_RED + "Vous possedez deja le kit " + aKit.getName());
@@ -585,7 +591,7 @@ public class OnClickInventory implements Listener {
 			        			}
 			        		}
 			        	}
-	        		}else {
+	        		} else {
 	        			
 	        			//exception if to not give a stack of 0
 	        			if(playerRound.getScore() > 0) {
@@ -595,7 +601,7 @@ public class OnClickInventory implements Listener {
 	        			
 	        			player.closeInventory();
 	        			
-	        			new CommandStart(plugin).giveKitItems((Player) player);
+	        			game.giveKitItems((Player) player);
 	        			
 	        		}
 	        			
@@ -620,6 +626,11 @@ public class OnClickInventory implements Listener {
 
 
 	private void createBannedKitInventory(Player player) {
+		Game game = Game.getPlayerGame(player);
+		if(game == null) {
+			return;
+		}
+
 		
 		ItemStack beacon = new ItemStack(Material.BEACON);
 		ItemStack arrow = new ItemStack(Material.ARROW);
@@ -648,9 +659,9 @@ public class OnClickInventory implements Listener {
         	name.setDisplayName(ChatColor.RESET + aKit.getName());
         	lore.clear();
         	
-        	if(plugin.getConfig().getList("config.bannedKits").contains(aKit.getName())) {
+        	if(game.getBannedKits().contains(aKit)) {
         		lore.add(ChatColor.RED + "Kit Banni");
-        	}else {
+        	} else {
         		lore.add(ChatColor.GREEN + "Kit En Jeu");
         		
         	}

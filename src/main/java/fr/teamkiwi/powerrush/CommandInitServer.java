@@ -52,7 +52,7 @@ public class CommandInitServer implements CommandExecutor {
 	
 	public void initKits() {
 		
-		new CommandSaveInv().setDefaultInventory();
+		//new CommandSaveInv().setDefaultInventory();
 		
 		Kit katana = new Kit("Katana", Material.DIAMOND_SWORD, 0, false, "");
 		Kit ange = new Kit("Ange", Material.GOLDEN_APPLE, 0, false, "");

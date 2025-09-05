@@ -1,5 +1,6 @@
 package fr.teamkiwi.powerrush.events;
 
+import fr.teamkiwi.powerrush.Game;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -12,8 +13,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import fr.teamkiwi.powerrush.CommandInitServer;
 import fr.teamkiwi.powerrush.utils.Kit;
 import fr.teamkiwi.powerrush.Main;
-import fr.teamkiwi.powerrush.Stop;
-import fr.teamkiwi.powerrush.commands.CommandStart;
 
 public class OnDead implements Listener {
 	
@@ -40,11 +39,18 @@ public class OnDead implements Listener {
 	public void killPlayer(PlayerDeathEvent event) {
 		
 		Player player = event.getEntity();
+
+		Game game = Game.getPlayerGame(player);
+		if(game == null) {
+			return;
+		}
 		
 		
 		String deadPlayerKits = "";
-		
-		CommandStart.allPlayersInGame.remove(player.getUniqueId());
+
+		//TODO remove player
+		//game.removePlayer()
+		//CommandStart.allPlayersInGame.remove(player.getUniqueId());
 		
 		for(Kit aKit : CommandInitServer.allKits) {
 			
@@ -61,10 +67,8 @@ public class OnDead implements Listener {
 		player.setGameMode(GameMode.SPECTATOR);
 		
 		
-		if(CommandStart.allPlayersInGame.size() == 1) {
-			
-			new Stop().stop();
-			
+		if(game.getAllPlayers().size() == 1) {
+			game.stop();
 		}
 		
 		

@@ -40,8 +40,7 @@ public class KitAnge {
 				PotionEffect potionEffectRegen = new PotionEffect(PotionEffectType.REGENERATION, 2*20+10, 2, false, false);
 				
 				player.addPotionEffect(potionEffectRegen);
-				
-				
+
 			}
 			
 		}

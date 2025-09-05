@@ -65,7 +65,7 @@ public class OnSecond implements Runnable {
 							aPlayer.sendMessage(ChatColor.AQUA + "Capacite " + ChatColor.GOLD + "Ange" + ChatColor.AQUA + " rechargee");
 						}
 					
-					}else {
+					} else {
 						objectiveAnge.getScore(aPlayer).setScore(0);
 					}
 			
@@ -73,7 +73,7 @@ public class OnSecond implements Runnable {
 			}
 		
 		// if game is not started
-		}else {
+		} else {
 			for(Player aPlayer : allPlayers) {
 				aPlayer.setFoodLevel(20);
 			}

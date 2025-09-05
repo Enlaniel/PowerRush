@@ -1,5 +1,6 @@
 package fr.teamkiwi.powerrush.commands;
 
+import fr.teamkiwi.powerrush.Game;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -16,17 +17,23 @@ public class CommandShowInv implements CommandExecutor {
 		//check if sender is in game
 		if(sender instanceof Player) {
 			Player player = (Player) sender;
+
+			Game game = Game.getPlayerGame(player);
+			if(game == null) {
+				sender.sendMessage("Vous n'etes pas dans une partie");
+				return false;
+			}
 			
 			//create showinv
 			Inventory showInv = Bukkit.createInventory(null, 9*5, ChatColor.DARK_GRAY + "Inventaire de Depart");
 			
 			//set up the content of the show inv
-			showInv.setContents(CommandSaveInv.inventoryOnStartContent);
-			if(CommandSaveInv.inventoryOnStartArmor != null) {
-				showInv.setItem(9*4, CommandSaveInv.inventoryOnStartArmor[0]);
-				showInv.setItem(9*4 + 1, CommandSaveInv.inventoryOnStartArmor[1]);
-				showInv.setItem(9*4 + 2, CommandSaveInv.inventoryOnStartArmor[2]);
-				showInv.setItem(9*4 + 3, CommandSaveInv.inventoryOnStartArmor[3]);
+			showInv.setContents(game.getInventoryOnStartContent());
+			if(game.getInventoryOnStartArmor() != null) {
+				showInv.setItem(9*4, game.getInventoryOnStartArmor()[0]);
+				showInv.setItem(9*4 + 1, game.getInventoryOnStartArmor()[1]);
+				showInv.setItem(9*4 + 2, game.getInventoryOnStartArmor()[2]);
+				showInv.setItem(9*4 + 3, game.getInventoryOnStartArmor()[3]);
 			}
 			
 			
