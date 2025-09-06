@@ -2,6 +2,7 @@ package fr.teamkiwi.powerrush.commands.debug;
 
 import java.util.List;
 
+import fr.teamkiwi.powerrush.Game;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -28,15 +29,21 @@ public class CommandSelectKit implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		
 		//TODO compléter toutes les possibilité de choix de kit
-		List<Kit> allKits = CommandInitServer.allKits;
+		List<Kit.Kits> allKits = Kit.Kits.getAsList();
 		
 		//check if sender is a player
 		if(sender instanceof Player) {
 			Player player = (Player) sender;
+
+			Game game = Game.getPlayerGame(player);
+			if(game == null) {
+				sender.sendMessage("Vous n'etes pas dans une partie !");
+				return false;
+			}
 			
 			//create string message that will be send if error
 			String message = "";
-			for(Kit aKit : allKits) {
+			for(Kit.Kits aKit : allKits) {
 				message = message + ChatColor.AQUA + aKit.getName() + separation;
 			}
 			player.sendMessage(message);
@@ -46,7 +53,7 @@ public class CommandSelectKit implements CommandExecutor {
 				player.sendMessage(ChatColor.RED + "Usage: /selectkit <kit | help>");
 				
 			//case help
-			}else if(args[0].equals("help")){
+			} else if(args[0].equals("help")){
 				player.sendMessage(ChatColor.GOLD + "Voici tous les kits que vous pouvez choisir:");
 				player.sendMessage(message);
 				
@@ -55,36 +62,29 @@ public class CommandSelectKit implements CommandExecutor {
 			//check argument if args has an argument
 			if(args.length == 1 && !(args[0].equals("help"))) {
 				
-				String choosenKit = "";
+				Kit.Kits choosenKit = null;
 				
-				for(Kit aKit : allKits) {
+				for(Kit.Kits aKit : allKits) {
 					
 					if(aKit.getName().equalsIgnoreCase(args[0])) {
-						choosenKit = aKit.getName();
+						choosenKit = aKit;
 					}
 				}
 				
 				//check if a kit is choosen
-				if(! choosenKit.equals("")) {
-					
-					//get config.yml
-					@SuppressWarnings("unchecked")
-					List<String> kitConfigList = (List<String>) plugin.getConfig().getList("kits." + choosenKit.toLowerCase());
-					
-					
+				if(choosenKit != null) {
+
 					//if player has kit, remove it. else add kit to player
-					if(kitConfigList.contains(player.getName())) {
-						kitConfigList.remove(player.getName());
+					if(game.playerHasKit(player, choosenKit)) {
+						game.removeKitToPlayer(player, choosenKit);
 						player.sendMessage(ChatColor.RED + "Vous venez de vous enlever le kit " + ChatColor.AQUA + choosenKit);
-						
-					}else {
-						kitConfigList.add(player.getName());
+					} else {
+						game.addPlayerKit(new Kit(choosenKit, player));
 						player.sendMessage(ChatColor.GREEN + "Vous venez de vous rajouter le kit " + ChatColor.AQUA + choosenKit);
+
 					}
-					//apply
-					plugin.getConfig().set("kits." + choosenKit.toLowerCase(), kitConfigList);
 					
-				}else {
+				} else {
 				
 					player.sendMessage(ChatColor.GOLD + "Voici tous les kits que vous pouvez choisir:");
 					player.sendMessage(ChatColor.AQUA + message);

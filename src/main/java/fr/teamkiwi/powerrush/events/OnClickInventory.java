@@ -489,6 +489,7 @@ public class OnClickInventory implements Listener {
 	        		//case arrow: go back
 		        	if(clickedItem.getType().equals(Material.ARROW)) {
 		        		Bukkit.dispatchCommand(player, "config");
+						return;
 		        		
 		        	//case cobblstone wall: reinitialiser
 		        	} else if(clickedItem.getType().equals(Material.BEACON)){
@@ -496,13 +497,12 @@ public class OnClickInventory implements Listener {
 		        		game.resetBannedKits();
 
 		        		player.sendMessage(consoleSender + ChatColor.AQUA + "Les kits bannis ont ete reinitialises");
-		        		createBannedKitInventory((Player) player);
 		        		
 		        	//case on a kit
 		        	} else {
 		        		String aKitName = clickedItem.getItemMeta().getDisplayName().substring(2);
 		        		
-		        		for(Kit aKit : CommandInitServer.allKits) {
+		        		for(Kit.Kits aKit : Kit.Kits.getAsList()) {
 		        			
 		        			if(aKitName.equals(aKit.getName())) {
 		        				
@@ -527,10 +527,10 @@ public class OnClickInventory implements Listener {
 		        				}
 		        			}
 		        		}
-		        		
-		        		createBannedKitInventory((Player) player);
-		        		
+
 		        	}
+
+					createBannedKitInventory((Player) player);
 		        	
 	        	}
 	        	
@@ -561,22 +561,19 @@ public class OnClickInventory implements Listener {
 			        	
 			        	} else {
 			        		String aKitName = clickedItem.getItemMeta().getDisplayName();
-			        		List<Kit> allKits = new ArrayList<>(CommandInitServer.allKits);
+			        		List<Kit.Kits> allKits = new ArrayList<>(Kit.Kits.getAsList());
 			        		
 			        		//ban the banned kits
 			        		allKits.removeAll(game.getBannedKits());
 			        		
 			        		
-			        		for(Kit aKit : allKits) {
+			        		for(Kit.Kits aKit : allKits) {
 			        			
 			        			if(aKitName.equals(aKit.getName())) {
 			        				
-			        				if(! plugin.getConfig().getList("kits." + aKit.getName().toLowerCase()).contains(player.getName())) {
+			        				if(game.playerHasKit((Player) player, aKit)) {
 			        					
-		        						@SuppressWarnings("unchecked")
-		        						List<String> aKitList = (List<String>) plugin.getConfig().getList("kits." + aKit.getName().toLowerCase());
-		        						aKitList.add(player.getName());
-		        						plugin.getConfig().set("kits." + aKit.getName().toLowerCase(), aKitList);
+		        						game.addPlayerKit(new Kit(aKit, (Player) player));
 		        					
 		        						playerRound.setScore(playerRound.getScore() - 1);
 			        				
@@ -653,7 +650,7 @@ public class OnClickInventory implements Listener {
         
         int i = 0;
         
-        for(Kit aKit : CommandInitServer.allKits) {
+        for(Kit.Kits aKit : Kit.Kits.getAsList()) {
         	ItemStack anItem = new ItemStack(aKit.getMaterial());
         	
         	name.setDisplayName(ChatColor.RESET + aKit.getName());

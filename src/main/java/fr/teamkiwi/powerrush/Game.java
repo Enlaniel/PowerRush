@@ -15,7 +15,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
 
 import java.util.*;
@@ -26,12 +25,12 @@ public class Game {
 
     private int id;
     private final Set<Player> allPlayers = new HashSet<>();
-    private final Set<Kit> allKits = new HashSet<>();
+    private final Set<Kit> allPlayersKits = new HashSet<>();
     private boolean hasStarted = false;
 
     //config
     private GameMode gameMode = GameMode.CLASSIQUE;
-    private final Set<Kit> bannedKits = new HashSet<>();
+    private final Set<Kit.Kits> bannedKits = new HashSet<>();
     //private Map map;
     private int maxPlayers = 30; //TODO do max player consequences
     //else kick player
@@ -77,7 +76,7 @@ public class Game {
         maxPlayers = i;
     }
 
-    public Set<Kit> getBannedKits() {
+    public Set<Kit.Kits> getBannedKits() {
         return bannedKits;
     }
 
@@ -85,16 +84,53 @@ public class Game {
         bannedKits.clear();
     }
 
-    public void addBannedKit(Kit kit) {
+    public void addBannedKit(Kit.Kits kit) {
         bannedKits.add(kit);
     }
 
-    public void removeBannedKit(Kit kit) {
+    public void removeBannedKit(Kit.Kits kit) {
         bannedKits.remove(kit);
     }
 
     public Set<Player> getAllPlayers() {
         return allPlayers;
+    }
+
+    public void addPlayerKit(Kit kit) {
+        allPlayersKits.add(kit);
+    }
+
+    public Set<Kit> getPlayerKits(Player player) {
+        Set<Kit> allPlayerKits = new HashSet<>();
+        for(Kit kit : allPlayersKits) {
+            if(kit.getPlayer().equals(player)) {
+                allPlayerKits.add(kit);
+            }
+        }
+        return allPlayerKits;
+    }
+
+    public Set<Kit.Kits> getPlayerKitsType(Player player) {
+        Set<Kit> pKits = getPlayerKits(player);
+        Set<Kit.Kits> allPlayerKits = new HashSet<>();
+        for(Kit k : pKits) {
+            allPlayerKits.add(k.getType());
+        }
+        return allPlayerKits;
+    }
+
+    public boolean playerHasKit(Player player, Kit.Kits kit) {
+        return getPlayerKitsType(player).contains(kit);
+    }
+
+    public void removeKitToPlayer(Player player, Kit.Kits kit) {
+        Set<Kit> allKits = getPlayerKits(player);
+        for(Kit k : allKits) {
+            if(k.getType().equals(kit)) {
+                allPlayersKits.remove(k);
+            }
+        }
+
     }
 
 
@@ -157,7 +193,7 @@ public class Game {
         List<String> lore = new ArrayList<>();
         Score playerRound = Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Round").getScore(player);
 
-        List<Kit> allKits = new ArrayList<>(CommandInitServer.allKits);
+        List<Kit.Kits> allKits = new ArrayList<>(Kit.Kits.getAsList());
 
         //ban the banned kits
         allKits.removeAll(bannedKits);
@@ -169,9 +205,9 @@ public class Game {
             ItemStack[] choicesList = new ItemStack[9*2];
 
             //get all random kits
-            Kit randomKit1 = allKits.get(random.nextInt(allKits.size()));
-            Kit randomKit2 = allKits.get(random.nextInt(allKits.size()));
-            Kit randomKit3 = allKits.get(random.nextInt(allKits.size()));
+            Kit.Kits randomKit1 = allKits.get(random.nextInt(allKits.size()));
+            Kit.Kits randomKit2 = allKits.get(random.nextInt(allKits.size()));
+            Kit.Kits randomKit3 = allKits.get(random.nextInt(allKits.size()));
 
             //get all random items
             ItemStack randomKit1Item = new ItemStack(randomKit1.getMaterial());
@@ -232,30 +268,33 @@ public class Game {
     private void setRandom(Player player) {
 
         Random random = new Random();
-        List<Kit> allKits = new ArrayList<>(CommandInitServer.allKits);
+        List<Kit.Kits> allKits = new ArrayList<>(Kit.Kits.getAsList());
 
         //ban the banned kits
         allKits.removeAll(bannedKits);
 
-//        //if choosen random config is > than the number of kits
+        //if choosen random config is > than the number of kits
 //        if(allKits.size() < plugin.getConfig().getInt("config.random")) {
 //            plugin.getConfig().set("config.random", allKits.size());
 //        }
 
 //        for(int i = 0; i < plugin.getConfig().getInt("config.random"); i++ ) {
-//
-//            Kit randomKit = allKits.get(random.nextInt(allKits.size()));
+        for(int i = 0; i < 3; i++ ) {
+
+            Kit.Kits randomKit = allKits.get(random.nextInt(allKits.size()));
 //            List<String> randomKitList = (List<String>) plugin.getConfig().getList("kits." + randomKit.getName().toLowerCase());
-//
-//
+
+
+
 //            randomKitList.add(player.getName());
-//            allKits.remove(randomKit);
-//
-////            plugin.getConfig().set("kits." + randomKit.getName().toLowerCase(), randomKitList);
-//
-//            player.sendMessage(ChatColor.AQUA + "Vous venez de recevoir le kit " + ChatColor.GOLD + randomKit.getName());
-//
-//        }
+            allPlayersKits.add(new Kit(randomKit, player));
+            allKits.remove(randomKit);
+
+//            plugin.getConfig().set("kits." + randomKit.getName().toLowerCase(), randomKitList);
+
+            player.sendMessage(ChatColor.AQUA + "Vous venez de recevoir le kit " + ChatColor.GOLD + randomKit.getName());
+
+        }
 
 
         giveKitItems(player);
@@ -266,16 +305,16 @@ public class Game {
 
     public void giveKitItems(Player player) {
 
-        for(Kit aKit : CommandInitServer.allKits) {
+        for(Kit aKit : getPlayerKits(player)) {
 
             //set cooldown
-            if(aKit.hasCooldown()) {
-                Objective obj = Bukkit.getScoreboardManager().getMainScoreboard().getObjective(aKit.getName());
-                obj.getScore(player).setScore(0);
-            }
+//            if(aKit.hasCooldown()) {
+//                Objective obj = Bukkit.getScoreboardManager().getMainScoreboard().getObjective(aKit.getName());
+//                obj.getScore(player).setScore(0);
+//            }
 
             //give items
-            if(aKit.isGivingMaterial()) {
+            if(aKit.getType().isGivingMaterial()) {
 
 //                if(plugin.getConfig().getList("kits." + aKit.getName().toLowerCase()).contains(player.getName())){
 

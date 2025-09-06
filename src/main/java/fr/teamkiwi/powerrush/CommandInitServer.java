@@ -54,20 +54,20 @@ public class CommandInitServer implements CommandExecutor {
 		
 		//new CommandSaveInv().setDefaultInventory();
 		
-		Kit katana = new Kit("Katana", Material.DIAMOND_SWORD, 0, false, "");
-		Kit ange = new Kit("Ange", Material.GOLDEN_APPLE, 0, false, "");
-		Kit doppage = new Kit("Doppage", Material.SUGAR, 120, true, "");
-		Kit trader = new Kit("Trader", Material.EMERALD, 120, true, "");
-		Kit sangsue = new Kit("Sangsue", Material.FERMENTED_SPIDER_EYE, 0, false, "");
-		Kit avenir = new Kit("Avenir", Material.BEACON, 0, false, "");
-		
-		
-		allKits.add(katana);
-		allKits.add(ange);
-		allKits.add(doppage);
-		allKits.add(trader);
-		allKits.add(sangsue);
-		allKits.add(avenir);
+//		Kit katana = new Kit("Katana", Material.DIAMOND_SWORD, 0, false, "");
+//		Kit ange = new Kit("Ange", Material.GOLDEN_APPLE, 0, false, "");
+//		Kit doppage = new Kit("Doppage", Material.SUGAR, 120, true, "");
+//		Kit trader = new Kit("Trader", Material.EMERALD, 120, true, "");
+//		Kit sangsue = new Kit("Sangsue", Material.FERMENTED_SPIDER_EYE, 0, false, "");
+//		Kit avenir = new Kit("Avenir", Material.BEACON, 0, false, "");
+//
+//
+//		allKits.add(katana);
+//		allKits.add(ange);
+//		allKits.add(doppage);
+//		allKits.add(trader);
+//		allKits.add(sangsue);
+//		allKits.add(avenir);
 		
 		
 	}

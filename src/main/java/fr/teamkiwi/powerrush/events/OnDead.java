@@ -10,7 +10,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
-import fr.teamkiwi.powerrush.CommandInitServer;
 import fr.teamkiwi.powerrush.utils.Kit;
 import fr.teamkiwi.powerrush.Main;
 
@@ -52,12 +51,8 @@ public class OnDead implements Listener {
 		//game.removePlayer()
 		//CommandStart.allPlayersInGame.remove(player.getUniqueId());
 		
-		for(Kit aKit : CommandInitServer.allKits) {
-			
-			if(plugin.getConfig().getList("kits." + aKit.getName().toLowerCase()).contains(player.getName())){
-				deadPlayerKits = deadPlayerKits + ChatColor.GOLD +  "- " + aKit.getName() + "\n";
-				
-			}
+		for(Kit aKit : game.getPlayerKits(player)) {
+			deadPlayerKits = deadPlayerKits + ChatColor.GOLD +  "- " + aKit.getName() + "\n";
 		}
 		
 		event.setDeathMessage(ChatColor.BOLD + player.getName() + ChatColor.RESET + ChatColor.RED + " est mort, il avait les kits:\n" + deadPlayerKits);
