@@ -1,10 +1,8 @@
 package fr.teamkiwi.powerrush.events;
 
-import fr.teamkiwi.powerrush.CommandInitServer;
 import fr.teamkiwi.powerrush.Game;
 import fr.teamkiwi.powerrush.GameMode;
 import fr.teamkiwi.powerrush.utils.Kit;
-import fr.teamkiwi.powerrush.Main;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,16 +28,6 @@ public class OnClickInventory implements Listener {
 	
     public static final String consoleSender = "" + ChatColor.DARK_GRAY + ChatColor.ITALIC + "[" + ChatColor.DARK_GREEN + ChatColor.ITALIC + "POWER RUSH" + ChatColor.DARK_GRAY + ChatColor.ITALIC + "] " + ChatColor.RESET;
 
-
-
-    Main plugin;
-    
-    public OnClickInventory(Main plugin) {
-		this.plugin = plugin;
-	}
-    
-
-	@SuppressWarnings("deprecation")
 	@EventHandler
     public void onClick(InventoryClickEvent event){
     	
@@ -47,10 +35,7 @@ public class OnClickInventory implements Listener {
         ItemStack clickedItem = event.getCurrentItem();
         HumanEntity player = event.getWhoClicked();
 
-		Game game = null;
-		if(player instanceof Player) {
-			game = Game.getPlayerGame((Player) player);
-		}
+		Game game = Game.getPlayerGame((Player) player);
 
 		if(game == null) {
 			return;
@@ -111,8 +96,7 @@ public class OnClickInventory implements Listener {
 	                case GRASS :
 	                    break;
 	
-	                    
-	                    
+
 	                //Changement de mode de jeu
 	                case COMMAND :
 	                	
@@ -398,24 +382,24 @@ public class OnClickInventory implements Listener {
 	
 	                case ACACIA_FENCE :
 	
-	                    plugin.getConfig().set("config.random", plugin.getConfig().getInt("config.random") - 1);
+	                    game.setGameModeModifier(game.getGameModeModifier()-1);
 	                    player.sendMessage(consoleSender + "Le nombre maximum de kits a ete diminue de " + ChatColor.RED + "1 kit");
-	                    player.sendMessage(consoleSender + "Le nombre maximum de kits est maintenant de " + ChatColor.AQUA + plugin.getConfig().getInt("config.random"));
+	                    player.sendMessage(consoleSender + "Le nombre maximum de kits est maintenant de " + ChatColor.AQUA + game.getGameModeModifier());
 	
 	                    break;
 	
 	                case BEACON :
 	
-	                	plugin.getConfig().set("config.random", 5);
+	                	game.setGameModeModifier(5);
 	                    player.sendMessage(consoleSender + "Le nombre maximum de kits a ete reinitialise a " + ChatColor.AQUA + "5 kits");
 	
 	                    break;
 	
 	                case ACACIA_FENCE_GATE :
-	
-	                	plugin.getConfig().set("config.random", plugin.getConfig().getInt("config.random") + 1);
+
+						game.setGameModeModifier(game.getGameModeModifier()+1);
 	                    player.sendMessage(consoleSender + "Le nombre maximum de kits a ete augmente de " + ChatColor.GREEN + "1 kit");
-	                    player.sendMessage(consoleSender + "Le nombre maximum de kits est maintenant de " + ChatColor.AQUA + plugin.getConfig().getInt("config.random"));
+	                    player.sendMessage(consoleSender + "Le nombre maximum de kits est maintenant de " + game.getGameModeModifier());
 	
 	                    break;
 	
@@ -441,25 +425,25 @@ public class OnClickInventory implements Listener {
 	            switch (clickedItem.getType()) {
 	
 	                case ACACIA_FENCE :
-	
-	                    plugin.getConfig().set("config.classique", plugin.getConfig().getInt("config.classique") - 1);
+
+						game.setGameModeModifier(game.getGameModeModifier()-1);
 	                    player.sendMessage(consoleSender + "Le nombre maximum de kits a ete diminue de " + ChatColor.RED + "1 kit");
-	                    player.sendMessage(consoleSender + "Le nombre maximum de kits est maintenant de " + ChatColor.AQUA + plugin.getConfig().getInt("config.classique"));
+	                    player.sendMessage(consoleSender + "Le nombre maximum de kits est maintenant de " + ChatColor.AQUA + game.getGameModeModifier());
 	
 	                    break;
 	
 	                case BEACON :
-	
-	                	plugin.getConfig().set("config.classique",5);
+
+						game.setGameModeModifier(5);
 	                    player.sendMessage(consoleSender + "Le nombre maximum de kits a ete reinitialise a " + ChatColor.AQUA + "5 kits");
 	
 	                    break;
 	
 	                case ACACIA_FENCE_GATE :
 	
-	                	plugin.getConfig().set("config.classique", plugin.getConfig().getInt("config.classique") + 1);
+	                	game.setGameModeModifier(game.getGameModeModifier()+1);
 	                    player.sendMessage(consoleSender + "Le nombre maximum de kits a ete augmente de " + ChatColor.GREEN + "1 kit");
-	                    player.sendMessage(consoleSender + "Le nombre maximum de kits est maintenant de " + ChatColor.AQUA + plugin.getConfig().getInt("config.classique"));
+	                    player.sendMessage(consoleSender + "Le nombre maximum de kits est maintenant de " + ChatColor.AQUA + game.getGameModeModifier());
 	
 	                    break;
 	

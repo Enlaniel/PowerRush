@@ -30,6 +30,7 @@ public class Game {
 
     //config
     private GameMode gameMode = GameMode.CLASSIQUE;
+    private int gameModeModifier = 5;
     private final Set<Kit.Kits> bannedKits = new HashSet<>();
     //private Map map;
     private int maxPlayers = 30; //TODO do max player consequences
@@ -52,6 +53,8 @@ public class Game {
     }
 
 
+
+
     public int getId() {
         return id;
     }
@@ -66,6 +69,14 @@ public class Game {
 
     public void setGameMode(GameMode gm) {
         gameMode = gm;
+    }
+
+    public int getGameModeModifier() {
+        return gameModeModifier;
+    }
+
+    public void setGameModeModifier(int i) {
+        gameModeModifier = i;
     }
 
     public int getMaxPlayers() {
@@ -117,6 +128,16 @@ public class Game {
             allPlayerKits.add(k.getType());
         }
         return allPlayerKits;
+    }
+
+    public Kit getPlayerKitByType(Player player, Kit.Kits type) {
+        Set<Kit> pKits = getPlayerKits(player);
+        Set<Kit.Kits> allPlayerKits = new HashSet<>();
+        for(Kit k : pKits) {
+            allPlayerKits.add(k.getType());
+            return k;
+        }
+        return null;
     }
 
     public boolean playerHasKit(Player player, Kit.Kits kit) {
@@ -184,6 +205,8 @@ public class Game {
 
             }
         }
+
+        hasStarted = true;
 
     }
 
@@ -318,10 +341,10 @@ public class Game {
 
 //                if(plugin.getConfig().getList("kits." + aKit.getName().toLowerCase()).contains(player.getName())){
 
-                    ItemStack aKitItem = new ItemStack(aKit.getMaterial());
+                    ItemStack aKitItem = new ItemStack(aKit.getType().getMaterial());
                     ItemMeta aKitItemMeta = aKitItem.getItemMeta();
 
-                    aKitItemMeta.setDisplayName(ChatColor.RESET + "" + ChatColor.AQUA + aKit.getName());
+                    aKitItemMeta.setDisplayName(ChatColor.RESET + "" + ChatColor.AQUA + aKit.getType().getName());
                     aKitItemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
                     aKitItem.setItemMeta(aKitItemMeta);
 
@@ -340,22 +363,6 @@ public class Game {
 
     public void stop() {
 
-//        //reset parameter
-//        CommandStart.allPlayersInGame.clear();
-//        CommandStart.isStarted = false;
-//
-//        //reset all kits
-//        List<Kit> allKits = CommandInitServer.allKits;
-//
-//        for(Kit aKit : allKits) {
-//            plugin.getConfig().set("kits." + aKit.getName().toLowerCase(), new ArrayList<>());
-//        }
-//
-//
-//        for(OfflinePlayer player : Bukkit.getOfflinePlayers()) {
-//            Bukkit.getScoreboardManager().getMainScoreboard().resetScores(player);
-//        }
-
         Location spawn = new Location(Bukkit.getWorld("world"), 0, 201, 0);
 
         for (Player aPlayer : allPlayers) {
@@ -367,14 +374,15 @@ public class Game {
             aPlayer.setGameMode(org.bukkit.GameMode.SURVIVAL);
             aPlayer.setHealth(aPlayer.getMaxHealth());
             aPlayer.setFoodLevel(20);
-            //Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Points").getScore(aPlayer).setScore(plugin.getConfig().getInt("config.classique"));
-            //Bukkit.getScoreboardManager().getMainScoreboard().getObjective("Round").getScore(aPlayer).setScore(0);
             for (PotionEffect effect : aPlayer.getActivePotionEffects()) {
                 aPlayer.removePotionEffect(effect.getType());
             }
 
             aPlayer.sendMessage(OnClickInventory.consoleSender + "La partie a bien ete arretee");
         }
+
+        hasStarted = false;
+        allPlayers.clear();
     }
 
 
@@ -473,6 +481,10 @@ public class Game {
         game.allPlayers.add(player);
 
         player.sendMessage("You joined game " + game.id);
+    }
+
+    public static Set<Game> getAllGames() {
+        return allGames;
     }
 
 }

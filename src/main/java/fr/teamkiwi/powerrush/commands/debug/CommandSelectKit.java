@@ -9,7 +9,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import fr.teamkiwi.powerrush.CommandInitServer;
 import fr.teamkiwi.powerrush.Main;
 import fr.teamkiwi.powerrush.utils.Kit;
 

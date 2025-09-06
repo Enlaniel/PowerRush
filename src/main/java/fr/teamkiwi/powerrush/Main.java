@@ -50,27 +50,22 @@ public class Main extends JavaPlugin {
     	getCommand("saveinventory").setExecutor(new CommandSaveInv());
     	getCommand("showinventory").setExecutor(new CommandShowInv());
     	getCommand("powerrushhelp").setExecutor(new CommandHelp());
-    	
-    	//init commande
-    	getCommand("initserver").setExecutor(new CommandInitServer(this));
-    	
+
     	//setup debug commands
     	getCommand("selectkit").setExecutor(new CommandSelectKit(this));
     	getCommand("showyml").setExecutor(new CommandShowYML(this));
     	getCommand("joingame").setExecutor(new CommandJoinGame());
 
     	//register event
-    	getServer().getPluginManager().registerEvents(new OnClickInventory(this), this);
+    	getServer().getPluginManager().registerEvents(new OnClickInventory(), this);
         getServer().getPluginManager().registerEvents(new WhenPlayerJoins(), this);
-        getServer().getPluginManager().registerEvents(new OnClick(this), this);
+        getServer().getPluginManager().registerEvents(new OnClick(), this);
 		getServer().getPluginManager().registerEvents(new OnChat(), this);
-		getServer().getPluginManager().registerEvents(new OnItemConsume(this), this);
-		getServer().getPluginManager().registerEvents(new OnInteractAtEntity(this), this);
-		getServer().getPluginManager().registerEvents(new OnDead(this), this);
+		getServer().getPluginManager().registerEvents(new OnItemConsume(), this);
+		getServer().getPluginManager().registerEvents(new OnInteractAtEntity(), this);
+		getServer().getPluginManager().registerEvents(new OnDead(), this);
 		getServer().getPluginManager().registerEvents(new OnRespawn(), this);
 		getServer().getScheduler().runTaskTimer(this, new OnSecond(), 0, 1*20);
-		
-		new CommandInitServer(this).initKits();
         
     }
 	

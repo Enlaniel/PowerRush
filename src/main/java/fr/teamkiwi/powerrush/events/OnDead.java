@@ -14,20 +14,19 @@ import fr.teamkiwi.powerrush.utils.Kit;
 import fr.teamkiwi.powerrush.Main;
 
 public class OnDead implements Listener {
-	
-	Main plugin;
-	
-	public OnDead(Main main) {
-		plugin = main;
-	}
 
-	
 	@EventHandler
 	public void onDeath(PlayerDeathEvent event) {
 		
 		Player deadPlayer = event.getEntity();
+
+		Game game = Game.getPlayerGame(deadPlayer);
+
+		if(game == null) {
+			return;
+		}
 		
-		if(! plugin.getConfig().getList("kits.avenir").contains(deadPlayer.getName())) {
+		if(! game.playerHasKit(deadPlayer, Kit.Kits.AVENIR)) {
 			killPlayer(event);
 		}
 		
@@ -43,6 +42,9 @@ public class OnDead implements Listener {
 		if(game == null) {
 			return;
 		}
+		if(! game.hasStarted()) {
+			return;
+		}
 		
 		
 		String deadPlayerKits = "";
@@ -52,7 +54,7 @@ public class OnDead implements Listener {
 		//CommandStart.allPlayersInGame.remove(player.getUniqueId());
 		
 		for(Kit aKit : game.getPlayerKits(player)) {
-			deadPlayerKits = deadPlayerKits + ChatColor.GOLD +  "- " + aKit.getName() + "\n";
+			deadPlayerKits = deadPlayerKits + ChatColor.GOLD +  "- " + aKit.getType().getName() + "\n";
 		}
 		
 		event.setDeathMessage(ChatColor.BOLD + player.getName() + ChatColor.RESET + ChatColor.RED + " est mort, il avait les kits:\n" + deadPlayerKits);

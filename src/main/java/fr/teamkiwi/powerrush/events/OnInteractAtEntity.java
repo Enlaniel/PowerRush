@@ -1,5 +1,7 @@
 package fr.teamkiwi.powerrush.events;
 
+import fr.teamkiwi.powerrush.Game;
+import fr.teamkiwi.powerrush.utils.Kit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,22 +13,20 @@ import fr.teamkiwi.powerrush.kits.KitSangsue;
 
 public class OnInteractAtEntity implements Listener {
 
-	Main plugin;
-	
-	public OnInteractAtEntity(Main main) {
-		plugin = main;
-	}
-	
-	
 	@EventHandler
 	public void onInteractAtEntity(EntityDamageByEntityEvent event) {
 		
 		Entity entity = event.getDamager();
 		
 		if(entity instanceof Player) {
+
+			Game game = Game.getPlayerGame((Player) entity);
+
+			if(game == null) {
+				return;
+			}
 			
-			if(plugin.getConfig().getList("kits.sangsue").contains(entity.getName())) {
-				
+			if(game.playerHasKit((Player) entity, Kit.Kits.SANGSUE)) {
 				new KitSangsue().kitSangsue(event);
 				
 			}
